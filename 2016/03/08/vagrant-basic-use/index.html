@@ -32,8 +32,6 @@
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
@@ -70,7 +68,7 @@ Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境
 Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境
 我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行">
 <meta property="og:image" content="http://segmentfault.com/img/bVbg05">
-<meta property="og:updated_time" content="2016-03-09T11:12:30.151Z">
+<meta property="og:updated_time" content="2016-03-09T11:25:28.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vagrant基本用法">
 <meta name="twitter:description" content="vagrant windows下基本使用简介
@@ -314,22 +312,25 @@ Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境
 <h6 id="下载地址："><a href="#下载地址：" class="headerlink" title="下载地址："></a>下载地址：</h6><p>. <a href="www.vagrantup.com">vagrant(选对应版本)</a></p>
 <p>. <a href="www.vitulbox.org">virtulbox</a></p>
 <p>安装过程基本就是默认状态，最后在命令行输入：</p>
-<p>  <code>vagrant</code><br>出现帮助信息代表安装完成</p>
+<pre><code>vagrant
+</code></pre><p>出现帮助信息代表安装完成</p>
 <p>. box镜像文件可想象成虚拟机的本身</p>
-<h6 id="查看安装的box"><a href="#查看安装的box" class="headerlink" title="查看安装的box"></a>查看安装的box</h6><p><code>vagrant box list</code></p>
-<h6 id="添加box"><a href="#添加box" class="headerlink" title="添加box"></a>添加box</h6><p><code>vagrant box add</code>  </p>
-<blockquote>
+<h6 id="查看安装的box"><a href="#查看安装的box" class="headerlink" title="查看安装的box"></a>查看安装的box</h6><pre><code>vagrant box list
+</code></pre><h6 id="添加box"><a href="#添加box" class="headerlink" title="添加box"></a>添加box</h6><pre><code>vagrant box add  
+</code></pre><blockquote>
 <p>下载地址：www.vagrantcloud.com  搜索centos 6.5 32</p>
 </blockquote>
-<h6 id="添加本地下载好的box"><a href="#添加本地下载好的box" class="headerlink" title="添加本地下载好的box"></a>添加本地下载好的box</h6><p><code>vagarnt box add  文件绝对路径+name 别名</code></p>
-<blockquote>
+<h6 id="添加本地下载好的box"><a href="#添加本地下载好的box" class="headerlink" title="添加本地下载好的box"></a>添加本地下载好的box</h6><pre><code>vagarnt box add  文件绝对路径+name 别名
+</code></pre><blockquote>
 <p>例如：复制box的名字：在命令行执行如：vagrant box add chef/centos-6.5  选择virtulbox</p>
 </blockquote>
-<h6 id="为项目创建个目录"><a href="#为项目创建个目录" class="headerlink" title="为项目创建个目录"></a>为项目创建个目录</h6><p><code>md wangcan</code></p>
-<p>  <code>cd wangcan</code></p>
-<p>  <code>vagrant box list</code></p>
-<h6 id="初始化项目目录"><a href="#初始化项目目录" class="headerlink" title="初始化项目目录"></a>初始化项目目录</h6><p><code>vagrant init chef/centos-6.5</code></p>
-<p>这时会出现vagrantfile文件（以后很多配置都在这里）</p>
+<h6 id="为项目创建个目录"><a href="#为项目创建个目录" class="headerlink" title="为项目创建个目录"></a>为项目创建个目录</h6><pre><code>md wangcan
+
+cd wangcan
+
+vagrant box list`
+</code></pre><h6 id="初始化项目目录"><a href="#初始化项目目录" class="headerlink" title="初始化项目目录"></a>初始化项目目录</h6><pre><code>vagrant init chef/centos-6.5
+</code></pre><p>这时会出现vagrantfile文件（以后很多配置都在这里）</p>
 <h6 id="启动虚拟机"><a href="#启动虚拟机" class="headerlink" title="启动虚拟机"></a>启动虚拟机</h6><pre><code>vagrant up
 </code></pre><blockquote>
 <p>如果失败可以直接打开virtualbox看看报什么错误,针对提示一般都会找到解决方案</p>
