@@ -249,6 +249,196 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/08/vagrant-basic-use/" itemprop="url">
+                  vagrant基本用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-08T18:34:59+08:00" content="2016-03-08">
+              2016-03-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/08/vagrant-basic-use/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/08/vagrant-basic-use/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="vagrant-windows下基本使用"><a href="#vagrant-windows下基本使用" class="headerlink" title="vagrant windows下基本使用"></a>vagrant windows下基本使用</h4><h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p><img src="http://segmentfault.com/img/bVbg05" alt=""></p>
+<blockquote>
+<p>Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境</p>
+<p>我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气</p>
+</blockquote>
+<h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p>安装vagrant和虚拟机virtulbox（一般先下载安装virtulbox）</p>
+<h6 id="下载地址："><a href="#下载地址：" class="headerlink" title="下载地址："></a>下载地址：</h6><p>. <a href="www.vagrantup.com">vagrant(选对应版本)</a></p>
+<p>. <a href="www.vitulbox.org">virtulbox</a></p>
+<p>安装过程基本就是默认状态，最后在命令行输入：</p>
+<p>  <code>vagrant</code><br>出现帮助信息代表安装完成</p>
+<p>. box镜像文件可想象成虚拟机的本身</p>
+<h6 id="查看安装的box"><a href="#查看安装的box" class="headerlink" title="查看安装的box"></a>查看安装的box</h6><p><code>vagrant box list</code></p>
+<h6 id="添加box"><a href="#添加box" class="headerlink" title="添加box"></a>添加box</h6><p><code>vagrant box add</code>  </p>
+<blockquote>
+<p>下载地址：www.vagrantcloud.com  搜索centos 6.5 32</p>
+</blockquote>
+<h6 id="添加本地下载好的box"><a href="#添加本地下载好的box" class="headerlink" title="添加本地下载好的box"></a>添加本地下载好的box</h6><p><code>vagarnt box add  文件绝对路径+name 别名</code></p>
+<blockquote>
+<p>例如：复制box的名字：在命令行执行如：vagrant box add chef/centos-6.5  选择virtulbox</p>
+</blockquote>
+<h6 id="为项目创建个目录"><a href="#为项目创建个目录" class="headerlink" title="为项目创建个目录"></a>为项目创建个目录</h6><p><code>md wangcan</code></p>
+<p>  <code>cd wangcan</code></p>
+<p>  <code>vagrant box list</code></p>
+<h6 id="初始化项目目录"><a href="#初始化项目目录" class="headerlink" title="初始化项目目录"></a>初始化项目目录</h6><p><code>vagrant init chef/centos-6.5</code></p>
+<p>这时会出现vagrantfile文件（以后很多配置都在这里）</p>
+<h6 id="启动虚拟机"><a href="#启动虚拟机" class="headerlink" title="启动虚拟机"></a>启动虚拟机</h6><pre><code>vagrant up
+</code></pre><blockquote>
+<p>如果失败可以直接打开virtualbox看看报什么错误,针对提示一般都会找到解决方案</p>
+</blockquote>
+<p>启动成功后显示类似如下：</p>
+<pre><code>default：/vagrant =&gt; /User/phoenix/wangcan
+</code></pre><blockquote>
+<p>虚拟机的vagrant目录和本地的wangcan目录同步，此时修改本地就可以同步</p>
+<p>vagrnat ssh 可连接虚拟机，可以用客户端工具连接；127.0.0.1 端口：2222 用户和密码都是vagrant</p>
+<p>在windows命令窗口下清楚之前命令用 cls</p>
+</blockquote>
+<h6 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h6><pre><code>vagrant status  #查看虚机状态
+vagrant halt    #关机
+vagrant suspend #暂停
+vagrant reload  #先关机再启动
+vagrant destroy #销毁当前的box,不会销毁原来的
+</code></pre><blockquote>
+<p>虚拟机搭建好之后就可以安装开发环境了</p>
+<p>不过记得切换root用户</p>
+<p>或者使用sudo+命令</p>
+</blockquote>
+<h6 id="额外共享目录设置"><a href="#额外共享目录设置" class="headerlink" title="额外共享目录设置"></a>额外共享目录设置</h6><ol>
+<li><p>打开vagrantfile</p>
+</li>
+<li><p>搜索打开:synced_folder项</p>
+</li>
+<li><p>create:ture,owner:”root”, group:”root”     (目录不存在就创建，拥有者，群组)</p>
+</li>
+<li><p>重启vagrant up</p>
+</li>
+</ol>
+<h6 id="在虚拟机上配置web服务器"><a href="#在虚拟机上配置web服务器" class="headerlink" title="在虚拟机上配置web服务器"></a>在虚拟机上配置web服务器</h6><blockquote>
+<p>可配置网络类型：</p>
+<p>私有=&gt; 为虚拟机手工的制定一个ip地址，通过这个ip地址电脑和虚拟机间通讯，并且只能通过自己的电脑才能访问这个虚拟机，如果在这台虚拟机上搭建了一台服务器，那么只能在你的电脑上访问</p>
+<p>公有=&gt; 同一个网络上可访问，同一个网络上的其他设备都可以访问</p>
+<p>端口转发 =&gt; 配置好要转发的端口如8080 转发到80 访问本地8080会转发到细腻机80端口，这样不灵活，要手工配置多个端口</p>
+</blockquote>
+<p>.</p>
+<blockquote>
+<p> 私有网络配置</p>
+</blockquote>
+<pre><code>打开vagrantfile 搜索
+  # config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
+  打开重启虚拟机
+  ping 192.168.33.10     测试能否通讯，（主机接受数据包返回信息）
+  vagrant ssh  后输入 ifconfig              返回配置系统的网络信息
+</code></pre><blockquote>
+<p>公有网络</p>
+</blockquote>
+<pre><code>打开vagrantfile 注释掉私有配置
+搜索打开
+# config.vm.network &quot;public_network&quot;
+重启 -&gt;    提示选择网络类型
+ifconfig 查看 ip
+用ip 就可以
+</code></pre><h6 id="package打包现有开发环境"><a href="#package打包现有开发环境" class="headerlink" title="package打包现有开发环境"></a>package打包现有开发环境</h6><blockquote>
+<p>首先删除一个文件</p>
+</blockquote>
+<pre><code>rm -rf  /etc/udev/rules.d/70-persistent-net.rules
+</code></pre><blockquote>
+<p>进入到醒目根目录执行如下命令</p>
+</blockquote>
+<pre><code>vagrant up
+vagrant package –base virtualbox_vm_name –output newbox_name.box
+vagrant box add wangcan/item package.box
+</code></pre><p>  在你的醒目下就存在了一个打包好的box</p>
+<blockquote>
+<p>tips:</p>
+</blockquote>
+<pre><code>su 切换root用户     passwd： 修改密码
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/07/makdown-diary/" itemprop="url">
                   makdown基础用法
                 </a>
@@ -487,13 +677,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
           
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
