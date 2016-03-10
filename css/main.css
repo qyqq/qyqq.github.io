@@ -1544,7 +1544,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #63d6d4;
+  background: #52f7ff;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2106,7 +2106,7 @@ hr {
   background: #f5f5f5;
 }
 .header-inner {
-  padding: 25px 0 20px;
+  padding: 36px 0 29px;
 }
 .header-inner:before,
 .header-inner:after {
@@ -2146,8 +2146,9 @@ hr {
   display: none;
 }
 .site-meta .site-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bolder;
+  line-height: 48px;
 }
 @media (max-width: 767px) {
   .site-meta .site-title {
@@ -2159,7 +2160,7 @@ hr {
   display: block;
   overflow: hidden;
   margin: 0 auto;
-  width: 75%;
+  width: 78%;
 }
 @media (max-width: 767px) {
   .logo-line-before,
@@ -2195,7 +2196,7 @@ hr {
 }
 .menu {
   float: right;
-  margin: 8px 0 0 0;
+  margin: 14px 0 0 0;
 }
 @media (max-width: 767px) {
   .menu {
