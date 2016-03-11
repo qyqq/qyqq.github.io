@@ -268,6 +268,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/small-tool/" itemprop="url" rel="index">
+                    <span itemprop="name">small-tool</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -299,7 +318,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" rel="gallery_ciln2rn8f00019wo09s94f4y4"
+                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" rel="gallery_ciln9k0nw000188o0vo9zmxt8"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" itemprop="contentUrl"/>
               </a>
@@ -313,390 +332,16 @@
 
       
         
-          
-            <h2 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h2><h3 id="Git是什么？"><a href="#Git是什么？" class="headerlink" title="Git是什么？"></a>Git是什么？</h3><blockquote>
+          <h2 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h2><blockquote>
 <p>最流行的分布式版本控制系统。</p>
 <p>Git有什么特点？</p>
 <p>免费而超级好用。</p>
 </blockquote>
-<h2 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h2><blockquote>
-<p> 在Linux上安装Git</p>
-<p>首先你可以试着输入<strong>git</strong>，看看系统有没有安装Git！</p>
-</blockquote>
-<pre><code>$ git
-usage: git [--version] [--exec-path[=GIT_EXEC_PATH]] [--html-path]
-       [-p|--paginate|--no-pager] [--no-replace-objects]
-       [--bare] [--git-dir=GIT_DIR] [--work-tree=GIT_WORK_TREE]
-       [--help] COMMAND [ARGS]
-
-The most commonly used git commands are:
-   add        Add file contents to the index
-     bisect     Find by binary search the change that     introduced a bug
-     branch     List, create, or delete branches
-     checkout   Checkout a branch or paths to the working     tree
-   clone      Clone a repository into a new directory
-   commit     Record changes to the repository
-   diff       Show changes between commits, commit and working tree, etc
-   fetch      Download objects and refs from another repository
-   grep       Print lines matching a pattern
-   init       Create an empty git repository or reinitialize an existing one
-   log        Show commit logs
-   merge      Join two or more development histories together
-   mv         Move or rename a file, a directory, or a symlink
-   pull       Fetch from and merge with another repository or a local branch
-   push       Update remote refs along with associated objects
-   rebase     Forward-port local commits to the updated upstream head
-   reset      Reset current HEAD to the specified state
-   rm         Remove files from the working tree and from the index
-   show       Show various types of objects
-   status     Show the working tree status
-   tag        Create, list, delete or verify a tag object signed with GPG
-
-See &apos;git help COMMAND&apos; for more information on a specific command.
-</code></pre><blockquote>
-<p>像上面的命令,如果是这样的证明你的系统已然存在git 不需要去安装了</p>
-</blockquote>
-<pre><code>$ git
-The program &apos;git&apos; is currently not installed. You can install it by typing:
-sudo apt-get install git
-</code></pre><blockquote>
-<p>如果碰到这种情况，有很多Linux会友好地告诉你Git没有安装，还会告诉你如何安装Git。别慌，现在我来带你安装git!</p>
-<p>如果你碰巧用Debian或Ubuntu Linux，运行下面这条命令就可以直接完成Git的安装，非常简单。</p>
-</blockquote>
-<pre><code>$ sudo apt-get install git
-</code></pre><blockquote>
-<p>如果你的Debian或Ubuntu Linux太老了，那试试下面这条命令！</p>
-</blockquote>
-<pre><code>$ sudo apt-get install git-core
-</code></pre><blockquote>
-<p>如果是其他Linux版本，可以直接通过源码安装。先从Git官网下载源码，然后解压，依次输入：<strong>./config，make，sudo make install</strong>这几个命令安装就好了。</p>
-</blockquote>
-<h3 id="在Mac-OS-X上安装Git"><a href="#在Mac-OS-X上安装Git" class="headerlink" title="在Mac OS X上安装Git"></a>在Mac OS X上安装Git</h3><blockquote>
-<p>下面我提供两种安装Git的方法,这里我们推荐使用第二种！</p>
-</blockquote>
-<ul>
-<li>安装homebrew，然后通过homebrew安装Git，具体方法请参考homebrew的文档：<a href="http://brew.sh/" target="_blank" rel="external">http://brew.sh/</a>。</li>
-<li>从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode，选择菜单“Xcode”-&gt;“Preferences”，在弹出窗口中找到“Downloads”，选择“Command Line Tools”，点“Install”就可以完成安装了。</li>
-</ul>
-<blockquote>
-<p>Xcode是Apple官方IDE，功能非常强大，是开发Mac和iOS App的必选装备，而且是免费的!</p>
-</blockquote>
-<h3 id="在Windows上安装Git"><a href="#在Windows上安装Git" class="headerlink" title="在Windows上安装Git"></a>在Windows上安装Git</h3><blockquote>
-<p>说实话<strong>windows</strong>是非常垃圾的开发平台，个人不推荐。但是好多人都用这款操作系统，我们还是说一下吧。</p>
-<p>msysgit是Windows版的Git，点击下面这条链接下载到本地！</p>
-<p><a href="http://dlsw.baidu.com/sw-search-sp/soft/4e/30195/Git_V2.5.1_64_bit_setup.1441791170.exe" target="_blank" rel="external">http://dlsw.baidu.com/sw-search-sp/soft/4e/30195/Git_V2.5.1_64_bit_setup.1441791170.exe</a></p>
-</blockquote>
-<p>我们使用的是Git Bash。去你的应用里面打开这个，会出现一个类似cmd的黑色窗口，恭喜你，成功安装<strong>windows</strong>版本<strong>git</strong>！</p>
-<p>以上安装完成后，还需要最后一步设置，在命令行输入：</p>
-<pre><code>$ git config --global user.name &quot;Your Name&quot;
-$ git config --global user.email &quot;email@example.com&quot;
-</code></pre><blockquote>
-<p>注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址</p>
-<p>例如如果你公司的项目是放在自建的gitlab上面, 如果你不进行配置用户名和邮箱的话, 则会使用全局的, 这个时候是错误的, 正确的做法是针对公司的项目, 在项目根目录下进行单独配置</p>
-</blockquote>
-<pre><code>$ git config user.name &quot;Your Name&quot;
-$ git config user.email &quot;email@example.com&quot;
-</code></pre><blockquote>
-<p>那我们应该怎么去看，我们做的一些配置呢？</p>
-</blockquote>
-<pre><code>$ git config --list
-</code></pre><blockquote>
-<p>这个命令查看的是当前配置, 在当前项目下面查看的配置是全局配置+当前项目的配置, 使用的时候会优先使用当前项目的配置。</p>
-</blockquote>
-<h2 id="如何操作？"><a href="#如何操作？" class="headerlink" title="如何操作？"></a>如何操作？</h2><h3 id="一：创建版本库"><a href="#一：创建版本库" class="headerlink" title="一：创建版本库"></a>一：创建版本库</h3><h4 id="版本库是什么？"><a href="#版本库是什么？" class="headerlink" title="版本库是什么？"></a>版本库是什么？</h4><blockquote>
-<p>版本库又名仓库，也就是我们常见的repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。是不是很屌？</p>
-</blockquote>
-<h4 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h4><p><strong> 上文说到他很屌，但是创建起来确实非常的简单！</strong></p>
-<blockquote>
-<p>我们只需要选择一个适合的地方，创建一个空目录即可！我们来举个栗子！其实都是一样的！不过这里注意一下，尽量不要用中文命名！就算为了我们的逼格也千万别用！</p>
-</blockquote>
-<pre><code>$ mkdir www/git/myStudy -p
-$ cd www/git/myStudy
-$ pwd
-/d/www/git/myStudy
-</code></pre><blockquote>
-<p>下面我们将要用到一个很牛的命令瞬间把这块地方变成你的仓库！</p>
-</blockquote>
-<pre><code>$ git init
-</code></pre><blockquote>
-<p>如果你看到出现这种提示，证明你成功了</p>
-</blockquote>
-<pre><code>Initialized empty Git repository in /root/git/my-study/.git/
-</code></pre><blockquote>
-<p>这时候你当前目录下会多了一个.git的目录，这个目录是Git来跟踪管理版本的，没事千万不要手动乱改这个目录里面的文件，否则，就会把git仓库给破坏了！你可以用这个命令来查看一下。</p>
-</blockquote>
-<pre><code>$ ls -ah
-</code></pre><h4 id="把文件添加到版本库"><a href="#把文件添加到版本库" class="headerlink" title="把文件添加到版本库"></a>把文件添加到版本库</h4><p><strong>接下来简单说几点需要注意的</strong></p>
-<ol>
-<li>所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了啥，版本控制系统不知道，也没法知道。</li>
-<li>Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的，前面我们举的例子只是为了演示，如果要真正使用版本控制系统，就要以纯文本方式编写文件。</li>
-<li>千万不要使用Windows自带的记事本编辑任何文本文件。原因是Microsoft开发记事本的团队使用了一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。</li>
-</ol>
-<blockquote>
-<p>下面我们继续，首先我们在当前目录下来创建一个文件，代码如下</p>
-</blockquote>
-<pre><code>$ touch readme.md
-$ vi readme.md
-</code></pre><blockquote>
-<p>我们随便在里面写一些东西进去然后保存</p>
-</blockquote>
-<pre><code>we are family
-</code></pre><blockquote>
-<p>那么我们怎么去把这个文件放到仓库里面呢？</p>
-</blockquote>
-<p>1    用命令git add告诉Git，把文件添加到仓库：</p>
-<pre><code>$ git add readme.txt
-</code></pre><p>2    用命令git commit告诉Git，把文件提交到仓库：</p>
-<pre><code>$ git commit -m &quot;wrote a readme file&quot;
-[master (root-commit) cb926e7] wrote a readme file
-1 file changed, 1 insertions(+)
- create mode 100644 readme.txt
-</code></pre><blockquote>
-<p>上面的意思其实就是，1个文件被改动（我们新添加的readme.txt文件），插入了一行内容（we are family）。<strong>-m “wrote a readme file”</strong>其实就是加了注释，这是作为一个程序员的基本准则！<strong>切记！切记！</strong></p>
-<p>为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，比如：</p>
-</blockquote>
-<pre><code>$ git add file1.txt
-$ git add file2.txt file3.txt
-$ git commit -m &quot;add 3 files.&quot;
-</code></pre><blockquote>
-<p>我们也可以不用add，当我们提交一个项目，或者文件比较多，基本没问题的前提下可以用下面的代码：</p>
-</blockquote>
-<pre><code>$ git commit -am &quot;add all&quot;
-</code></pre><h3 id="二：git-常用的命令"><a href="#二：git-常用的命令" class="headerlink" title="二：git 常用的命令"></a>二：git 常用的命令</h3><blockquote>
-<p>当我们运行git时会出现这样的代码</p>
-</blockquote>
-<pre><code>add        Add file contents to the index
-bisect     Find by binary search the change that introduced a bug
-branch     List, create, or delete branches
-checkout   Checkout a branch or paths to the working tree
-clone      Clone a repository into a new directory
-commit     Record changes to the repository
-diff       Show changes between commits, commit and working tree, etc
-fetch      Download objects and refs from another repository
-grep       Print lines matching a pattern
-init       Create an empty git repository or reinitialize an existing one
-log        Show commit logs
-merge      Join two or more development histories together
-mv         Move or rename a file, a directory, or a symlink
-pull       Fetch from and merge with another repository or a local branch
-push       Update remote refs along with associated objects
-rebase     Forward-port local commits to the updated upstream head
-reset      Reset current HEAD to the specified state
-rm         Remove files from the working tree and from the index
-show       Show various types of objects
-status     Show the working tree status
-tag        Create, list, delete or verify a tag
-</code></pre><blockquote>
-<p>其实这些都是 git的命令 下面我们就来说一说我们常用的命令</p>
-</blockquote>
-<ul>
-<li><h4 id="git-status命令可以让我们时刻掌握仓库当前的状态"><a href="#git-status命令可以让我们时刻掌握仓库当前的状态" class="headerlink" title="git status命令可以让我们时刻掌握仓库当前的状态"></a>git status命令可以让我们时刻掌握仓库当前的状态</h4><p>   $ git status</p>
-<h1 id="On-branch-master"><a href="#On-branch-master" class="headerlink" title="On branch master"></a>On branch master</h1><h1 id="Changes-not-staged-for-commit"><a href="#Changes-not-staged-for-commit" class="headerlink" title="Changes not staged for commit:"></a>Changes not staged for commit:</h1><h1 id="use-“git-add-…”-to-update-what-will-be-committed"><a href="#use-“git-add-…”-to-update-what-will-be-committed" class="headerlink" title="(use “git add …” to update what will be committed)"></a>(use “git add <file>…” to update what will be committed)</file></h1><h1 id="use-“git-checkout-–-…”-to-discard-changes-in-working-directory"><a href="#use-“git-checkout-–-…”-to-discard-changes-in-working-directory" class="headerlink" title="(use “git checkout – …” to discard changes in working directory)"></a>(use “git checkout – <file>…” to discard changes in working directory)</file></h1><p>   #</p>
-<h1 id="modified-readme-txt"><a href="#modified-readme-txt" class="headerlink" title="modified:   readme.txt"></a>modified:   readme.txt</h1><p>   #<br>   no changes added to commit (use “git add” and/or “git commit -a”)</p>
-</li>
-</ul>
-<ul>
-<li><h4 id="git-diff查看差异，显示的格式正是Unix通用的diff格式-如果加上具体某个文件名，就可以具体对比某个文件了！"><a href="#git-diff查看差异，显示的格式正是Unix通用的diff格式-如果加上具体某个文件名，就可以具体对比某个文件了！" class="headerlink" title="git diff查看差异，显示的格式正是Unix通用的diff格式,如果加上具体某个文件名，就可以具体对比某个文件了！"></a>git diff查看差异，显示的格式正是Unix通用的diff格式,如果加上具体某个文件名，就可以具体对比某个文件了！</h4><p>   diff –git a/Learning-growth/git/test.md b/Learning-growth/git/test.md<br>   index 4dad973..ec71f80 100644<br>   — a/Learning-growth/git/test.md<br>   +++ b/Learning-growth/git/test.md<br>   @@ -1 +1 @@</p>
-<ul>
-<li>hello word!<br>+hello word!<br>diff –git a/readme.md b/readme.md<br>index 55bef5e..f4370ba 100644<br>— a/readme.md<br>+++ b/readme.md<br>@@ -1,2 +1,2 @@</li>
-<li>we are familu!<br>+we are familu!
-　</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><h4 id="可以告诉我们历史记录，在Git中，我们用git-log命令查看："><a href="#可以告诉我们历史记录，在Git中，我们用git-log命令查看：" class="headerlink" title="可以告诉我们历史记录，在Git中，我们用git log命令查看："></a>可以告诉我们历史记录，在Git中，我们用git log命令查看：</h4></li>
-</ul>
-<pre><code>    $ git log
-    commit b8d7cbd8d3b5585e495fdf8f0f79a13e8e106fb7
-    Author: cuijiji &lt;624337224@qq.com&gt;
-    Date:   Wed Feb 3 18:07:28 2016 +0800
-    add all
-
-    commit 57b37b7e743b0790213d97fb55d0664c2b18794c
-    Author: cuijiji &lt;624337224@qq.com&gt;
-    Date:   Wed Feb 3 18:05:25 2016 +0800
-
-    add a folder
-
-    commit 66d1757cfcc8d1476a23387b133125dc0efb2b96
-    Author: cuijiji &lt;624337224@qq.com&gt;
-    Date:   Wed Feb 3 17:49:55 2016 +0800
-
-    add a new file
-
-如果嫌输出信息太多，看得眼花缭乱的，可以试试加上--pretty=oneline参数：
-
-    $ git log --pretty=oneline
-
-    b8d7cbd8d3b5585e495fdf8f0f79a13e8e106fb7 add all
-    57b37b7e743b0790213d97fb55d0664c2b18794c add a folder
-    66d1757cfcc8d1476a23387b133125dc0efb2b96 add a new file
-</code></pre><ul>
-<li><h4 id="我们要把当前版本回退到上一个版本就可以使用git-reset命令："><a href="#我们要把当前版本回退到上一个版本就可以使用git-reset命令：" class="headerlink" title="我们要把当前版本回退到上一个版本就可以使用git reset命令："></a>我们要把当前版本回退到上一个版本就可以使用git reset命令：</h4><p>   $ git reset –hard HEAD^<br>   HEAD is now at ea34578 add distributed</p>
-<p>^代表回退上N个版本所以^^代表两个不过如果太往前的我们就会用commit id(这个ID 不用写全 只要前几位保证没有重复即可)</p>
-<p>   $ git reset –hard 3628164<br>   HEAD is now at 3628164 append GPL</p>
-<h3 id="三：git的工作区和暂存区的概念"><a href="#三：git的工作区和暂存区的概念" class="headerlink" title="三：git的工作区和暂存区的概念"></a>三：git的工作区和暂存区的概念</h3></li>
-</ul>
-<h4 id="简单以下几点"><a href="#简单以下几点" class="headerlink" title="简单以下几点"></a>简单以下几点</h4><ul>
-<li>工作区及我们本地仓库的区域，</li>
-<li>暂存区及我们add上去的区域</li>
-</ul>
-<h4 id="那么我们commit到了哪里了呢？"><a href="#那么我们commit到了哪里了呢？" class="headerlink" title="那么我们commit到了哪里了呢？"></a>那么我们commit到了哪里了呢？</h4><blockquote>
-<p>我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以，现在，git commit就是往master分支上提交更改。你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。</p>
-</blockquote>
-<h4 id="那我们接下来说几个与这个有关的命令吧"><a href="#那我们接下来说几个与这个有关的命令吧" class="headerlink" title="那我们接下来说几个与这个有关的命令吧"></a>那我们接下来说几个与这个有关的命令吧</h4><blockquote>
-<p><strong>git checkout – file可以丢弃工作区的修改,也就是让这个文件回到最近一次git commit或git add时的状态：</strong></p>
-</blockquote>
-<pre><code>$ git checkout -- readme.txt
-</code></pre><blockquote>
-<p><strong>git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区</strong></p>
-</blockquote>
-<pre><code>$ git reset HEAD readme.txt
-Unstaged changes after reset:
-M       readme.txt
-</code></pre><blockquote>
-<p><strong>rm可以删除工作区的文件这时候你可以有两种方式来处理</strong></p>
-</blockquote>
-<h6 id="第一种从版本库中删除该文件"><a href="#第一种从版本库中删除该文件" class="headerlink" title="第一种从版本库中删除该文件"></a>第一种从版本库中删除该文件</h6><pre><code>$ git rm test.txt
-rm &apos;test.txt&apos;
-$ git commit -m &quot;remove test.txt&quot;
-[master d17efd8] remove test.txt
-1 file changed, 1 deletion(-)
-delete mode 100644 test.txt
-</code></pre><h6 id="另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本"><a href="#另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本" class="headerlink" title="另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本"></a>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本</h6><pre><code>$ git checkout -- test.txt
-</code></pre><h3 id="四：远程仓库"><a href="#四：远程仓库" class="headerlink" title="四：远程仓库"></a>四：远程仓库</h3><h4 id="什么是远程仓库？"><a href="#什么是远程仓库？" class="headerlink" title="什么是远程仓库？"></a>什么是远程仓库？</h4><blockquote>
-<p>Git是分布式版本控制系统，同一个Git仓库，可以分布到不同的机器上。怎么分布呢？最早，肯定只有一台机器有一个原始版本库，此后，别的机器可以“克隆”这个原始版本库，而且每台机器的版本库其实都是一样的，并没有主次之分。</p>
-</blockquote>
-<h4 id="那我们怎么办呢？"><a href="#那我们怎么办呢？" class="headerlink" title="那我们怎么办呢？"></a>那我们怎么办呢？</h4><blockquote>
-<p>完全可以自己搭建一台运行Git的服务器，不过现阶段，为了学Git先搭个服务器绝对是小题大作。好在这个世界上有个叫GitHub的神奇的网站，从名字就可以看出，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。</p>
-</blockquote>
-<h4 id="下面我们来说说具体怎么去做吧"><a href="#下面我们来说说具体怎么去做吧" class="headerlink" title="下面我们来说说具体怎么去做吧"></a>下面我们来说说具体怎么去做吧</h4><ol>
-<li>注册GitHub账号，不会的去找教程，我这里不说了！</li>
-<li>创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key。如果一切顺利的话，可以在用户主目录里找到.ssh目录，获取id_rsa.pub里面的内容</li>
-<li>登陆GitHub，打开“Account settings”，“SSH Keys”页面：<br>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：点“Add Key”，你就应该看到已经添加的Key：</li>
-</ol>
-<p><strong>注意：GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。</strong></p>
-<h4 id="与仓库链接"><a href="#与仓库链接" class="headerlink" title="与仓库链接"></a>与仓库链接</h4><ol>
-<li>登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库</li>
-<li>在Repository name填入learngit，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库：</li>
-<li><p>鉴于我们大多数都是以clone为主，我们就使用下面的代码运行</p>
-<p>git clone git@github.com:cuijiji/study-and-grow-up.git</p>
-<p>这样你就把你的远程仓库克隆下来了！现在我们重复之前的命令来修改，或者添加一个文件</p>
-</li>
-<li><p>现在我们用下面的命令来提到我们的github上面吧</p>
-<p> git push -u origin master</p>
-</li>
-</ol>
-<blockquote>
-<p><strong>注意</strong> 你可能会碰到权限问题，换种链接方式试试！或者联系我吧！</p>
-</blockquote>
-<h3 id="五：创建与合并分支"><a href="#五：创建与合并分支" class="headerlink" title="五：创建与合并分支"></a>五：创建与合并分支</h3><h4 id="什么是分支？"><a href="#什么是分支？" class="headerlink" title="什么是分支？"></a>什么是分支？</h4><blockquote>
-<p>分支就好比数学中平行的几条线！他们之间无不影响，都在自己的世界工作！</p>
-</blockquote>
-<h4 id="到底是什么？举个栗子说明！"><a href="#到底是什么？举个栗子说明！" class="headerlink" title="到底是什么？举个栗子说明！"></a>到底是什么？举个栗子说明！</h4><blockquote>
-<h5 id="这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！"><a href="#这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！" class="headerlink" title="这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！"></a>这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！</h5></blockquote>
-<h4 id="来创建dev分支，然后切换到dev分支上"><a href="#来创建dev分支，然后切换到dev分支上" class="headerlink" title="来创建dev分支，然后切换到dev分支上"></a>来创建dev分支，然后切换到dev分支上</h4><p><strong>使用下面的命令来创建一个分支dev</strong></p>
-<pre><code>$ git checkout -b dev
-</code></pre><p>有没有想起来我们之前好像用过这个checkout命令呢？好吧，想不起来算了！那我们重点说下这个命令的意思，其实它是涵盖这一下两个命令：</p>
-<pre><code>$ git branch dev
-
-$ git checkout dev
-</code></pre><p>那么我们现在试试这个git branch命令的效果吧</p>
-<pre><code>$ git branch
- * dev
- master
-</code></pre><p><strong>git branch</strong>会列出所有的分支，前面带*的分支就是我们当前工作的分支！那我们怎么去切换分支呢？很简单：</p>
-<pre><code>$ git checkout master
-Switched to branch &apos;master&apos;
-</code></pre><p>现在我们切回dev分支修改一下自己做个测试，然后提交。再切回master，看看你刚才更改的文件是否有跟着变动呢？</p>
-<blockquote>
-<p>答案是<strong>没有</strong>。<strong>为什么？</strong></p>
-<blockquote>
-<p>这个问题问的真傻？不是说了吗平行，平行的……</p>
-</blockquote>
-</blockquote>
-<h3 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h3><p><strong>合并分支其实很简单，使用下面这个命令即可：</strong></p>
-<pre><code>$ git merge dev
-Updating d17efd8..fec145a
-Fast-forward
- readme.txt |    1 +
- 1 file changed, 1 insertion(+)
-</code></pre><p>屌不屌？我就想问一句，<strong>还有谁？</strong>这里我们对这个命令说明一下，<strong>git merge命令用于合并指定分支到当前分支</strong>所以保证要合并到的是当前分支，也要注意你要合并的分支！<strong>切记切记！</strong></p>
-<blockquote>
-<p>没参数的情况下merge是<strong>fast-forward</strong>的，即Git将master分支的指针直接移到dev的最前方。换句话说，如果顺着一个分支走下去可以到达另一个分支的话，那么Git在合并两者时，只会简单移动指针，所以这种合并成为快进式</p>
-</blockquote>
-<p>以上的那种我们称之为直接合并！我们还可以试试这种合并：</p>
-<blockquote>
-<p>将一条分支上的若干个提交条目压合成一个提交条目，提交到另一条分支的末梢。把dev分支上的所有提交压合成主分支上的一个提交，即压合提交：</p>
-</blockquote>
-<p>　</p>
-<pre><code>$ git checkout master
-$ git merge --squash dev
-</code></pre><blockquote>
-<p>此时，dev上的所有提交已经合并到当前工作区并暂存，但还没有作为一个提交，可以像其他提交一样，把这个改动提交到版本库中：</p>
-</blockquote>
-<p>　　<br>    $ git commit –m “something from dev”</p>
-<p>拣选另一条分支上的某个提交条目的改动带到当前分支上。<br>每一次提交都会产生一个全局唯一的提交名称，利用这个名称就可以进行拣选提交。<br>比如在dev上的某个提交叫：321d76f<em>*</em>，我们现在把它合并到master</p>
-<pre><code>$ git checkout master
-$ git cherry-pick 321d76f
-</code></pre><blockquote>
-<p>要拣选多个提交，可以给git cherry-pick命令传递-n选项，比如：</p>
-</blockquote>
-<p>　　<br>    $ git cherry-pick –n 321d76f</p>
-<blockquote>
-<p>这样在拣选了这个改动之后，进行暂存而不立即提交，接着可以进行下一个拣选操作，一旦拣选完需要的各个提交，就可以一并提交。</p>
-</blockquote>
-<h3 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h3><p>像我这么正直的人，爱做的就是卸磨杀驴！用完了怎么删除？试试这个：</p>
-<pre><code>$ git branch -d dev
-Deleted branch dev (was fec145a).
-</code></pre><p>这样就删除了，其实我们是为了不让自己混乱，因为分支一多就蒙圈了！</p>
-<h3 id="六：解决冲突"><a href="#六：解决冲突" class="headerlink" title="六：解决冲突"></a>六：解决冲突</h3><h4 id="为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决"><a href="#为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决" class="headerlink" title="为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决"></a>为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决</h4><p>首先我们想要解决冲突，就制造个冲突出来。很简单，还记得我们的分支吗？对了，就是这个！我就不在这里重复了，直接来命令</p>
-<pre><code>$ git checkout -b dev
-$  git checkout dev
-$  vim README.md
-$  git add README.md
-$  git commit -m &apos;test test&apos;
-$  git branch
-$  git branch master
-$  git checkout master
-$  vim README.md
-$  git add README.md
-$  git commit -m &apos;test master&apos;
-$  git merge dev
-</code></pre><p>如果你看到的是这样的提示</p>
-<pre><code>Auto-merging README.md
-CONFLICT (content): Merge conflict in README.md
-Automatic merge failed; fix conflicts and then commit the result.
-</code></pre><p>那恭喜你，你冲突了！怎么办？解决！你可以用之前我们用过的命令看一下状态：</p>
-<pre><code>$ git status
-</code></pre><p>你也可以看到哪个文件冲突了！那么我们现在打开刚刚冲突的文件来看一看！</p>
-<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-## 666
-=======
-## 777
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; dev
-</code></pre><blockquote>
-<p>解释一下：&lt;&lt;&lt;&lt;&lt;&lt;&lt;标记冲突开始，后面跟的是当前分支中的内容。</p>
-<p>　　HEAD指向当前分支末梢的提交。</p>
-<p>　　=======之后，&gt;&gt;&gt;&gt;&gt;&gt;&gt;之前是要merge过来的另一条分支上的代码。</p>
-<p>　　&gt;&gt;&gt;&gt;&gt;&gt;&gt;之后的dev是该分支的名字。</p>
-</blockquote>
-<p><strong>对于简单的合并，手工编辑，然后去掉这些标记，最后像往常的提交一样先add再commit即可。我们可以通过下面这个命令来具体看一下</strong></p>
-<pre><code>$ git log --graph --pretty=oneline --abbrev-commit
-</code></pre><p>你会看见类似这样的提示：</p>
-<pre><code>*   10fcd7a modify README.md
-|\  
-| * f9b6554 test test
-* | 7d60f76 test master
-|/  
-</code></pre><p>有没有很好懂，但是那个git log 后面跟的一长串 都不记不住。怎么办？下面我来告诉你！怎么把命令简化！</p>
-<pre><code>$ git config --global alias.lg &quot;log --graph --pretty=oneline --abbrev-commit&quot;
-</code></pre><p>接下来你在运行一下</p>
-<pre><code>$ git lg
-</code></pre><p>看到了什么？神奇吧！不解释！按照这个写法，你自己去定制几个试试吧！</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/08/git/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -760,6 +405,25 @@ Automatic merge failed; fix conflicts and then commit the result.
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/small-tool/" itemprop="url" rel="index">
+                    <span itemprop="name">small-tool</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -791,7 +455,7 @@ Automatic merge failed; fix conflicts and then commit the result.
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://segmentfault.com/img/bVbg05" rel="gallery_ciln2rn9000089wo0kn9cc1ue"
+                 href="http://segmentfault.com/img/bVbg05" rel="gallery_ciln9k0og000888o0fb3eoqcu"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://segmentfault.com/img/bVbg05" itemprop="contentUrl"/>
               </a>
@@ -805,106 +469,15 @@ Automatic merge failed; fix conflicts and then commit the result.
 
       
         
-          
-            <h4 id="vagrant-windows下基本使用"><a href="#vagrant-windows下基本使用" class="headerlink" title="vagrant windows下基本使用"></a>vagrant windows下基本使用</h4><h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><blockquote>
+          <h4 id="vagrant-windows下基本使用"><a href="#vagrant-windows下基本使用" class="headerlink" title="vagrant windows下基本使用"></a>vagrant windows下基本使用</h4><h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><blockquote>
 <p>Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境</p>
 <p>我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气</p>
 </blockquote>
-<h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p>安装vagrant和虚拟机virtulbox（一般先下载安装virtulbox）</p>
-<h6 id="下载地址："><a href="#下载地址：" class="headerlink" title="下载地址："></a>下载地址：</h6><p>. <a href="https://www.vagrantup.com" target="_blank" rel="external">vagrant(选对应版本)</a></p>
-<p>. <a href="https://www.virtualbox.org" target="_blank" rel="external">virtulbox</a></p>
-<p>安装过程基本就是默认状态，最后在命令行输入：</p>
-<pre><code>vagrant
-</code></pre><p>出现帮助信息代表安装完成</p>
-<p>. box镜像文件可想象成虚拟机的本身</p>
-<h6 id="查看安装的box"><a href="#查看安装的box" class="headerlink" title="查看安装的box"></a>查看安装的box</h6><pre><code>vagrant box list
-</code></pre><h6 id="添加box"><a href="#添加box" class="headerlink" title="添加box"></a>添加box</h6><pre><code>vagrant box add  
-</code></pre><blockquote>
-<p>下载地址：www.vagrantcloud.com  搜索centos 6.5 32</p>
-</blockquote>
-<h6 id="添加本地下载好的box"><a href="#添加本地下载好的box" class="headerlink" title="添加本地下载好的box"></a>添加本地下载好的box</h6><pre><code>vagarnt box add  文件绝对路径+name 别名
-</code></pre><blockquote>
-<p>例如：复制box的名字：在命令行执行如：vagrant box add chef/centos-6.5  选择virtulbox</p>
-</blockquote>
-<h6 id="为项目创建个目录"><a href="#为项目创建个目录" class="headerlink" title="为项目创建个目录"></a>为项目创建个目录</h6><pre><code>md wangcan
-
-cd wangcan
-
-vagrant box list`
-</code></pre><h6 id="初始化项目目录"><a href="#初始化项目目录" class="headerlink" title="初始化项目目录"></a>初始化项目目录</h6><pre><code>vagrant init chef/centos-6.5
-</code></pre><p>这时会出现vagrantfile文件（以后很多配置都在这里）</p>
-<h6 id="启动虚拟机"><a href="#启动虚拟机" class="headerlink" title="启动虚拟机"></a>启动虚拟机</h6><pre><code>vagrant up
-</code></pre><blockquote>
-<p>如果失败可以直接打开virtualbox看看报什么错误,针对提示一般都会找到解决方案</p>
-</blockquote>
-<p>启动成功后显示类似如下：</p>
-<pre><code>default：/vagrant =&gt; /User/phoenix/wangcan
-</code></pre><blockquote>
-<p>虚拟机的vagrant目录和本地的wangcan目录同步，此时修改本地就可以同步</p>
-<p>vagrnat ssh 可连接虚拟机，可以用客户端工具连接；127.0.0.1 端口：2222 用户和密码都是vagrant</p>
-<p>在windows命令窗口下清楚之前命令用 cls</p>
-</blockquote>
-<h6 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h6><pre><code>vagrant status  #查看虚机状态
-vagrant halt    #关机
-vagrant suspend #暂停
-vagrant reload  #先关机再启动
-vagrant destroy #销毁当前的box,不会销毁原来的
-</code></pre><blockquote>
-<p>虚拟机搭建好之后就可以安装开发环境了</p>
-<p>不过记得切换root用户</p>
-<p>或者使用sudo+命令</p>
-</blockquote>
-<h6 id="额外共享目录设置"><a href="#额外共享目录设置" class="headerlink" title="额外共享目录设置"></a>额外共享目录设置</h6><ol>
-<li><p>打开vagrantfile</p>
-</li>
-<li><p>搜索打开:synced_folder项</p>
-</li>
-<li><p>create:ture,owner:”root”, group:”root”     (目录不存在就创建，拥有者，群组)</p>
-</li>
-<li><p>重启vagrant up</p>
-</li>
-</ol>
-<h6 id="在虚拟机上配置web服务器"><a href="#在虚拟机上配置web服务器" class="headerlink" title="在虚拟机上配置web服务器"></a>在虚拟机上配置web服务器</h6><blockquote>
-<p>可配置网络类型：</p>
-<p>私有=&gt; 为虚拟机手工的制定一个ip地址，通过这个ip地址电脑和虚拟机间通讯，并且只能通过自己的电脑才能访问这个虚拟机，如果在这台虚拟机上搭建了一台服务器，那么只能在你的电脑上访问</p>
-<p>公有=&gt; 同一个网络上可访问，同一个网络上的其他设备都可以访问</p>
-<p>端口转发 =&gt; 配置好要转发的端口如8080 转发到80 访问本地8080会转发到细腻机80端口，这样不灵活，要手工配置多个端口</p>
-</blockquote>
-<p>.</p>
-<blockquote>
-<p> 私有网络配置</p>
-</blockquote>
-<pre><code>打开vagrantfile 搜索
-  # config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
-  打开重启虚拟机
-  ping 192.168.33.10     测试能否通讯，（主机接受数据包返回信息）
-  vagrant ssh  后输入 ifconfig              返回配置系统的网络信息
-</code></pre><blockquote>
-<p>公有网络</p>
-</blockquote>
-<pre><code>打开vagrantfile 注释掉私有配置
-搜索打开
-# config.vm.network &quot;public_network&quot;
-重启 -&gt;    提示选择网络类型
-ifconfig 查看 ip
-用ip 就可以
-</code></pre><h6 id="package打包现有开发环境"><a href="#package打包现有开发环境" class="headerlink" title="package打包现有开发环境"></a>package打包现有开发环境</h6><blockquote>
-<p>首先删除一个文件</p>
-</blockquote>
-<pre><code>rm -rf  /etc/udev/rules.d/70-persistent-net.rules
-</code></pre><blockquote>
-<p>进入到醒目根目录执行如下命令</p>
-</blockquote>
-<pre><code>vagrant up
-vagrant package –base virtualbox_vm_name –output newbox_name.box
-vagrant box add wangcan/item package.box
-</code></pre><p>  在你的醒目下就存在了一个打包好的box</p>
-<blockquote>
-<p>tips:</p>
-</blockquote>
-<pre><code>su 切换root用户     passwd： 修改密码
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/08/vagrant-basic-use/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -968,6 +541,25 @@ vagrant box add wangcan/item package.box
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/small-tool/" itemprop="url" rel="index">
+                    <span itemprop="name">small-tool</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -994,13 +586,28 @@ vagrant box add wangcan/item package.box
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160311133405.png" rel="gallery_ciln9k0ob000688o0kbskr37j"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160311133405.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         
-          
-            <h2 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h2><pre><code>&apos;#&apos;号后加空格，几个#就是几级标题，一共6级标题
+          <h2 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h2><pre><code>&apos;#&apos;号后加空格，几个#就是几级标题，一共6级标题
 </code></pre><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><ul>
-<li>需要在文字前加上 - 或 * </li>
+<li>需要在文字前加上 - 或 *</li>
 </ul>
 <ul>
 <li>即可变为无序列表</li>
@@ -1009,25 +616,11 @@ vagrant box add wangcan/item package.box
 <li>有序列表则直接在文字前加 1. 2. 3.</li>
 <li>符号要和文字之间加上一个字符的空格。</li>
 </ol>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>如果你需要引用一小段别处的句子，那么就要用引用的格式。<br>只需要在文本前加入 &gt; 这种尖括号（大于号）即可</p>
-<blockquote>
-<p>这里是引用</p>
-</blockquote>
-<p>要注意符号和文本的空格</p>
-<p>##图片与连接<br>插入链接与插入图片的语法很像，区别在一个 !号</p>
-<p>插入图片的地址需要图床，这里推荐 CloudApp 的服务，生成URL地址即可。<br><a href="http://baidu.com" target="_blank" rel="external">baidu</a></p>
-<p><img src="http://mouapp.com/Mou_128.png" alt="mou icom"></p>
-<h2 id="粗体与斜体"><a href="#粗体与斜体" class="headerlink" title="粗体与斜体"></a>粗体与斜体</h2><p>Markdown 的粗体和斜体也非常简单，用两个 <em> 包含一段文本就是粗体的语法，用一个 </em> 包含一段文本就是斜体的语法。</p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><pre><code>| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-</code></pre><h2 id="代码框"><a href="#代码框" class="headerlink" title="代码框"></a>代码框</h2><p>只需要用两个 反引号把中间的代码包裹起来</p>
-<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>分割线的语法只需要另起一行，连续输入三个星号 <em>*</em> 即可。</p>
-<hr>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/07/makdown-diary/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1091,6 +684,25 @@ vagrant box add wangcan/item package.box
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/small-tool/" itemprop="url" rel="index">
+                    <span itemprop="name">small-tool</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -1117,11 +729,26 @@ vagrant box add wangcan/item package.box
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://7xrpkn.com1.z0.glb.clouddn.com/29.jpg" rel="gallery_ciln9k0o4000388o0mgc6f5za"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/29.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         
-          
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。</p>
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。</p>
 <h1 id="gulp能帮我们做什么"><a href="#gulp能帮我们做什么" class="headerlink" title="gulp能帮我们做什么?"></a>gulp能帮我们做什么?</h1><ul>
 <li>javascript语法的检测、合并，压缩。</li>
 <li>css的压缩、合并、sass/less的编译</li>
@@ -1130,146 +757,11 @@ vagrant box add wangcan/item package.box
 <li>部署文件生产替换</li>
 <li>监控文件变化并自动生产相应文件</li>
 </ul>
-<h1 id="gulp的安装"><a href="#gulp的安装" class="headerlink" title="gulp的安装"></a>gulp的安装</h1><p>gulp是基于Nodejs的自动任务运行器，这里默认已经安装了nodejs</p>
-<blockquote>
-<p>全局安装gulp</p>
-</blockquote>
-<pre><code>npm install --global gulp
-</code></pre><blockquote>
-<p>作为项目的开发依赖安装</p>
-</blockquote>
-<pre><code>npm install --save-dev gulp
-</code></pre><blockquote>
-<p>在项目根目录下创建名为gulpfile.js的文件</p>
-</blockquote>
-<pre><code>var gulp = require(&apos;gulp&apos;);
-
-gulp.task(&apos;default&apos;, function(){});
-</code></pre><blockquote>
-<p>运行gulp 安装完成</p>
-</blockquote>
-<pre><code>gulp -v
-
-gulp
-</code></pre><h2 id="正常安装完成会出现版本号以及执行默认任务"><a href="#正常安装完成会出现版本号以及执行默认任务" class="headerlink" title="正常安装完成会出现版本号以及执行默认任务"></a>正常安装完成会出现版本号以及执行默认任务</h2><blockquote>
-<p>依赖文件</p>
-</blockquote>
-<p> 别忘记在项目的根目录下还应该建相应的资源依赖文件package.json文件，它只是一个普通的json文件(但是不可以写注释)，但是对项目来说，不可或缺，里面不仅存在项目的具体描述信息，还存有项目所需要的包依赖，使用它可以记录相关的gulp插件，以便多人开始时协同使用，另外也可以指令建立：</p>
-<pre><code>npm init
-</code></pre><h1 id="gulp原理"><a href="#gulp原理" class="headerlink" title="gulp原理"></a>gulp原理</h1><p>  在实现上，glup借鉴了Unix操作系统的管道（pipe）思想，前一级的输出，直接变成后一级的输入，使得在操作上非常简单。但是需要注意的是，gulp运行的过程中不会产生临时文件，所有的文件都是虚拟的，直到指定相应目录进行输出。</p>
-<h1 id="gulp函数"><a href="#gulp函数" class="headerlink" title="gulp函数"></a>gulp函数</h1><h2 id="gulp-src"><a href="#gulp-src" class="headerlink" title="gulp.src()"></a>gulp.src()</h2><p>gulp.src()方法输入一个glob(比如匹配一个或多个文件的字符串)或者glob数组，然后返回一个可以传递给插件的数据流。</p>
-<p>Gulp使用node-glob来从你指定的glob里面获取文件,主要匹配规则有以下规则（以js为例）</p>
-<ul>
-<li>js/app.js 精确匹配文件</li>
-<li>js/*.js 仅匹配js目录下的所有后缀为.js的文件</li>
-<li>js/*/.js 匹配js目录及其子目录下所有后缀为.js的文件</li>
-<li>!js/app.js 从匹配结果中排除js/app.js，这种方法在你想要匹配除了特殊文件之外的所有文件时非常管用</li>
-<li>*.+(js|css) 匹配根目录下所有后缀为.js或者.css的文件</li>
-</ul>
-<h2 id="gulp-task"><a href="#gulp-task" class="headerlink" title="gulp.task()"></a>gulp.task()</h2><p>gulp.task()函数通常会被用来定义任务。当你定义一个简单的任务时，需要传入任务名字和执行函数两个属性。</p>
-<pre><code>gulp.task(&apos;greet&apos;, function () {
-       console.log(&apos;Hello world!&apos;);
-});
-</code></pre><p>一个任务有时也可以是一系列任务。假设要定义一个任务build来执行css、js、imgs这三个任务，我们可以通过指定一个任务数组而不是函数来完成。</p>
-<pre><code>gulp.task(&apos;build&apos;, [&apos;css&apos;, &apos;js&apos;, &apos;imgs&apos;]);
-</code></pre><p>这些任务不是同时进行的，所以你不能认为在js任务开始的时候css任务已经结束了，也可能还没有结束。为了确保一个任务在另一个任务执行前已经结束，可以将函数和任务数组结合起来指定其依赖关系。例如，定义一个css任务，在执行前需要检查greet任务是否已经执行完毕，这样做就是可行的:</p>
-<pre><code>gulp.task(&apos;css&apos;, [&apos;greet&apos;], function () { });
-</code></pre><p>现在，当执行css任务时，Gulp会先执行greet任务，然后在它结束后再调用你定义的函数。</p>
-<p>你可以定义一个在gulp开始运行时候默认执行的任务，并将这个任务命名为“default”：</p>
-<pre><code>gulp.task(&apos;default&apos;, function () { });
-</code></pre><h2 id="gulp-dest"><a href="#gulp-dest" class="headerlink" title="gulp.dest()"></a>gulp.dest()</h2><p>gulp.dest()方法是用来写文件的，他将经过gulp处理的文件输出到相应目录</p>
-<pre><code>var gulp = reruire(&apos;gulp&apos;);
-gulp.src(&apos;script/**/*.js&apos;)
-    .pipe(gulp.dest(&apos;dist&apos;));
-</code></pre><h2 id="gulp-watch"><a href="#gulp-watch" class="headerlink" title="gulp.watch()"></a>gulp.watch()</h2><p>gulp.watch()用来监视文件的变化，当文件发生变化后，我们可以利用它来执行相应的任务，例如文件压缩等</p>
-<pre><code>gulp.watch(glob[, opts], tasks)
-</code></pre><p>Gulp可以监听文件的修改动态，然后在文件被改动的时候执行一个或多个任务。这个特性十分有用（对我来说，这可能是Gulp中最有用的一个功能）。你可以保存LESS文件，接着Gulp会自动把它转换为CSS文件并更新浏览器。</p>
-<p>使用gulp.watch()方法可以监听文件，它接受一个glob或者glob数组（和gulp.src()一样）以及一个任务数组来执行回调。</p>
-<p>让我们看看下面，build任务可以将模板转换成html格式，然后我们希望定义一个watch任务来监听模板文件的变化，并将这些模板转换成html格式。watch函数的使用方法如下所示：</p>
-<pre><code>gulp.task(&apos;watch&apos;, function () {
-       gulp.watch(&apos;templates/*.tmpl.html&apos;, [&apos;build&apos;]);
-});
-</code></pre><p>现在，当改变一个模板文件时，build任务会被执行并生成HTML文件，也可以给watch函数一个回调函数，而不是一个任务数组。在这个示例中，回调函数有一个包含触发回调函数信息的event对象：</p>
-<pre><code>gulp.watch(&apos;templates/*.tmpl.html&apos;, function (event) {
-       console.log(&apos;Event type: &apos; + event.type); // added, changed, or deleted
-       console.log(&apos;Event path: &apos; + event.path); // The path of the modified file
-});
-</code></pre><p>Gulp.watch()的另一个非常好的特性是返回我们熟知的watcher。利用watcher来监听额外的事件或者向watch中添加文件。例如，在执行一系列任务和调用一个函数时，你就可以在返回的watcher中添加监听change事件:</p>
-<pre><code>var watcher = gulp.watch(&apos;templates/*.tmpl.html&apos;, [&apos;build&apos;]);
-    watcher.on(&apos;change&apos;, function (event) {
-       console.log(&apos;Event type: &apos; + event.type); // added, changed, or deleted
-       console.log(&apos;Event path: &apos; + event.path); // The path of the modified file
-});
-</code></pre><p>除了change事件，还可以监听很多其他的事件:</p>
-<ul>
-<li>end 在watcher结束时触发（这意味着，在文件改变的时候，任务或者回调不会执行）</li>
-<li>error 在出现error时触发</li>
-<li>ready 在文件被找到并正被监听时触发</li>
-<li>nomatch 在glob没有匹配到任何文件时触发</li>
-<li><p>Watcher对象也包含了一些可以调用的方法：</p>
-</li>
-<li><p>watcher.end() 停止watcher（以便停止执行后面的任务或者回调函数）</p>
-</li>
-<li>watcher.files() 返回watcher监听的文件列表</li>
-<li>watcher.add(glob) 将与指定glob相匹配的文件添加到watcher（也接受可选的回调当第二个参数）</li>
-<li>watcher.remove(filepath) 从watcher中移除个别文件</li>
-</ul>
-<h1 id="gulp常用插件"><a href="#gulp常用插件" class="headerlink" title="gulp常用插件"></a>gulp常用插件</h1><blockquote>
-<p>js语法检测</p>
-</blockquote>
-<pre><code>var jshint = require(&quot;gulp-jshint&quot;),
-</code></pre><blockquote>
-<p>js压缩</p>
-</blockquote>
-<pre><code>var uglify = require(&quot;gulp-uglify&quot;),
-</code></pre><blockquote>
-<p>css压缩</p>
-</blockquote>
-<pre><code>var minifycss = require(&quot;gulp-minify-css&quot;),
-</code></pre><blockquote>
-<p>sass编译</p>
-</blockquote>
-<pre><code>var sass = require(&quot;gulp-ruby-sass&quot;),
-</code></pre><blockquote>
-<p>图片压缩</p>
-</blockquote>
-<pre><code>var imagemin = require(&quot;gulp-imagemin&quot;)
-</code></pre><blockquote>
-<p>雪碧图合并</p>
-</blockquote>
-<pre><code>var spriter = require(&quot;gulp-css-spriter&quot;)
-</code></pre><blockquote>
-<p>js、css的合并</p>
-</blockquote>
-<pre><code>var concat = require(&quot;gulp-concat&quot;)
-</code></pre><blockquote>
-<p>文件重命名</p>
-</blockquote>
-<pre><code>var rename = require(&quot;gulp-rename&quot;)
-</code></pre><blockquote>
-<p>MD5戳</p>
-</blockquote>
-<pre><code>var md5 = require(&quot;gulp-rev&quot;)
-</code></pre><blockquote>
-<p>路径替换</p>
-</blockquote>
-<pre><code>var collector = require(&quot;gulp-rev-collector&quot;) 
-</code></pre><blockquote>
-<p>刷新浏览器</p>
-</blockquote>
-<pre><code>var reload = require(&quot;gulp-livereload&quot;)
-</code></pre><p>以上这些就是gulp常用的插件，至于安装以及其中的用法，这里不做一一介绍，有兴趣的朋友自行研究即可。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>gulp作为前端的开发的自动化构建工具，确实帮我们完成了很多必要的工作，相对于其他前端构建工具运行速度快，一直为gulp所骄傲，但是同时由于项目的复杂性，以及认为的灵活性，gulp有时也会遇到瓶颈，建议可以参考参考其它构建工具，诸于fis等。</p>
-<p>（gulp的几大函数基本参数是必须掌握的，其中还有一些不常用的参数配置，这里不一一介绍，在项目中进行锻炼时可以慢慢体会）</p>
-<p>下面是gulp的两个参考网站：</p>
-<ul>
-<li><p><a href="http://www.gulpjs.com.cn/" target="_blank" rel="external">gulp中文网</a></p>
-</li>
-<li><p><a href="http://www.w3cplus.com/blog/tags/528.html" target="_blank" rel="external">gulp系列教程</a></p>
-</li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/07/gulp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1339,11 +831,18 @@ gulp.src(&apos;script/**/*.js&apos;)
           </div>
           
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
