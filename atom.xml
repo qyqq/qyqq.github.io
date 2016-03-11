@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WANGCAN&#39;S BLOG</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-03-11T05:44:02.469Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>WANGCAN</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git 介绍与使用</title>
+    <link href="http://yoursite.com/2016/03/08/git/"/>
+    <id>http://yoursite.com/2016/03/08/git/</id>
+    <published>2016-03-08T10:34:59.000Z</published>
+    <updated>2016-03-11T05:44:02.469Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Git简介&quot;&gt;&lt;a href=&quot;#Git简介&quot; class=&quot;headerlink&quot; title=&quot;Git简介&quot;&gt;&lt;/a&gt;Git简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;最流行的分布式版本控制系统。&lt;/p&gt;
+&lt;p&gt;Git有什么特点？&lt;/p&gt;
+&lt;p&gt;免费而超级好用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Git安装&quot;&gt;&lt;a href=&quot;#Git安装&quot; class=&quot;headerlink&quot; title=&quot;Git安装&quot;&gt;&lt;/a&gt;Git安装&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt; 在Linux上安装Git&lt;/p&gt;
+&lt;p&gt;首先你可以试着输入&lt;strong&gt;git&lt;/strong&gt;，看看系统有没有安装Git！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git
+usage: git [--version] [--exec-path[=GIT_EXEC_PATH]] [--html-path]
+       [-p|--paginate|--no-pager] [--no-replace-objects]
+       [--bare] [--git-dir=GIT_DIR] [--work-tree=GIT_WORK_TREE]
+       [--help] COMMAND [ARGS]
+
+The most commonly used git commands are:
+   add        Add file contents to the index
+     bisect     Find by binary search the change that     introduced a bug
+     branch     List, create, or delete branches
+     checkout   Checkout a branch or paths to the working     tree
+   clone      Clone a repository into a new directory
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   fetch      Download objects and refs from another repository
+   grep       Print lines matching a pattern
+   init       Create an empty git repository or reinitialize an existing one
+   log        Show commit logs
+   merge      Join two or more development histories together
+   mv         Move or rename a file, a directory, or a symlink
+   pull       Fetch from and merge with another repository or a local branch
+   push       Update remote refs along with associated objects
+   rebase     Forward-port local commits to the updated upstream head
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+   show       Show various types of objects
+   status     Show the working tree status
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+See &amp;apos;git help COMMAND&amp;apos; for more information on a specific command.
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;像上面的命令,如果是这样的证明你的系统已然存在git 不需要去安装了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git
+The program &amp;apos;git&amp;apos; is currently not installed. You can install it by typing:
+sudo apt-get install git
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;如果碰到这种情况，有很多Linux会友好地告诉你Git没有安装，还会告诉你如何安装Git。别慌，现在我来带你安装git!&lt;/p&gt;
+&lt;p&gt;如果你碰巧用Debian或Ubuntu Linux，运行下面这条命令就可以直接完成Git的安装，非常简单。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install git
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;如果你的Debian或Ubuntu Linux太老了，那试试下面这条命令！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install git-core
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;如果是其他Linux版本，可以直接通过源码安装。先从Git官网下载源码，然后解压，依次输入：&lt;strong&gt;./config，make，sudo make install&lt;/strong&gt;这几个命令安装就好了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;在Mac-OS-X上安装Git&quot;&gt;&lt;a href=&quot;#在Mac-OS-X上安装Git&quot; class=&quot;headerlink&quot; title=&quot;在Mac OS X上安装Git&quot;&gt;&lt;/a&gt;在Mac OS X上安装Git&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;下面我提供两种安装Git的方法,这里我们推荐使用第二种！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;安装homebrew，然后通过homebrew安装Git，具体方法请参考homebrew的文档：&lt;a href=&quot;http://brew.sh/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://brew.sh/&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode，选择菜单“Xcode”-&amp;gt;“Preferences”，在弹出窗口中找到“Downloads”，选择“Command Line Tools”，点“Install”就可以完成安装了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Xcode是Apple官方IDE，功能非常强大，是开发Mac和iOS App的必选装备，而且是免费的!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;在Windows上安装Git&quot;&gt;&lt;a href=&quot;#在Windows上安装Git&quot; class=&quot;headerlink&quot; title=&quot;在Windows上安装Git&quot;&gt;&lt;/a&gt;在Windows上安装Git&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;说实话&lt;strong&gt;windows&lt;/strong&gt;是非常垃圾的开发平台，个人不推荐。但是好多人都用这款操作系统，我们还是说一下吧。&lt;/p&gt;
+&lt;p&gt;msysgit是Windows版的Git，点击下面这条链接下载到本地！&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://dlsw.baidu.com/sw-search-sp/soft/4e/30195/Git_V2.5.1_64_bit_setup.1441791170.exe&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dlsw.baidu.com/sw-search-sp/soft/4e/30195/Git_V2.5.1_64_bit_setup.1441791170.exe&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们使用的是Git Bash。去你的应用里面打开这个，会出现一个类似cmd的黑色窗口，恭喜你，成功安装&lt;strong&gt;windows&lt;/strong&gt;版本&lt;strong&gt;git&lt;/strong&gt;！&lt;/p&gt;
+&lt;p&gt;以上安装完成后，还需要最后一步设置，在命令行输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git config --global user.name &amp;quot;Your Name&amp;quot;
+$ git config --global user.email &amp;quot;email@example.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址&lt;/p&gt;
+&lt;p&gt;例如如果你公司的项目是放在自建的gitlab上面, 如果你不进行配置用户名和邮箱的话, 则会使用全局的, 这个时候是错误的, 正确的做法是针对公司的项目, 在项目根目录下进行单独配置&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git config user.name &amp;quot;Your Name&amp;quot;
+$ git config user.email &amp;quot;email@example.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;那我们应该怎么去看，我们做的一些配置呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git config --list
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;这个命令查看的是当前配置, 在当前项目下面查看的配置是全局配置+当前项目的配置, 使用的时候会优先使用当前项目的配置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;如何操作？&quot;&gt;&lt;a href=&quot;#如何操作？&quot; class=&quot;headerlink&quot; title=&quot;如何操作？&quot;&gt;&lt;/a&gt;如何操作？&lt;/h2&gt;&lt;h3 id=&quot;一：创建版本库&quot;&gt;&lt;a href=&quot;#一：创建版本库&quot; class=&quot;headerlink&quot; title=&quot;一：创建版本库&quot;&gt;&lt;/a&gt;一：创建版本库&lt;/h3&gt;&lt;h4 id=&quot;版本库是什么？&quot;&gt;&lt;a href=&quot;#版本库是什么？&quot; class=&quot;headerlink&quot; title=&quot;版本库是什么？&quot;&gt;&lt;/a&gt;版本库是什么？&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;版本库又名仓库，也就是我们常见的repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。是不是很屌？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;创建版本库&quot;&gt;&lt;a href=&quot;#创建版本库&quot; class=&quot;headerlink&quot; title=&quot;创建版本库&quot;&gt;&lt;/a&gt;创建版本库&lt;/h4&gt;&lt;p&gt;&lt;strong&gt; 上文说到他很屌，但是创建起来确实非常的简单！&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们只需要选择一个适合的地方，创建一个空目录即可！我们来举个栗子！其实都是一样的！不过这里注意一下，尽量不要用中文命名！就算为了我们的逼格也千万别用！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ mkdir www/git/myStudy -p
+$ cd www/git/myStudy
+$ pwd
+/d/www/git/myStudy
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;下面我们将要用到一个很牛的命令瞬间把这块地方变成你的仓库！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git init
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;如果你看到出现这种提示，证明你成功了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;Initialized empty Git repository in /root/git/my-study/.git/
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;这时候你当前目录下会多了一个.git的目录，这个目录是Git来跟踪管理版本的，没事千万不要手动乱改这个目录里面的文件，否则，就会把git仓库给破坏了！你可以用这个命令来查看一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ ls -ah
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;把文件添加到版本库&quot;&gt;&lt;a href=&quot;#把文件添加到版本库&quot; class=&quot;headerlink&quot; title=&quot;把文件添加到版本库&quot;&gt;&lt;/a&gt;把文件添加到版本库&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;接下来简单说几点需要注意的&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了啥，版本控制系统不知道，也没法知道。&lt;/li&gt;
+&lt;li&gt;Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的，前面我们举的例子只是为了演示，如果要真正使用版本控制系统，就要以纯文本方式编写文件。&lt;/li&gt;
+&lt;li&gt;千万不要使用Windows自带的记事本编辑任何文本文件。原因是Microsoft开发记事本的团队使用了一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面我们继续，首先我们在当前目录下来创建一个文件，代码如下&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ touch readme.md
+$ vi readme.md
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;我们随便在里面写一些东西进去然后保存&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;we are family
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;那么我们怎么去把这个文件放到仓库里面呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1    用命令git add告诉Git，把文件添加到仓库：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git add readme.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2    用命令git commit告诉Git，把文件提交到仓库：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git commit -m &amp;quot;wrote a readme file&amp;quot;
+[master (root-commit) cb926e7] wrote a readme file
+1 file changed, 1 insertions(+)
+ create mode 100644 readme.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;上面的意思其实就是，1个文件被改动（我们新添加的readme.txt文件），插入了一行内容（we are family）。&lt;strong&gt;-m “wrote a readme file”&lt;/strong&gt;其实就是加了注释，这是作为一个程序员的基本准则！&lt;strong&gt;切记！切记！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，比如：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git add file1.txt
+$ git add file2.txt file3.txt
+$ git commit -m &amp;quot;add 3 files.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;我们也可以不用add，当我们提交一个项目，或者文件比较多，基本没问题的前提下可以用下面的代码：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git commit -am &amp;quot;add all&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;二：git-常用的命令&quot;&gt;&lt;a href=&quot;#二：git-常用的命令&quot; class=&quot;headerlink&quot; title=&quot;二：git 常用的命令&quot;&gt;&lt;/a&gt;二：git 常用的命令&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;当我们运行git时会出现这样的代码&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;add        Add file contents to the index
+bisect     Find by binary search the change that introduced a bug
+branch     List, create, or delete branches
+checkout   Checkout a branch or paths to the working tree
+clone      Clone a repository into a new directory
+commit     Record changes to the repository
+diff       Show changes between commits, commit and working tree, etc
+fetch      Download objects and refs from another repository
+grep       Print lines matching a pattern
+init       Create an empty git repository or reinitialize an existing one
+log        Show commit logs
+merge      Join two or more development histories together
+mv         Move or rename a file, a directory, or a symlink
+pull       Fetch from and merge with another repository or a local branch
+push       Update remote refs along with associated objects
+rebase     Forward-port local commits to the updated upstream head
+reset      Reset current HEAD to the specified state
+rm         Remove files from the working tree and from the index
+show       Show various types of objects
+status     Show the working tree status
+tag        Create, list, delete or verify a tag
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;其实这些都是 git的命令 下面我们就来说一说我们常用的命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;git-status命令可以让我们时刻掌握仓库当前的状态&quot;&gt;&lt;a href=&quot;#git-status命令可以让我们时刻掌握仓库当前的状态&quot; class=&quot;headerlink&quot; title=&quot;git status命令可以让我们时刻掌握仓库当前的状态&quot;&gt;&lt;/a&gt;git status命令可以让我们时刻掌握仓库当前的状态&lt;/h4&gt;&lt;p&gt;   $ git status&lt;/p&gt;
+&lt;h1 id=&quot;On-branch-master&quot;&gt;&lt;a href=&quot;#On-branch-master&quot; class=&quot;headerlink&quot; title=&quot;On branch master&quot;&gt;&lt;/a&gt;On branch master&lt;/h1&gt;&lt;h1 id=&quot;Changes-not-staged-for-commit&quot;&gt;&lt;a href=&quot;#Changes-not-staged-for-commit&quot; class=&quot;headerlink&quot; title=&quot;Changes not staged for commit:&quot;&gt;&lt;/a&gt;Changes not staged for commit:&lt;/h1&gt;&lt;h1 id=&quot;use-“git-add-…”-to-update-what-will-be-committed&quot;&gt;&lt;a href=&quot;#use-“git-add-…”-to-update-what-will-be-committed&quot; class=&quot;headerlink&quot; title=&quot;(use “git add …” to update what will be committed)&quot;&gt;&lt;/a&gt;(use “git add &lt;file&gt;…” to update what will be committed)&lt;/file&gt;&lt;/h1&gt;&lt;h1 id=&quot;use-“git-checkout-–-…”-to-discard-changes-in-working-directory&quot;&gt;&lt;a href=&quot;#use-“git-checkout-–-…”-to-discard-changes-in-working-directory&quot; class=&quot;headerlink&quot; title=&quot;(use “git checkout – …” to discard changes in working directory)&quot;&gt;&lt;/a&gt;(use “git checkout – &lt;file&gt;…” to discard changes in working directory)&lt;/file&gt;&lt;/h1&gt;&lt;p&gt;   #&lt;/p&gt;
+&lt;h1 id=&quot;modified-readme-txt&quot;&gt;&lt;a href=&quot;#modified-readme-txt&quot; class=&quot;headerlink&quot; title=&quot;modified:   readme.txt&quot;&gt;&lt;/a&gt;modified:   readme.txt&lt;/h1&gt;&lt;p&gt;   #&lt;br&gt;   no changes added to commit (use “git add” and/or “git commit -a”)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;git-diff查看差异，显示的格式正是Unix通用的diff格式-如果加上具体某个文件名，就可以具体对比某个文件了！&quot;&gt;&lt;a href=&quot;#git-diff查看差异，显示的格式正是Unix通用的diff格式-如果加上具体某个文件名，就可以具体对比某个文件了！&quot; class=&quot;headerlink&quot; title=&quot;git diff查看差异，显示的格式正是Unix通用的diff格式,如果加上具体某个文件名，就可以具体对比某个文件了！&quot;&gt;&lt;/a&gt;git diff查看差异，显示的格式正是Unix通用的diff格式,如果加上具体某个文件名，就可以具体对比某个文件了！&lt;/h4&gt;&lt;p&gt;   diff –git a/Learning-growth/git/test.md b/Learning-growth/git/test.md&lt;br&gt;   index 4dad973..ec71f80 100644&lt;br&gt;   — a/Learning-growth/git/test.md&lt;br&gt;   +++ b/Learning-growth/git/test.md&lt;br&gt;   @@ -1 +1 @@&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hello word!&lt;br&gt;+hello word!&lt;br&gt;diff –git a/readme.md b/readme.md&lt;br&gt;index 55bef5e..f4370ba 100644&lt;br&gt;— a/readme.md&lt;br&gt;+++ b/readme.md&lt;br&gt;@@ -1,2 +1,2 @@&lt;/li&gt;
+&lt;li&gt;we are familu!&lt;br&gt;+we are familu!
+　&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;可以告诉我们历史记录，在Git中，我们用git-log命令查看：&quot;&gt;&lt;a href=&quot;#可以告诉我们历史记录，在Git中，我们用git-log命令查看：&quot; class=&quot;headerlink&quot; title=&quot;可以告诉我们历史记录，在Git中，我们用git log命令查看：&quot;&gt;&lt;/a&gt;可以告诉我们历史记录，在Git中，我们用git log命令查看：&lt;/h4&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;    $ git log
+    commit b8d7cbd8d3b5585e495fdf8f0f79a13e8e106fb7
+    Author: cuijiji &amp;lt;624337224@qq.com&amp;gt;
+    Date:   Wed Feb 3 18:07:28 2016 +0800
+    add all
+
+    commit 57b37b7e743b0790213d97fb55d0664c2b18794c
+    Author: cuijiji &amp;lt;624337224@qq.com&amp;gt;
+    Date:   Wed Feb 3 18:05:25 2016 +0800
+
+    add a folder
+
+    commit 66d1757cfcc8d1476a23387b133125dc0efb2b96
+    Author: cuijiji &amp;lt;624337224@qq.com&amp;gt;
+    Date:   Wed Feb 3 17:49:55 2016 +0800
+
+    add a new file
+
+如果嫌输出信息太多，看得眼花缭乱的，可以试试加上--pretty=oneline参数：
+
+    $ git log --pretty=oneline
+
+    b8d7cbd8d3b5585e495fdf8f0f79a13e8e106fb7 add all
+    57b37b7e743b0790213d97fb55d0664c2b18794c add a folder
+    66d1757cfcc8d1476a23387b133125dc0efb2b96 add a new file
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;我们要把当前版本回退到上一个版本就可以使用git-reset命令：&quot;&gt;&lt;a href=&quot;#我们要把当前版本回退到上一个版本就可以使用git-reset命令：&quot; class=&quot;headerlink&quot; title=&quot;我们要把当前版本回退到上一个版本就可以使用git reset命令：&quot;&gt;&lt;/a&gt;我们要把当前版本回退到上一个版本就可以使用git reset命令：&lt;/h4&gt;&lt;p&gt;   $ git reset –hard HEAD^&lt;br&gt;   HEAD is now at ea34578 add distributed&lt;/p&gt;
+&lt;p&gt;^代表回退上N个版本所以^^代表两个不过如果太往前的我们就会用commit id(这个ID 不用写全 只要前几位保证没有重复即可)&lt;/p&gt;
+&lt;p&gt;   $ git reset –hard 3628164&lt;br&gt;   HEAD is now at 3628164 append GPL&lt;/p&gt;
+&lt;h3 id=&quot;三：git的工作区和暂存区的概念&quot;&gt;&lt;a href=&quot;#三：git的工作区和暂存区的概念&quot; class=&quot;headerlink&quot; title=&quot;三：git的工作区和暂存区的概念&quot;&gt;&lt;/a&gt;三：git的工作区和暂存区的概念&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;简单以下几点&quot;&gt;&lt;a href=&quot;#简单以下几点&quot; class=&quot;headerlink&quot; title=&quot;简单以下几点&quot;&gt;&lt;/a&gt;简单以下几点&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;工作区及我们本地仓库的区域，&lt;/li&gt;
+&lt;li&gt;暂存区及我们add上去的区域&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;那么我们commit到了哪里了呢？&quot;&gt;&lt;a href=&quot;#那么我们commit到了哪里了呢？&quot; class=&quot;headerlink&quot; title=&quot;那么我们commit到了哪里了呢？&quot;&gt;&lt;/a&gt;那么我们commit到了哪里了呢？&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以，现在，git commit就是往master分支上提交更改。你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;那我们接下来说几个与这个有关的命令吧&quot;&gt;&lt;a href=&quot;#那我们接下来说几个与这个有关的命令吧&quot; class=&quot;headerlink&quot; title=&quot;那我们接下来说几个与这个有关的命令吧&quot;&gt;&lt;/a&gt;那我们接下来说几个与这个有关的命令吧&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;git checkout – file可以丢弃工作区的修改,也就是让这个文件回到最近一次git commit或git add时的状态：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout -- readme.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;$ git reset HEAD readme.txt
+Unstaged changes after reset:
+M       readme.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;rm可以删除工作区的文件这时候你可以有两种方式来处理&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;第一种从版本库中删除该文件&quot;&gt;&lt;a href=&quot;#第一种从版本库中删除该文件&quot; class=&quot;headerlink&quot; title=&quot;第一种从版本库中删除该文件&quot;&gt;&lt;/a&gt;第一种从版本库中删除该文件&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;$ git rm test.txt
+rm &amp;apos;test.txt&amp;apos;
+$ git commit -m &amp;quot;remove test.txt&amp;quot;
+[master d17efd8] remove test.txt
+1 file changed, 1 deletion(-)
+delete mode 100644 test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本&quot;&gt;&lt;a href=&quot;#另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本&quot; class=&quot;headerlink&quot; title=&quot;另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本&quot;&gt;&lt;/a&gt;另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;$ git checkout -- test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;四：远程仓库&quot;&gt;&lt;a href=&quot;#四：远程仓库&quot; class=&quot;headerlink&quot; title=&quot;四：远程仓库&quot;&gt;&lt;/a&gt;四：远程仓库&lt;/h3&gt;&lt;h4 id=&quot;什么是远程仓库？&quot;&gt;&lt;a href=&quot;#什么是远程仓库？&quot; class=&quot;headerlink&quot; title=&quot;什么是远程仓库？&quot;&gt;&lt;/a&gt;什么是远程仓库？&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;Git是分布式版本控制系统，同一个Git仓库，可以分布到不同的机器上。怎么分布呢？最早，肯定只有一台机器有一个原始版本库，此后，别的机器可以“克隆”这个原始版本库，而且每台机器的版本库其实都是一样的，并没有主次之分。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;那我们怎么办呢？&quot;&gt;&lt;a href=&quot;#那我们怎么办呢？&quot; class=&quot;headerlink&quot; title=&quot;那我们怎么办呢？&quot;&gt;&lt;/a&gt;那我们怎么办呢？&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;完全可以自己搭建一台运行Git的服务器，不过现阶段，为了学Git先搭个服务器绝对是小题大作。好在这个世界上有个叫GitHub的神奇的网站，从名字就可以看出，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;下面我们来说说具体怎么去做吧&quot;&gt;&lt;a href=&quot;#下面我们来说说具体怎么去做吧&quot; class=&quot;headerlink&quot; title=&quot;下面我们来说说具体怎么去做吧&quot;&gt;&lt;/a&gt;下面我们来说说具体怎么去做吧&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;注册GitHub账号，不会的去找教程，我这里不说了！&lt;/li&gt;
+&lt;li&gt;创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key。如果一切顺利的话，可以在用户主目录里找到.ssh目录，获取id_rsa.pub里面的内容&lt;/li&gt;
+&lt;li&gt;登陆GitHub，打开“Account settings”，“SSH Keys”页面：&lt;br&gt;然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：点“Add Key”，你就应该看到已经添加的Key：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;注意：GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;与仓库链接&quot;&gt;&lt;a href=&quot;#与仓库链接&quot; class=&quot;headerlink&quot; title=&quot;与仓库链接&quot;&gt;&lt;/a&gt;与仓库链接&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库&lt;/li&gt;
+&lt;li&gt;在Repository name填入learngit，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库：&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;鉴于我们大多数都是以clone为主，我们就使用下面的代码运行&lt;/p&gt;
+&lt;p&gt;git clone git@github.com:cuijiji/study-and-grow-up.git&lt;/p&gt;
+&lt;p&gt;这样你就把你的远程仓库克隆下来了！现在我们重复之前的命令来修改，或者添加一个文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;现在我们用下面的命令来提到我们的github上面吧&lt;/p&gt;
+&lt;p&gt; git push -u origin master&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; 你可能会碰到权限问题，换种链接方式试试！或者联系我吧！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;五：创建与合并分支&quot;&gt;&lt;a href=&quot;#五：创建与合并分支&quot; class=&quot;headerlink&quot; title=&quot;五：创建与合并分支&quot;&gt;&lt;/a&gt;五：创建与合并分支&lt;/h3&gt;&lt;h4 id=&quot;什么是分支？&quot;&gt;&lt;a href=&quot;#什么是分支？&quot; class=&quot;headerlink&quot; title=&quot;什么是分支？&quot;&gt;&lt;/a&gt;什么是分支？&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;分支就好比数学中平行的几条线！他们之间无不影响，都在自己的世界工作！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;到底是什么？举个栗子说明！&quot;&gt;&lt;a href=&quot;#到底是什么？举个栗子说明！&quot; class=&quot;headerlink&quot; title=&quot;到底是什么？举个栗子说明！&quot;&gt;&lt;/a&gt;到底是什么？举个栗子说明！&lt;/h4&gt;&lt;blockquote&gt;
+&lt;h5 id=&quot;这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！&quot;&gt;&lt;a href=&quot;#这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！&quot; class=&quot;headerlink&quot; title=&quot;这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！&quot;&gt;&lt;/a&gt;这个问题问的好（自问自答）！但是首先我们要再来理解一下这个概念。经过上面的学习或许你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。这样说你是否清楚了呢？不清楚没办法！有招想去，没招联系我！&lt;/h5&gt;&lt;/blockquote&gt;
+&lt;h4 id=&quot;来创建dev分支，然后切换到dev分支上&quot;&gt;&lt;a href=&quot;#来创建dev分支，然后切换到dev分支上&quot; class=&quot;headerlink&quot; title=&quot;来创建dev分支，然后切换到dev分支上&quot;&gt;&lt;/a&gt;来创建dev分支，然后切换到dev分支上&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;使用下面的命令来创建一个分支dev&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout -b dev
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;有没有想起来我们之前好像用过这个checkout命令呢？好吧，想不起来算了！那我们重点说下这个命令的意思，其实它是涵盖这一下两个命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git branch dev
+
+$ git checkout dev
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那么我们现在试试这个git branch命令的效果吧&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git branch
+ * dev
+ master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;git branch&lt;/strong&gt;会列出所有的分支，前面带*的分支就是我们当前工作的分支！那我们怎么去切换分支呢？很简单：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout master
+Switched to branch &amp;apos;master&amp;apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在我们切回dev分支修改一下自己做个测试，然后提交。再切回master，看看你刚才更改的文件是否有跟着变动呢？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;答案是&lt;strong&gt;没有&lt;/strong&gt;。&lt;strong&gt;为什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这个问题问的真傻？不是说了吗平行，平行的……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;合并分支&quot;&gt;&lt;a href=&quot;#合并分支&quot; class=&quot;headerlink&quot; title=&quot;合并分支&quot;&gt;&lt;/a&gt;合并分支&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;合并分支其实很简单，使用下面这个命令即可：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git merge dev
+Updating d17efd8..fec145a
+Fast-forward
+ readme.txt |    1 +
+ 1 file changed, 1 insertion(+)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;屌不屌？我就想问一句，&lt;strong&gt;还有谁？&lt;/strong&gt;这里我们对这个命令说明一下，&lt;strong&gt;git merge命令用于合并指定分支到当前分支&lt;/strong&gt;所以保证要合并到的是当前分支，也要注意你要合并的分支！&lt;strong&gt;切记切记！&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;没参数的情况下merge是&lt;strong&gt;fast-forward&lt;/strong&gt;的，即Git将master分支的指针直接移到dev的最前方。换句话说，如果顺着一个分支走下去可以到达另一个分支的话，那么Git在合并两者时，只会简单移动指针，所以这种合并成为快进式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以上的那种我们称之为直接合并！我们还可以试试这种合并：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;将一条分支上的若干个提交条目压合成一个提交条目，提交到另一条分支的末梢。把dev分支上的所有提交压合成主分支上的一个提交，即压合提交：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;　&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout master
+$ git merge --squash dev
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;此时，dev上的所有提交已经合并到当前工作区并暂存，但还没有作为一个提交，可以像其他提交一样，把这个改动提交到版本库中：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;　　&lt;br&gt;    $ git commit –m “something from dev”&lt;/p&gt;
+&lt;p&gt;拣选另一条分支上的某个提交条目的改动带到当前分支上。&lt;br&gt;每一次提交都会产生一个全局唯一的提交名称，利用这个名称就可以进行拣选提交。&lt;br&gt;比如在dev上的某个提交叫：321d76f&lt;em&gt;*&lt;/em&gt;，我们现在把它合并到master&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout master
+$ git cherry-pick 321d76f
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;要拣选多个提交，可以给git cherry-pick命令传递-n选项，比如：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;　　&lt;br&gt;    $ git cherry-pick –n 321d76f&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这样在拣选了这个改动之后，进行暂存而不立即提交，接着可以进行下一个拣选操作，一旦拣选完需要的各个提交，就可以一并提交。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;删除分支&quot;&gt;&lt;a href=&quot;#删除分支&quot; class=&quot;headerlink&quot; title=&quot;删除分支&quot;&gt;&lt;/a&gt;删除分支&lt;/h3&gt;&lt;p&gt;像我这么正直的人，爱做的就是卸磨杀驴！用完了怎么删除？试试这个：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git branch -d dev
+Deleted branch dev (was fec145a).
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样就删除了，其实我们是为了不让自己混乱，因为分支一多就蒙圈了！&lt;/p&gt;
+&lt;h3 id=&quot;六：解决冲突&quot;&gt;&lt;a href=&quot;#六：解决冲突&quot; class=&quot;headerlink&quot; title=&quot;六：解决冲突&quot;&gt;&lt;/a&gt;六：解决冲突&lt;/h3&gt;&lt;h4 id=&quot;为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决&quot;&gt;&lt;a href=&quot;#为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决&quot; class=&quot;headerlink&quot; title=&quot;为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决&quot;&gt;&lt;/a&gt;为什么拿出这个重点说下，因为版本控制器，最蛋疼的问题就是冲突！所以我来告诉大家怎么去解决&lt;/h4&gt;&lt;p&gt;首先我们想要解决冲突，就制造个冲突出来。很简单，还记得我们的分支吗？对了，就是这个！我就不在这里重复了，直接来命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout -b dev
+$  git checkout dev
+$  vim README.md
+$  git add README.md
+$  git commit -m &amp;apos;test test&amp;apos;
+$  git branch
+$  git branch master
+$  git checkout master
+$  vim README.md
+$  git add README.md
+$  git commit -m &amp;apos;test master&amp;apos;
+$  git merge dev
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果你看到的是这样的提示&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那恭喜你，你冲突了！怎么办？解决！你可以用之前我们用过的命令看一下状态：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git status
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;你也可以看到哪个文件冲突了！那么我们现在打开刚刚冲突的文件来看一看！&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; HEAD
+## 666
+=======
+## 777
+&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; dev
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;解释一下：&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;标记冲突开始，后面跟的是当前分支中的内容。&lt;/p&gt;
+&lt;p&gt;　　HEAD指向当前分支末梢的提交。&lt;/p&gt;
+&lt;p&gt;　　=======之后，&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;之前是要merge过来的另一条分支上的代码。&lt;/p&gt;
+&lt;p&gt;　　&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;之后的dev是该分支的名字。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;对于简单的合并，手工编辑，然后去掉这些标记，最后像往常的提交一样先add再commit即可。我们可以通过下面这个命令来具体看一下&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git log --graph --pretty=oneline --abbrev-commit
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;你会看见类似这样的提示：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;*   10fcd7a modify README.md
+|\  
+| * f9b6554 test test
+* | 7d60f76 test master
+|/  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;有没有很好懂，但是那个git log 后面跟的一长串 都不记不住。怎么办？下面我来告诉你！怎么把命令简化！&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git config --global alias.lg &amp;quot;log --graph --pretty=oneline --abbrev-commit&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来你在运行一下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git lg
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看到了什么？神奇吧！不解释！按照这个写法，你自己去定制几个试试吧！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Git简介&quot;&gt;&lt;a href=&quot;#Git简介&quot; class=&quot;headerlink&quot; title=&quot;Git简介&quot;&gt;&lt;/a&gt;Git简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;最流行的分布式版本控制系统。&lt;/p&gt;
+&lt;p&gt;Git有什么特点？&lt;/p&gt;
+&lt;p&gt;免费而超级好用。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="small-tool" scheme="http://yoursite.com/categories/small-tool/"/>
+    
+    
+      <category term="small-tool" scheme="http://yoursite.com/tags/small-tool/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vagrant基本用法</title>
+    <link href="http://yoursite.com/2016/03/08/vagrant-basic-use/"/>
+    <id>http://yoursite.com/2016/03/08/vagrant-basic-use/</id>
+    <published>2016-03-08T10:34:59.000Z</published>
+    <updated>2016-03-11T05:44:13.294Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
+&lt;p&gt;我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h6 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h6&gt;&lt;p&gt;安装vagrant和虚拟机virtulbox（一般先下载安装virtulbox）&lt;/p&gt;
+&lt;h6 id=&quot;下载地址：&quot;&gt;&lt;a href=&quot;#下载地址：&quot; class=&quot;headerlink&quot; title=&quot;下载地址：&quot;&gt;&lt;/a&gt;下载地址：&lt;/h6&gt;&lt;p&gt;. &lt;a href=&quot;https://www.vagrantup.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;vagrant(选对应版本)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;. &lt;a href=&quot;https://www.virtualbox.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;virtulbox&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装过程基本就是默认状态，最后在命令行输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vagrant
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出现帮助信息代表安装完成&lt;/p&gt;
+&lt;p&gt;. box镜像文件可想象成虚拟机的本身&lt;/p&gt;
+&lt;h6 id=&quot;查看安装的box&quot;&gt;&lt;a href=&quot;#查看安装的box&quot; class=&quot;headerlink&quot; title=&quot;查看安装的box&quot;&gt;&lt;/a&gt;查看安装的box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant box list
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;添加box&quot;&gt;&lt;a href=&quot;#添加box&quot; class=&quot;headerlink&quot; title=&quot;添加box&quot;&gt;&lt;/a&gt;添加box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant box add  
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;下载地址：www.vagrantcloud.com  搜索centos 6.5 32&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;添加本地下载好的box&quot;&gt;&lt;a href=&quot;#添加本地下载好的box&quot; class=&quot;headerlink&quot; title=&quot;添加本地下载好的box&quot;&gt;&lt;/a&gt;添加本地下载好的box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagarnt box add  文件绝对路径+name 别名
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;例如：复制box的名字：在命令行执行如：vagrant box add chef/centos-6.5  选择virtulbox&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;为项目创建个目录&quot;&gt;&lt;a href=&quot;#为项目创建个目录&quot; class=&quot;headerlink&quot; title=&quot;为项目创建个目录&quot;&gt;&lt;/a&gt;为项目创建个目录&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;md wangcan
+
+cd wangcan
+
+vagrant box list`
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;初始化项目目录&quot;&gt;&lt;a href=&quot;#初始化项目目录&quot; class=&quot;headerlink&quot; title=&quot;初始化项目目录&quot;&gt;&lt;/a&gt;初始化项目目录&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant init chef/centos-6.5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这时会出现vagrantfile文件（以后很多配置都在这里）&lt;/p&gt;
+&lt;h6 id=&quot;启动虚拟机&quot;&gt;&lt;a href=&quot;#启动虚拟机&quot; class=&quot;headerlink&quot; title=&quot;启动虚拟机&quot;&gt;&lt;/a&gt;启动虚拟机&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant up
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;如果失败可以直接打开virtualbox看看报什么错误,针对提示一般都会找到解决方案&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;启动成功后显示类似如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;default：/vagrant =&amp;gt; /User/phoenix/wangcan
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;虚拟机的vagrant目录和本地的wangcan目录同步，此时修改本地就可以同步&lt;/p&gt;
+&lt;p&gt;vagrnat ssh 可连接虚拟机，可以用客户端工具连接；127.0.0.1 端口：2222 用户和密码都是vagrant&lt;/p&gt;
+&lt;p&gt;在windows命令窗口下清楚之前命令用 cls&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant status  #查看虚机状态
+vagrant halt    #关机
+vagrant suspend #暂停
+vagrant reload  #先关机再启动
+vagrant destroy #销毁当前的box,不会销毁原来的
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;虚拟机搭建好之后就可以安装开发环境了&lt;/p&gt;
+&lt;p&gt;不过记得切换root用户&lt;/p&gt;
+&lt;p&gt;或者使用sudo+命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;额外共享目录设置&quot;&gt;&lt;a href=&quot;#额外共享目录设置&quot; class=&quot;headerlink&quot; title=&quot;额外共享目录设置&quot;&gt;&lt;/a&gt;额外共享目录设置&lt;/h6&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开vagrantfile&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;搜索打开:synced_folder项&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;create:ture,owner:”root”, group:”root”     (目录不存在就创建，拥有者，群组)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启vagrant up&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h6 id=&quot;在虚拟机上配置web服务器&quot;&gt;&lt;a href=&quot;#在虚拟机上配置web服务器&quot; class=&quot;headerlink&quot; title=&quot;在虚拟机上配置web服务器&quot;&gt;&lt;/a&gt;在虚拟机上配置web服务器&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;可配置网络类型：&lt;/p&gt;
+&lt;p&gt;私有=&amp;gt; 为虚拟机手工的制定一个ip地址，通过这个ip地址电脑和虚拟机间通讯，并且只能通过自己的电脑才能访问这个虚拟机，如果在这台虚拟机上搭建了一台服务器，那么只能在你的电脑上访问&lt;/p&gt;
+&lt;p&gt;公有=&amp;gt; 同一个网络上可访问，同一个网络上的其他设备都可以访问&lt;/p&gt;
+&lt;p&gt;端口转发 =&amp;gt; 配置好要转发的端口如8080 转发到80 访问本地8080会转发到细腻机80端口，这样不灵活，要手工配置多个端口&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 私有网络配置&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;打开vagrantfile 搜索
+  # config.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.33.10&amp;quot;
+  打开重启虚拟机
+  ping 192.168.33.10     测试能否通讯，（主机接受数据包返回信息）
+  vagrant ssh  后输入 ifconfig              返回配置系统的网络信息
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;公有网络&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;打开vagrantfile 注释掉私有配置
+搜索打开
+# config.vm.network &amp;quot;public_network&amp;quot;
+重启 -&amp;gt;    提示选择网络类型
+ifconfig 查看 ip
+用ip 就可以
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;package打包现有开发环境&quot;&gt;&lt;a href=&quot;#package打包现有开发环境&quot; class=&quot;headerlink&quot; title=&quot;package打包现有开发环境&quot;&gt;&lt;/a&gt;package打包现有开发环境&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;首先删除一个文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;rm -rf  /etc/udev/rules.d/70-persistent-net.rules
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;进入到醒目根目录执行如下命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;vagrant up
+vagrant package –base virtualbox_vm_name –output newbox_name.box
+vagrant box add wangcan/item package.box
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  在你的醒目下就存在了一个打包好的box&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tips:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;su 切换root用户     passwd： 修改密码
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
+&lt;p&gt;我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="small-tool" scheme="http://yoursite.com/categories/small-tool/"/>
+    
+    
+      <category term="small-tool" scheme="http://yoursite.com/tags/small-tool/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>makdown基础用法</title>
+    <link href="http://yoursite.com/2016/03/07/makdown-diary/"/>
+    <id>http://yoursite.com/2016/03/07/makdown-diary/</id>
+    <published>2016-03-07T09:53:51.000Z</published>
+    <updated>2016-03-11T05:39:40.883Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;一级标题&quot;&gt;&lt;a href=&quot;#一级标题&quot; class=&quot;headerlink&quot; title=&quot;一级标题&quot;&gt;&lt;/a&gt;一级标题&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;&amp;apos;#&amp;apos;号后加空格，几个#就是几级标题，一共6级标题
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;无序列表&quot;&gt;&lt;a href=&quot;#无序列表&quot; class=&quot;headerlink&quot; title=&quot;无序列表&quot;&gt;&lt;/a&gt;无序列表&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;需要在文字前加上 - 或 *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;即可变为无序列表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;有序列表&quot;&gt;&lt;a href=&quot;#有序列表&quot; class=&quot;headerlink&quot; title=&quot;有序列表&quot;&gt;&lt;/a&gt;有序列表&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;有序列表则直接在文字前加 1. 2. 3.&lt;/li&gt;
+&lt;li&gt;符号要和文字之间加上一个字符的空格。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;headerlink&quot; title=&quot;引用&quot;&gt;&lt;/a&gt;引用&lt;/h2&gt;&lt;p&gt;如果你需要引用一小段别处的句子，那么就要用引用的格式。&lt;br&gt;只需要在文本前加入 &amp;gt; 这种尖括号（大于号）即可&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里是引用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;要注意符号和文本的空格&lt;/p&gt;
+&lt;p&gt;##图片与连接&lt;br&gt;插入链接与插入图片的语法很像，区别在一个 !号&lt;/p&gt;
+&lt;p&gt;插入图片的地址需要图床，这里推荐 CloudApp 的服务，生成URL地址即可。&lt;br&gt;&lt;a href=&quot;http://baidu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;baidu&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://mouapp.com/Mou_128.png&quot; alt=&quot;mou icom&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;粗体与斜体&quot;&gt;&lt;a href=&quot;#粗体与斜体&quot; class=&quot;headerlink&quot; title=&quot;粗体与斜体&quot;&gt;&lt;/a&gt;粗体与斜体&lt;/h2&gt;&lt;p&gt;Markdown 的粗体和斜体也非常简单，用两个 &lt;em&gt; 包含一段文本就是粗体的语法，用一个 &lt;/em&gt; 包含一段文本就是斜体的语法。&lt;/p&gt;
+&lt;h2 id=&quot;表格&quot;&gt;&lt;a href=&quot;#表格&quot; class=&quot;headerlink&quot; title=&quot;表格&quot;&gt;&lt;/a&gt;表格&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;代码框&quot;&gt;&lt;a href=&quot;#代码框&quot; class=&quot;headerlink&quot; title=&quot;代码框&quot;&gt;&lt;/a&gt;代码框&lt;/h2&gt;&lt;p&gt;只需要用两个 反引号把中间的代码包裹起来&lt;/p&gt;
+&lt;h2 id=&quot;分割线&quot;&gt;&lt;a href=&quot;#分割线&quot; class=&quot;headerlink&quot; title=&quot;分割线&quot;&gt;&lt;/a&gt;分割线&lt;/h2&gt;&lt;p&gt;分割线的语法只需要另起一行，连续输入三个星号 &lt;em&gt;*&lt;/em&gt; 即可。&lt;/p&gt;
+&lt;hr&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一级标题&quot;&gt;&lt;a href=&quot;#一级标题&quot; class=&quot;headerlink&quot; title=&quot;一级标题&quot;&gt;&lt;/a&gt;一级标题&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;&amp;apos;#&amp;apos;号后加空格，几个#就是几级标题，一共6级标题
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;无序列表&quot;&gt;&lt;a href=&quot;#无序列表&quot; class=&quot;headerlink&quot; title=&quot;无序列表&quot;&gt;&lt;/a&gt;无序列表&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;需要在文字前加上 - 或 *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;即可变为无序列表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;有序列表&quot;&gt;&lt;a href=&quot;#有序列表&quot; class=&quot;headerlink&quot; title=&quot;有序列表&quot;&gt;&lt;/a&gt;有序列表&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;有序列表则直接在文字前加 1. 2. 3.&lt;/li&gt;
+&lt;li&gt;符号要和文字之间加上一个字符的空格。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="small-tool" scheme="http://yoursite.com/categories/small-tool/"/>
+    
+    
+      <category term="makdown" scheme="http://yoursite.com/tags/makdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gulp</title>
+    <link href="http://yoursite.com/2016/03/07/gulp/"/>
+    <id>http://yoursite.com/2016/03/07/gulp/</id>
+    <published>2016-03-07T03:51:53.000Z</published>
+    <updated>2016-03-11T05:44:07.767Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。&lt;/p&gt;
+&lt;h1 id=&quot;gulp能帮我们做什么&quot;&gt;&lt;a href=&quot;#gulp能帮我们做什么&quot; class=&quot;headerlink&quot; title=&quot;gulp能帮我们做什么?&quot;&gt;&lt;/a&gt;gulp能帮我们做什么?&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;javascript语法的检测、合并，压缩。&lt;/li&gt;
+&lt;li&gt;css的压缩、合并、sass/less的编译&lt;/li&gt;
+&lt;li&gt;images的压缩、合并&lt;/li&gt;
+&lt;li&gt;浏览器自动刷新&lt;/li&gt;
+&lt;li&gt;部署文件生产替换&lt;/li&gt;
+&lt;li&gt;监控文件变化并自动生产相应文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;gulp的安装&quot;&gt;&lt;a href=&quot;#gulp的安装&quot; class=&quot;headerlink&quot; title=&quot;gulp的安装&quot;&gt;&lt;/a&gt;gulp的安装&lt;/h1&gt;&lt;p&gt;gulp是基于Nodejs的自动任务运行器，这里默认已经安装了nodejs&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;全局安装gulp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;npm install --global gulp
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;作为项目的开发依赖安装&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;npm install --save-dev gulp
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;在项目根目录下创建名为gulpfile.js的文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var gulp = require(&amp;apos;gulp&amp;apos;);
+
+gulp.task(&amp;apos;default&amp;apos;, function(){});
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;运行gulp 安装完成&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;gulp -v
+
+gulp
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;正常安装完成会出现版本号以及执行默认任务&quot;&gt;&lt;a href=&quot;#正常安装完成会出现版本号以及执行默认任务&quot; class=&quot;headerlink&quot; title=&quot;正常安装完成会出现版本号以及执行默认任务&quot;&gt;&lt;/a&gt;正常安装完成会出现版本号以及执行默认任务&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;依赖文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 别忘记在项目的根目录下还应该建相应的资源依赖文件package.json文件，它只是一个普通的json文件(但是不可以写注释)，但是对项目来说，不可或缺，里面不仅存在项目的具体描述信息，还存有项目所需要的包依赖，使用它可以记录相关的gulp插件，以便多人开始时协同使用，另外也可以指令建立：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm init
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;gulp原理&quot;&gt;&lt;a href=&quot;#gulp原理&quot; class=&quot;headerlink&quot; title=&quot;gulp原理&quot;&gt;&lt;/a&gt;gulp原理&lt;/h1&gt;&lt;p&gt;  在实现上，glup借鉴了Unix操作系统的管道（pipe）思想，前一级的输出，直接变成后一级的输入，使得在操作上非常简单。但是需要注意的是，gulp运行的过程中不会产生临时文件，所有的文件都是虚拟的，直到指定相应目录进行输出。&lt;/p&gt;
+&lt;h1 id=&quot;gulp函数&quot;&gt;&lt;a href=&quot;#gulp函数&quot; class=&quot;headerlink&quot; title=&quot;gulp函数&quot;&gt;&lt;/a&gt;gulp函数&lt;/h1&gt;&lt;h2 id=&quot;gulp-src&quot;&gt;&lt;a href=&quot;#gulp-src&quot; class=&quot;headerlink&quot; title=&quot;gulp.src()&quot;&gt;&lt;/a&gt;gulp.src()&lt;/h2&gt;&lt;p&gt;gulp.src()方法输入一个glob(比如匹配一个或多个文件的字符串)或者glob数组，然后返回一个可以传递给插件的数据流。&lt;/p&gt;
+&lt;p&gt;Gulp使用node-glob来从你指定的glob里面获取文件,主要匹配规则有以下规则（以js为例）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;js/app.js 精确匹配文件&lt;/li&gt;
+&lt;li&gt;js/*.js 仅匹配js目录下的所有后缀为.js的文件&lt;/li&gt;
+&lt;li&gt;js/*/.js 匹配js目录及其子目录下所有后缀为.js的文件&lt;/li&gt;
+&lt;li&gt;!js/app.js 从匹配结果中排除js/app.js，这种方法在你想要匹配除了特殊文件之外的所有文件时非常管用&lt;/li&gt;
+&lt;li&gt;*.+(js|css) 匹配根目录下所有后缀为.js或者.css的文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;gulp-task&quot;&gt;&lt;a href=&quot;#gulp-task&quot; class=&quot;headerlink&quot; title=&quot;gulp.task()&quot;&gt;&lt;/a&gt;gulp.task()&lt;/h2&gt;&lt;p&gt;gulp.task()函数通常会被用来定义任务。当你定义一个简单的任务时，需要传入任务名字和执行函数两个属性。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.task(&amp;apos;greet&amp;apos;, function () {
+       console.log(&amp;apos;Hello world!&amp;apos;);
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一个任务有时也可以是一系列任务。假设要定义一个任务build来执行css、js、imgs这三个任务，我们可以通过指定一个任务数组而不是函数来完成。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.task(&amp;apos;build&amp;apos;, [&amp;apos;css&amp;apos;, &amp;apos;js&amp;apos;, &amp;apos;imgs&amp;apos;]);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这些任务不是同时进行的，所以你不能认为在js任务开始的时候css任务已经结束了，也可能还没有结束。为了确保一个任务在另一个任务执行前已经结束，可以将函数和任务数组结合起来指定其依赖关系。例如，定义一个css任务，在执行前需要检查greet任务是否已经执行完毕，这样做就是可行的:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.task(&amp;apos;css&amp;apos;, [&amp;apos;greet&amp;apos;], function () { });
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在，当执行css任务时，Gulp会先执行greet任务，然后在它结束后再调用你定义的函数。&lt;/p&gt;
+&lt;p&gt;你可以定义一个在gulp开始运行时候默认执行的任务，并将这个任务命名为“default”：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.task(&amp;apos;default&amp;apos;, function () { });
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;gulp-dest&quot;&gt;&lt;a href=&quot;#gulp-dest&quot; class=&quot;headerlink&quot; title=&quot;gulp.dest()&quot;&gt;&lt;/a&gt;gulp.dest()&lt;/h2&gt;&lt;p&gt;gulp.dest()方法是用来写文件的，他将经过gulp处理的文件输出到相应目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var gulp = reruire(&amp;apos;gulp&amp;apos;);
+gulp.src(&amp;apos;script/**/*.js&amp;apos;)
+    .pipe(gulp.dest(&amp;apos;dist&amp;apos;));
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;gulp-watch&quot;&gt;&lt;a href=&quot;#gulp-watch&quot; class=&quot;headerlink&quot; title=&quot;gulp.watch()&quot;&gt;&lt;/a&gt;gulp.watch()&lt;/h2&gt;&lt;p&gt;gulp.watch()用来监视文件的变化，当文件发生变化后，我们可以利用它来执行相应的任务，例如文件压缩等&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.watch(glob[, opts], tasks)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Gulp可以监听文件的修改动态，然后在文件被改动的时候执行一个或多个任务。这个特性十分有用（对我来说，这可能是Gulp中最有用的一个功能）。你可以保存LESS文件，接着Gulp会自动把它转换为CSS文件并更新浏览器。&lt;/p&gt;
+&lt;p&gt;使用gulp.watch()方法可以监听文件，它接受一个glob或者glob数组（和gulp.src()一样）以及一个任务数组来执行回调。&lt;/p&gt;
+&lt;p&gt;让我们看看下面，build任务可以将模板转换成html格式，然后我们希望定义一个watch任务来监听模板文件的变化，并将这些模板转换成html格式。watch函数的使用方法如下所示：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.task(&amp;apos;watch&amp;apos;, function () {
+       gulp.watch(&amp;apos;templates/*.tmpl.html&amp;apos;, [&amp;apos;build&amp;apos;]);
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在，当改变一个模板文件时，build任务会被执行并生成HTML文件，也可以给watch函数一个回调函数，而不是一个任务数组。在这个示例中，回调函数有一个包含触发回调函数信息的event对象：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gulp.watch(&amp;apos;templates/*.tmpl.html&amp;apos;, function (event) {
+       console.log(&amp;apos;Event type: &amp;apos; + event.type); // added, changed, or deleted
+       console.log(&amp;apos;Event path: &amp;apos; + event.path); // The path of the modified file
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Gulp.watch()的另一个非常好的特性是返回我们熟知的watcher。利用watcher来监听额外的事件或者向watch中添加文件。例如，在执行一系列任务和调用一个函数时，你就可以在返回的watcher中添加监听change事件:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var watcher = gulp.watch(&amp;apos;templates/*.tmpl.html&amp;apos;, [&amp;apos;build&amp;apos;]);
+    watcher.on(&amp;apos;change&amp;apos;, function (event) {
+       console.log(&amp;apos;Event type: &amp;apos; + event.type); // added, changed, or deleted
+       console.log(&amp;apos;Event path: &amp;apos; + event.path); // The path of the modified file
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;除了change事件，还可以监听很多其他的事件:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;end 在watcher结束时触发（这意味着，在文件改变的时候，任务或者回调不会执行）&lt;/li&gt;
+&lt;li&gt;error 在出现error时触发&lt;/li&gt;
+&lt;li&gt;ready 在文件被找到并正被监听时触发&lt;/li&gt;
+&lt;li&gt;nomatch 在glob没有匹配到任何文件时触发&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Watcher对象也包含了一些可以调用的方法：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;watcher.end() 停止watcher（以便停止执行后面的任务或者回调函数）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;watcher.files() 返回watcher监听的文件列表&lt;/li&gt;
+&lt;li&gt;watcher.add(glob) 将与指定glob相匹配的文件添加到watcher（也接受可选的回调当第二个参数）&lt;/li&gt;
+&lt;li&gt;watcher.remove(filepath) 从watcher中移除个别文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;gulp常用插件&quot;&gt;&lt;a href=&quot;#gulp常用插件&quot; class=&quot;headerlink&quot; title=&quot;gulp常用插件&quot;&gt;&lt;/a&gt;gulp常用插件&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;js语法检测&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var jshint = require(&amp;quot;gulp-jshint&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;js压缩&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var uglify = require(&amp;quot;gulp-uglify&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;css压缩&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var minifycss = require(&amp;quot;gulp-minify-css&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;sass编译&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var sass = require(&amp;quot;gulp-ruby-sass&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;图片压缩&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var imagemin = require(&amp;quot;gulp-imagemin&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;雪碧图合并&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var spriter = require(&amp;quot;gulp-css-spriter&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;js、css的合并&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var concat = require(&amp;quot;gulp-concat&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;文件重命名&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var rename = require(&amp;quot;gulp-rename&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;MD5戳&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var md5 = require(&amp;quot;gulp-rev&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;路径替换&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var collector = require(&amp;quot;gulp-rev-collector&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;刷新浏览器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var reload = require(&amp;quot;gulp-livereload&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以上这些就是gulp常用的插件，至于安装以及其中的用法，这里不做一一介绍，有兴趣的朋友自行研究即可。&lt;/p&gt;
+&lt;h1 id=&quot;小结&quot;&gt;&lt;a href=&quot;#小结&quot; class=&quot;headerlink&quot; title=&quot;小结&quot;&gt;&lt;/a&gt;小结&lt;/h1&gt;&lt;p&gt;gulp作为前端的开发的自动化构建工具，确实帮我们完成了很多必要的工作，相对于其他前端构建工具运行速度快，一直为gulp所骄傲，但是同时由于项目的复杂性，以及认为的灵活性，gulp有时也会遇到瓶颈，建议可以参考参考其它构建工具，诸于fis等。&lt;/p&gt;
+&lt;p&gt;（gulp的几大函数基本参数是必须掌握的，其中还有一些不常用的参数配置，这里不一一介绍，在项目中进行锻炼时可以慢慢体会）&lt;/p&gt;
+&lt;p&gt;下面是gulp的两个参考网站：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.gulpjs.com.cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gulp中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3cplus.com/blog/tags/528.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gulp系列教程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。&lt;/p&gt;
+&lt;h1 id=&quot;gulp能帮我们做什么&quot;&gt;&lt;a href=&quot;#gulp能帮我们做什么&quot; class=&quot;headerlink&quot; title=&quot;gulp能帮我们做什么?&quot;&gt;&lt;/a&gt;gulp能帮我们做什么?&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;javascript语法的检测、合并，压缩。&lt;/li&gt;
+&lt;li&gt;css的压缩、合并、sass/less的编译&lt;/li&gt;
+&lt;li&gt;images的压缩、合并&lt;/li&gt;
+&lt;li&gt;浏览器自动刷新&lt;/li&gt;
+&lt;li&gt;部署文件生产替换&lt;/li&gt;
+&lt;li&gt;监控文件变化并自动生产相应文件&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="small-tool" scheme="http://yoursite.com/categories/small-tool/"/>
+    
+    
+  </entry>
+  
+</feed>
