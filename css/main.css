@@ -1544,7 +1544,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5d2ba7;
+  background: #9313ff;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2269,10 +2269,12 @@ hr {
   margin-top: 0;
 }
 .posts-expand .post-meta {
+  text-align: center;
   margin-top: 5px;
   margin-bottom: 20px;
 }
 .posts-expand .post-title {
+  text-align: center;
   position: relative;
   font-size: 26px;
   font-weight: 400;
