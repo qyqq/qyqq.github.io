@@ -92,7 +92,7 @@ sbin（进程文件二进制程序）
     <link href="http://yoursite.com/2016/03/09/vagrant-basic-use/"/>
     <id>http://yoursite.com/2016/03/09/vagrant-basic-use/</id>
     <published>2016-03-09T10:34:59.000Z</published>
-    <updated>2016-03-14T08:41:39.875Z</updated>
+    <updated>2016-03-14T08:58:03.662Z</updated>
     
     <content type="html">&lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
 &lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
@@ -187,9 +187,23 @@ ifconfig 查看 ip
 &lt;pre&gt;&lt;code&gt;vagrant up
 vagrant package –base virtualbox_vm_name –output newbox_name.box
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  在你的醒目下就存在了一个打包好的newbox_name.box&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;tips:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vagrant package -h
+ Usage: vagrant package [options] [name]
+ Options:
+    --base NAME                  virtualbox程序里面的虚拟机的名称，不是box的名字也不是Vagrantfile里面的虚拟机名称.默认是打包当前目录下面的虚拟机。
+    --output NAME                要打包成的box名称，不会自动添加.box后缀，要手动加.默认值package.box
+    --include FILE...            打包时包含的文件名，你可以把.box文件理解为一个压缩包
+    --vagrantfile FILE           打包时包含的Vagrantfile文件，原理和上面类似
+ -h, --help                       Print this help
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;把这个newbox_name.box文件拷贝到你到小伙伴到机器上；&lt;/li&gt;
+&lt;li&gt;在机器上执行vagrant box add newbox_names newbox_name.box就可以把这个box添加到这台机器的box列表里面；&lt;/li&gt;
+&lt;li&gt;在需要搭建开发环境的目录下面执行vagrant init newbox_names,这样就初始化了一个虚拟机环境，然后执行vagrant up,&lt;br&gt;你的小伙伴就可以得到一个和你完全一样的开发环境了。&lt;br&gt;在初始化环境的时候需要注意的一点是：这个目录下面如果以前初始化过，那么请执行vagrant destroy命令把这个环境销毁掉，&lt;br&gt;并删除Vagrantfile文件，或者在windows环境下直接手动删除.vagrant目录和Vagrantfile文件有相同的效果。否则vagrant init命令无效，&lt;br&gt;当你vagant up的时候得到的是一个和以前完全一样的环境。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这段话参考自：&lt;a href=&quot;http://ju.outofmemory.cn/entry/101516&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ju.outofmemory.cn/entry/101516&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;tips:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;su 切换root用户     passwd： 修改密码
 &lt;/code&gt;&lt;/pre&gt;</content>
     

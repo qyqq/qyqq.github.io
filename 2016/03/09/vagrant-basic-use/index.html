@@ -68,7 +68,7 @@ Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境
 Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境
 我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，">
 <meta property="og:image" content="http://segmentfault.com/img/bVbg05">
-<meta property="og:updated_time" content="2016-03-14T08:41:39.875Z">
+<meta property="og:updated_time" content="2016-03-14T08:58:03.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vagrant基本用法">
 <meta name="twitter:description" content="vagrant windows下基本使用简介
@@ -430,9 +430,23 @@ ifconfig 查看 ip
 <pre><code>vagrant up
 vagrant package –base virtualbox_vm_name –output newbox_name.box
 </code></pre><p>  在你的醒目下就存在了一个打包好的newbox_name.box</p>
-<blockquote>
-<p>tips:</p>
+<pre><code>vagrant package -h
+ Usage: vagrant package [options] [name]
+ Options:
+    --base NAME                  virtualbox程序里面的虚拟机的名称，不是box的名字也不是Vagrantfile里面的虚拟机名称.默认是打包当前目录下面的虚拟机。
+    --output NAME                要打包成的box名称，不会自动添加.box后缀，要手动加.默认值package.box
+    --include FILE...            打包时包含的文件名，你可以把.box文件理解为一个压缩包
+    --vagrantfile FILE           打包时包含的Vagrantfile文件，原理和上面类似
+ -h, --help                       Print this help
+</code></pre><blockquote>
+<ol>
+<li>把这个newbox_name.box文件拷贝到你到小伙伴到机器上；</li>
+<li>在机器上执行vagrant box add newbox_names newbox_name.box就可以把这个box添加到这台机器的box列表里面；</li>
+<li>在需要搭建开发环境的目录下面执行vagrant init newbox_names,这样就初始化了一个虚拟机环境，然后执行vagrant up,<br>你的小伙伴就可以得到一个和你完全一样的开发环境了。<br>在初始化环境的时候需要注意的一点是：这个目录下面如果以前初始化过，那么请执行vagrant destroy命令把这个环境销毁掉，<br>并删除Vagrantfile文件，或者在windows环境下直接手动删除.vagrant目录和Vagrantfile文件有相同的效果。否则vagrant init命令无效，<br>当你vagant up的时候得到的是一个和以前完全一样的环境。</li>
+</ol>
+<p>这段话参考自：<a href="http://ju.outofmemory.cn/entry/101516" target="_blank" rel="external">http://ju.outofmemory.cn/entry/101516</a></p>
 </blockquote>
+<p>tips:</p>
 <pre><code>su 切换root用户     passwd： 修改密码
 </code></pre>
       
