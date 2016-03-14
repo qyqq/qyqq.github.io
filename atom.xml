@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-11T05:44:02.469Z</updated>
+  <updated>2016-03-14T06:01:58.664Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,129 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vagrant基本用法</title>
+    <link href="http://yoursite.com/2016/03/09/vagrant-basic-use/"/>
+    <id>http://yoursite.com/2016/03/09/vagrant-basic-use/</id>
+    <published>2016-03-09T10:34:59.000Z</published>
+    <updated>2016-03-14T06:01:58.664Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
+&lt;p&gt;我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h6 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h6&gt;&lt;p&gt;安装vagrant和虚拟机virtulbox（一般先下载安装virtulbox）&lt;/p&gt;
+&lt;h6 id=&quot;下载地址：&quot;&gt;&lt;a href=&quot;#下载地址：&quot; class=&quot;headerlink&quot; title=&quot;下载地址：&quot;&gt;&lt;/a&gt;下载地址：&lt;/h6&gt;&lt;p&gt;. &lt;a href=&quot;https://www.vagrantup.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;vagrant(选对应版本)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;. &lt;a href=&quot;https://www.virtualbox.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;virtulbox&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装过程基本就是默认状态，最后在命令行输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vagrant
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出现帮助信息代表安装完成&lt;/p&gt;
+&lt;p&gt;. box镜像文件可想象成虚拟机的本身&lt;/p&gt;
+&lt;h6 id=&quot;查看安装的box&quot;&gt;&lt;a href=&quot;#查看安装的box&quot; class=&quot;headerlink&quot; title=&quot;查看安装的box&quot;&gt;&lt;/a&gt;查看安装的box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant box list
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;添加box&quot;&gt;&lt;a href=&quot;#添加box&quot; class=&quot;headerlink&quot; title=&quot;添加box&quot;&gt;&lt;/a&gt;添加box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant box add  
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;下载地址：www.vagrantcloud.com  搜索centos 6.5 32&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;添加本地下载好的box&quot;&gt;&lt;a href=&quot;#添加本地下载好的box&quot; class=&quot;headerlink&quot; title=&quot;添加本地下载好的box&quot;&gt;&lt;/a&gt;添加本地下载好的box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagarnt box add  文件绝对路径+name 别名
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;例如：复制box的名字：在命令行执行如：vagrant box add chef/centos-6.5  选择virtulbox&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;为项目创建个目录&quot;&gt;&lt;a href=&quot;#为项目创建个目录&quot; class=&quot;headerlink&quot; title=&quot;为项目创建个目录&quot;&gt;&lt;/a&gt;为项目创建个目录&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;md wangcan
+
+cd wangcan
+
+vagrant box list`
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;初始化项目目录&quot;&gt;&lt;a href=&quot;#初始化项目目录&quot; class=&quot;headerlink&quot; title=&quot;初始化项目目录&quot;&gt;&lt;/a&gt;初始化项目目录&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant init chef/centos-6.5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这时会出现vagrantfile文件（以后很多配置都在这里）&lt;/p&gt;
+&lt;h6 id=&quot;启动虚拟机&quot;&gt;&lt;a href=&quot;#启动虚拟机&quot; class=&quot;headerlink&quot; title=&quot;启动虚拟机&quot;&gt;&lt;/a&gt;启动虚拟机&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant up
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;如果失败可以直接打开virtualbox看看报什么错误,针对提示一般都会找到解决方案&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;启动成功后显示类似如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;default：/vagrant =&amp;gt; /User/phoenix/wangcan
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;虚拟机的vagrant目录和本地的wangcan目录同步，此时修改本地就可以同步&lt;/p&gt;
+&lt;p&gt;vagrnat ssh 可连接虚拟机，可以用客户端工具连接；127.0.0.1 端口：2222 用户和密码都是vagrant&lt;/p&gt;
+&lt;p&gt;在windows命令窗口下清楚之前命令用 cls&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant status  #查看虚机状态
+vagrant halt    #关机
+vagrant suspend #暂停
+vagrant reload  #先关机再启动
+vagrant destroy #销毁当前的box,不会销毁原来的
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;虚拟机搭建好之后就可以安装开发环境了&lt;/p&gt;
+&lt;p&gt;不过记得切换root用户&lt;/p&gt;
+&lt;p&gt;或者使用sudo+命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;额外共享目录设置&quot;&gt;&lt;a href=&quot;#额外共享目录设置&quot; class=&quot;headerlink&quot; title=&quot;额外共享目录设置&quot;&gt;&lt;/a&gt;额外共享目录设置&lt;/h6&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开vagrantfile&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;搜索打开:synced_folder项&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;create:ture,owner:”root”, group:”root”     (目录不存在就创建，拥有者，群组)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启vagrant up&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h6 id=&quot;在虚拟机上配置web服务器&quot;&gt;&lt;a href=&quot;#在虚拟机上配置web服务器&quot; class=&quot;headerlink&quot; title=&quot;在虚拟机上配置web服务器&quot;&gt;&lt;/a&gt;在虚拟机上配置web服务器&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;可配置网络类型：&lt;/p&gt;
+&lt;p&gt;私有=&amp;gt; 为虚拟机手工的制定一个ip地址，通过这个ip地址电脑和虚拟机间通讯，并且只能通过自己的电脑才能访问这个虚拟机，如果在这台虚拟机上搭建了一台服务器，那么只能在你的电脑上访问&lt;/p&gt;
+&lt;p&gt;公有=&amp;gt; 同一个网络上可访问，同一个网络上的其他设备都可以访问&lt;/p&gt;
+&lt;p&gt;端口转发 =&amp;gt; 配置好要转发的端口如8080 转发到80 访问本地8080会转发到细腻机80端口，这样不灵活，要手工配置多个端口&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 私有网络配置&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;打开vagrantfile 搜索
+  # config.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.33.10&amp;quot;
+  打开重启虚拟机
+  ping 192.168.33.10     测试能否通讯，（主机接受数据包返回信息）
+  vagrant ssh  后输入 ifconfig              返回配置系统的网络信息
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;公有网络&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;打开vagrantfile 注释掉私有配置
+搜索打开
+# config.vm.network &amp;quot;public_network&amp;quot;
+重启 -&amp;gt;    提示选择网络类型
+ifconfig 查看 ip
+用ip 就可以
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;package打包现有开发环境&quot;&gt;&lt;a href=&quot;#package打包现有开发环境&quot; class=&quot;headerlink&quot; title=&quot;package打包现有开发环境&quot;&gt;&lt;/a&gt;package打包现有开发环境&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;首先删除一个文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;rm -rf  /etc/udev/rules.d/70-persistent-net.rules
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;进入到醒目根目录执行如下命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;vagrant up
+vagrant package –base virtualbox_vm_name –output newbox_name.box
+vagrant box add wangcan/item package.box
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  在你的醒目下就存在了一个打包好的box&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tips:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;su 切换root用户     passwd： 修改密码
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
+&lt;p&gt;我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="small-tool" scheme="http://yoursite.com/categories/small-tool/"/>
+    
+    
+      <category term="small-tool" scheme="http://yoursite.com/tags/small-tool/"/>
+    
+  </entry>
   
   <entry>
     <title>Git 介绍与使用</title>
@@ -412,129 +535,6 @@ Automatic merge failed; fix conflicts and then commit the result.
 &lt;p&gt;最流行的分布式版本控制系统。&lt;/p&gt;
 &lt;p&gt;Git有什么特点？&lt;/p&gt;
 &lt;p&gt;免费而超级好用。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="small-tool" scheme="http://yoursite.com/categories/small-tool/"/>
-    
-    
-      <category term="small-tool" scheme="http://yoursite.com/tags/small-tool/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vagrant基本用法</title>
-    <link href="http://yoursite.com/2016/03/08/vagrant-basic-use/"/>
-    <id>http://yoursite.com/2016/03/08/vagrant-basic-use/</id>
-    <published>2016-03-08T10:34:59.000Z</published>
-    <updated>2016-03-11T05:44:13.294Z</updated>
-    
-    <content type="html">&lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
-&lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
-&lt;p&gt;我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h6 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h6&gt;&lt;p&gt;安装vagrant和虚拟机virtulbox（一般先下载安装virtulbox）&lt;/p&gt;
-&lt;h6 id=&quot;下载地址：&quot;&gt;&lt;a href=&quot;#下载地址：&quot; class=&quot;headerlink&quot; title=&quot;下载地址：&quot;&gt;&lt;/a&gt;下载地址：&lt;/h6&gt;&lt;p&gt;. &lt;a href=&quot;https://www.vagrantup.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;vagrant(选对应版本)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;. &lt;a href=&quot;https://www.virtualbox.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;virtulbox&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;安装过程基本就是默认状态，最后在命令行输入：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;vagrant
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出现帮助信息代表安装完成&lt;/p&gt;
-&lt;p&gt;. box镜像文件可想象成虚拟机的本身&lt;/p&gt;
-&lt;h6 id=&quot;查看安装的box&quot;&gt;&lt;a href=&quot;#查看安装的box&quot; class=&quot;headerlink&quot; title=&quot;查看安装的box&quot;&gt;&lt;/a&gt;查看安装的box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant box list
-&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;添加box&quot;&gt;&lt;a href=&quot;#添加box&quot; class=&quot;headerlink&quot; title=&quot;添加box&quot;&gt;&lt;/a&gt;添加box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant box add  
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;下载地址：www.vagrantcloud.com  搜索centos 6.5 32&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&quot;添加本地下载好的box&quot;&gt;&lt;a href=&quot;#添加本地下载好的box&quot; class=&quot;headerlink&quot; title=&quot;添加本地下载好的box&quot;&gt;&lt;/a&gt;添加本地下载好的box&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagarnt box add  文件绝对路径+name 别名
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;例如：复制box的名字：在命令行执行如：vagrant box add chef/centos-6.5  选择virtulbox&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&quot;为项目创建个目录&quot;&gt;&lt;a href=&quot;#为项目创建个目录&quot; class=&quot;headerlink&quot; title=&quot;为项目创建个目录&quot;&gt;&lt;/a&gt;为项目创建个目录&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;md wangcan
-
-cd wangcan
-
-vagrant box list`
-&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;初始化项目目录&quot;&gt;&lt;a href=&quot;#初始化项目目录&quot; class=&quot;headerlink&quot; title=&quot;初始化项目目录&quot;&gt;&lt;/a&gt;初始化项目目录&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant init chef/centos-6.5
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这时会出现vagrantfile文件（以后很多配置都在这里）&lt;/p&gt;
-&lt;h6 id=&quot;启动虚拟机&quot;&gt;&lt;a href=&quot;#启动虚拟机&quot; class=&quot;headerlink&quot; title=&quot;启动虚拟机&quot;&gt;&lt;/a&gt;启动虚拟机&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant up
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;如果失败可以直接打开virtualbox看看报什么错误,针对提示一般都会找到解决方案&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;启动成功后显示类似如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;default：/vagrant =&amp;gt; /User/phoenix/wangcan
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;虚拟机的vagrant目录和本地的wangcan目录同步，此时修改本地就可以同步&lt;/p&gt;
-&lt;p&gt;vagrnat ssh 可连接虚拟机，可以用客户端工具连接；127.0.0.1 端口：2222 用户和密码都是vagrant&lt;/p&gt;
-&lt;p&gt;在windows命令窗口下清楚之前命令用 cls&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;vagrant status  #查看虚机状态
-vagrant halt    #关机
-vagrant suspend #暂停
-vagrant reload  #先关机再启动
-vagrant destroy #销毁当前的box,不会销毁原来的
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;虚拟机搭建好之后就可以安装开发环境了&lt;/p&gt;
-&lt;p&gt;不过记得切换root用户&lt;/p&gt;
-&lt;p&gt;或者使用sudo+命令&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&quot;额外共享目录设置&quot;&gt;&lt;a href=&quot;#额外共享目录设置&quot; class=&quot;headerlink&quot; title=&quot;额外共享目录设置&quot;&gt;&lt;/a&gt;额外共享目录设置&lt;/h6&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;打开vagrantfile&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;搜索打开:synced_folder项&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;create:ture,owner:”root”, group:”root”     (目录不存在就创建，拥有者，群组)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重启vagrant up&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h6 id=&quot;在虚拟机上配置web服务器&quot;&gt;&lt;a href=&quot;#在虚拟机上配置web服务器&quot; class=&quot;headerlink&quot; title=&quot;在虚拟机上配置web服务器&quot;&gt;&lt;/a&gt;在虚拟机上配置web服务器&lt;/h6&gt;&lt;blockquote&gt;
-&lt;p&gt;可配置网络类型：&lt;/p&gt;
-&lt;p&gt;私有=&amp;gt; 为虚拟机手工的制定一个ip地址，通过这个ip地址电脑和虚拟机间通讯，并且只能通过自己的电脑才能访问这个虚拟机，如果在这台虚拟机上搭建了一台服务器，那么只能在你的电脑上访问&lt;/p&gt;
-&lt;p&gt;公有=&amp;gt; 同一个网络上可访问，同一个网络上的其他设备都可以访问&lt;/p&gt;
-&lt;p&gt;端口转发 =&amp;gt; 配置好要转发的端口如8080 转发到80 访问本地8080会转发到细腻机80端口，这样不灵活，要手工配置多个端口&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 私有网络配置&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;打开vagrantfile 搜索
-  # config.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.33.10&amp;quot;
-  打开重启虚拟机
-  ping 192.168.33.10     测试能否通讯，（主机接受数据包返回信息）
-  vagrant ssh  后输入 ifconfig              返回配置系统的网络信息
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;公有网络&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;打开vagrantfile 注释掉私有配置
-搜索打开
-# config.vm.network &amp;quot;public_network&amp;quot;
-重启 -&amp;gt;    提示选择网络类型
-ifconfig 查看 ip
-用ip 就可以
-&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;package打包现有开发环境&quot;&gt;&lt;a href=&quot;#package打包现有开发环境&quot; class=&quot;headerlink&quot; title=&quot;package打包现有开发环境&quot;&gt;&lt;/a&gt;package打包现有开发环境&lt;/h6&gt;&lt;blockquote&gt;
-&lt;p&gt;首先删除一个文件&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;rm -rf  /etc/udev/rules.d/70-persistent-net.rules
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;进入到醒目根目录执行如下命令&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;vagrant up
-vagrant package –base virtualbox_vm_name –output newbox_name.box
-vagrant box add wangcan/item package.box
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  在你的醒目下就存在了一个打包好的box&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;tips:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;su 切换root用户     passwd： 修改密码
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
-&lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
-&lt;p&gt;我们可以通过 Vagrant 封装一个 Linux 的开发环境，分发给团队成员。成员可以在自己喜欢的桌面系统（Mac/Windows/Linux）上开发程序，代码却能统一在封装好的环境里运行，非常霸气&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
