@@ -57,21 +57,18 @@
 
 
 
-<meta name="description" content="nginx 信号量，nginx假单配置，
-nginx日志管理，按时间转存日志">
+<meta name="description" content="Location，rewrite 重写">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx简单配置管理(2)">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/nginx-staudy-2/index.html">
+<meta property="og:title" content="nginx简单配置管理(3)">
+<meta property="og:url" content="http://yoursite.com/2016/03/14/nginx-staudy-3/index.html">
 <meta property="og:site_name" content="WANGCAN'S BLOG">
-<meta property="og:description" content="nginx 信号量，nginx假单配置，
-nginx日志管理，按时间转存日志">
-<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg">
-<meta property="og:updated_time" content="2016-03-14T10:02:32.282Z">
+<meta property="og:description" content="Location，rewrite 重写">
+<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/9213b07eca806538d9da1f8492dda144ad348271.jpg">
+<meta property="og:updated_time" content="2016-03-14T10:47:11.555Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx简单配置管理(2)">
-<meta name="twitter:description" content="nginx 信号量，nginx假单配置，
-nginx日志管理，按时间转存日志">
-<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg">
+<meta name="twitter:title" content="nginx简单配置管理(3)">
+<meta name="twitter:description" content="Location，rewrite 重写">
+<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/9213b07eca806538d9da1f8492dda144ad348271.jpg">
 
 
 
@@ -89,7 +86,7 @@ nginx日志管理，按时间转存日志">
   };
 </script>
 
-  <title> nginx简单配置管理(2) | WANGCAN'S BLOG </title>
+  <title> nginx简单配置管理(3) | WANGCAN'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +250,7 @@ nginx日志管理，按时间转存日志">
             
             
               
-                nginx简单配置管理(2)
+                nginx简单配置管理(3)
               
             
           </h1>
@@ -265,7 +262,7 @@ nginx日志管理，按时间转存日志">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T17:17:14+08:00" content="2016-03-14">
+            <time itemprop="dateCreated" datetime="2016-03-14T18:17:14+08:00" content="2016-03-14">
               2016-03-14
             </time>
           </span>
@@ -279,8 +276,8 @@ nginx日志管理，按时间转存日志">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -295,8 +292,8 @@ nginx日志管理，按时间转存日志">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/nginx-staudy-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/nginx-staudy-2/" itemprop="commentsCount"></span>
+                <a href="/2016/03/14/nginx-staudy-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/nginx-staudy-3/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -321,9 +318,9 @@ nginx日志管理，按时间转存日志">
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg" rel="gallery_cilrry8gn000blgo0n4dz7uak"
+                 href="http://7xrpkn.com1.z0.glb.clouddn.com/9213b07eca806538d9da1f8492dda144ad348271.jpg" rel="gallery_cilruyjmi0000i0o02g2e3j0n"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg" itemprop="contentUrl"/>
+                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/9213b07eca806538d9da1f8492dda144ad348271.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -334,129 +331,131 @@ nginx日志管理，按时间转存日志">
       
 
       
-        <p>nginx 信号量，nginx假单配置，</p>
-<p>nginx日志管理，按时间转存日志</p>
+        <p>Location，rewrite 重写</p>
 <a id="more"></a>
-<h3 id="一、nginx-信号量"><a href="#一、nginx-信号量" class="headerlink" title="一、nginx 信号量"></a>一、nginx 信号量</h3><p>开启，关闭，重启</p>
-<pre><code>kill -INT 26661
-     -TERM (紧急杀掉)
-     -QUIT请求结束后在关闭
-     -HUP改配置文件，平滑的重读配置文件
-     -USR1重读日志，
-     -USR2 升级用
-     -WINCH优雅关闭旧程序配合usr1使用
-</code></pre><p>eg:</p>
-<pre><code>kill -HUP `cat logs/nginx.pid`
-</code></pre><p>也可以也哦那个命令来管理：</p>
-<pre><code>./sbin/nginx -s reload stop
-</code></pre><h3 id="二、nginx-简单配置"><a href="#二、nginx-简单配置" class="headerlink" title="二、nginx 简单配置"></a>二、nginx 简单配置</h3><p>nginx虚拟主机的配置</p>
-<p>  打开配置文件nginx.conf</p>
-<p>  全局区</p>
-<pre><code>worker_processes 1;       工作的子进程数量,可以修改,但太大无益,因为要争夺CPU,一般设置为 CPU数*核数
-</code></pre><p>  配置nginx连接的特性，如1个word能同时允许多少连接</p>
-<pre><code>Event {
-   worker_connections  1024; // 这是指 一个子进程最大允许连1024个连接
-}
-</code></pre><p>  配置http服务器的主要段</p>
-<pre><code>http {
-  Server1 { // 虚拟主机段
-        Location {  //定位,把特殊的路径或文件再次定位 ,如image目录单独处理
-        }             /// 如.php单独处理
- }
+<h3 id="一、Location"><a href="#一、Location" class="headerlink" title="一、Location"></a>一、Location</h3><p>1, 作用</p>
+<p>根据Uri来进行不同的定位，location可以把网站的不同部分,定位到不同的处理方式上</p>
+<p>2, 语法</p>
+<pre><code>location [=|~|~*|^~] patt { }【参数可以省略】
+</code></pre><blockquote>
+<p>三种参数类型：</p>
+</blockquote>
+<pre><code>location = patt {} 【精准匹配】
 
- Server2 {
- }
-}
-</code></pre><h6 id="简单的配置："><a href="#简单的配置：" class="headerlink" title="简单的配置："></a>简单的配置：</h6><p> 基于域名的虚拟主机</p>
-<pre><code>server {
-    listen 80;
-    server_name z.com;
-    location / {
-      root z.com;
-      index.html;
-    }
-}
-</code></pre><p>软重启nginx读取配置文件:</p>
-<pre><code>/usr/local/nginx/sbin/nginx -s reload
-</code></pre><p>或者</p>
-<pre><code>kill -HUP `cat logs/nginx.pid`
-</code></pre><p>然后解析host,访问z.com就可以访问了</p>
-<h6 id="基于端口的虚拟主机配置"><a href="#基于端口的虚拟主机配置" class="headerlink" title="基于端口的虚拟主机配置"></a>基于端口的虚拟主机配置</h6><pre><code>server {
-    listen 8080;
-    server_name 192.168.1.204;
+location patt{} 【一般匹配】
 
-    location / {
-            root /var/www/html8080;
+location ~ patt{} 【正则匹配】
+</code></pre><blockquote>
+<p>首先执行精准匹配，如果都匹配不到最终会定位到默认目录</p>
+</blockquote>
+<pre><code>/usr/local/nginx/html/
+</code></pre><blockquote>
+<p>有正则匹配参与的情况，如果之前有匹配到的，正则也能匹配到的就会覆盖前面的</p>
+</blockquote>
+<pre><code>location / {
+             root /usr/local/nginx/html;
+             index index.html index.htm;
+         }
+
+           location ~ image {
+            root /var/www/image;
             index index.html;
-    }
+        }
+</code></pre><blockquote>
+<p>对于同样都能匹配的情况下会使用更详细的匹配条件</p>
+</blockquote>
+<pre><code>location / {
+              root /usr/local/nginx/html;
+              index index.html index.htm;
+ }
+
+ location /foo {
+             root /var/www/html;
+             index index.html;
+ }
+</code></pre><blockquote>
+<p>匹配原则流程</p>
+</blockquote>
+<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/3.png" alt=""></p>
+<h3 id="二、rewrite-重写"><a href="#二、rewrite-重写" class="headerlink" title="二、rewrite 重写"></a>二、rewrite 重写</h3><p>1，模块很多，通常碰到nginx新问题怎么解决？？？？</p>
+<pre><code>到官网去查文档（在哪儿写，语法）      http://nginx.org/en/docs/
+</code></pre><p>2，功能：域名跳转，域名镜像，防盗链，等。</p>
+<p>3，nginx有权引用的变量</p>
+<pre><code>ls conf/     fastcgi.conf
+</code></pre><p>4，常用命令语法</p>
+<pre><code>location / {
+   # 判断相等
+        if ($remote_addr = 192.168.33.1) {
+           return 403;
+         }
+
+   # 正则匹配
+          if ($http_user_agent ~ AppleWebK ) {
+              rewrite ^.*$ /ge.html;
+              break;
+          }
+
+   # -f -d -e来判断是否为文件,为目录,是否存在.
+          if (!-e $document_root$fastcgi_script_name) {
+               rewrite ^.*$  /404.html;
+               break;
+           }
+     root   html;
+     index  index.html index.htm;
 }
-</code></pre><h3 id="三、nginx-简单日志管理"><a href="#三、nginx-简单日志管理" class="headerlink" title="三、nginx 简单日志管理"></a>三、nginx 简单日志管理</h3><p>打开配置文件会看到</p>
+</code></pre><blockquote>
+<p>set则用来设置变量，多条件判断时作标志用.</p>
+</blockquote>
+<pre><code>if ($http_user_agent ~* msie) {
+     set $isie 1;
+ }
+
+if ($fastcgi_script_name = ie.html) {
+     set $isie 0;
+  }
+
+if ($isie 1) {
+     rewrite ^.*$ ie.html;
+}
+</code></pre><p>tips:</p>
 <blockquote>
-<p>nginx的server段</p>
+<p>其中正则匹配和判断目录文件是都存在的模块break不可以少：服务器内部的rewrite和302跳转不一样访问路径不会改变</p>
+<p>如访问：xx.com/dsafsd.html，重写之后地址不会变，会循环重定向</p>
+<p>302跳转就是网址重定向的一种，它区别于301跳转，301是网址永久重定向，</p>
+<p>302  则 是 网址的临时定向。302转向或者302重定向（302 redirect）指的<br>是当浏览器要求一个网页的时候，主机所返回的状态码。302状态码的意义是<br>暂时转向到另外一个网址。</p>
 </blockquote>
-<pre><code>#access_log  logs/host.access.log  main;（访问日志的文件是logs/host.access.log 使用main格式，也可以自定义格式）
-</code></pre><blockquote>
-<p>main格式（是我们定义好一种日志的格式,并起个名字,便于引用 ）：</p>
+<p>5，ecshop正则重写练习</p>
+<blockquote>
+<p>模式规则</p>
 </blockquote>
-<pre><code>log_format  main  &apos;$remote_addr（远程IP ） - $remote_user [$time_local]（远程用户/用户时间 ） &quot;$request&quot;（请求方法(如GET/POST) ） &apos;
-#                 &apos;$status $body_bytes_sent （请求体body长度 ）&quot;$http_referer（referer来源信息 ）&quot; &apos;
-#                 &apos;&quot;$http_user_agent（用户代理/蜘蛛 ,被转发的请求的原始IP ）&quot; &quot;$http_x_forwarded_for（在经过代理时,代理把你的本来IP加在此头信息中,传输你的原始IP ）&quot;&apos;;
-</code></pre><blockquote>
-<p>声明一个独特的log_format并命名（选项可以自由选择）</p>
+<pre><code>Rewrite 正则表达式 定向后的位置 模式
+
+（根据url规则去匹配变的东西）（需要在ecshop后台设置url重写模式）
+</code></pre><p>对应关系:</p>
+<pre><code>Goods-3.html ----&gt;Goods.php?goods_id=3
+
+goods-([\d]+)\.html ---&gt; goods.php?goods_id =$1
+</code></pre><p>eg:</p>
+<pre><code>location /ecshop {
+    index index.php;
+
+    rewrite goods-([\d]+)\.html$ /ecshop/goods.php?id=$1;
+
+    rewrite article-([\d]+)\.html$ /ecshop/article.php?id=$1;
+
+    rewrite category-(\d+)-b(\d+)\.html /ecshop/category.php?id=$1&amp;brand=$2;
+
+    rewrite category-(\d+)-b(\d+)-min(\d+)-max(\d+)-attr([\d\.]+)\.html /ecshop/category.php?id=$1&amp;brand=$2&amp;price_min=$3&amp;price_max=$4&amp;filter_attr=$5;
+
+    rewrite category-(\d+)-b(\d+)-min(\d+)-max(\d+)-attr([\d+\.])-(\d+)-([^-]+)-([^-]+)\.html /ecshop/category.php?id=$1&amp;brand=$2&amp;price_min=$3&amp;price_max=$4&amp;filter_attr=$5&amp;page=$6&amp;sort=$7&amp;order=$8;
+}
+</code></pre><p> 遇到的问题：</p>
+<blockquote>
+<p>配置nginx.conf重写时报403,原因没有制定访问文件</p>
+<p>rewrite 项里不能用 {} 可能是会与location{}的括号冲突 ，可以用\d+代替，也可以用双引号引起来</p>
+<p>当用复杂重写时，使用贪婪匹配时要把复杂的放前面，先去匹配，否则不准确</p>
 </blockquote>
-<pre><code>log_format  mylog &apos;$remote_addr- &quot;$request&quot; &apos;
-                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
-                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
-</code></pre><blockquote>
-<p>针对不同的server做不同的Log ,(有的web服务器不支持,如lighttp)</p>
-</blockquote>
-<pre><code>access_log logs/access_8080.log mylog;
-声明log           log位置                  log格式;
-</code></pre><h3 id="四、按时间转存日志"><a href="#四、按时间转存日志" class="headerlink" title="四、按时间转存日志"></a>四、按时间转存日志</h3><p>1, 日志的定时切割，shell脚本，定时</p>
-<pre><code>date -s &apos;2015-12-28 17:32&apos;     修改系统时间
-clock -w                       修改后写入日志
 
-date -d yesterday              查看昨天时间
-date -d yesterday +%Y%m%d      格式化时间
-</code></pre><blockquote>
-<p>注意：安装ntpdate时间服务器，更新系统时间</p>
-</blockquote>
-<p>2, 写脚本</p>
-<pre><code>命名runlog.sh
-
-#!/bin/bash
-LOGPATH=/usr/local/nginx/logs/access.log (日志路径)
-BASEPATH=/data (将要保存路径)
-
-
-bak=$BASEPATH/$(date &quot;+%Y-%m-%d-%H-%M-%S&quot;).access.log（拼写命名路径）
-#echo $bak
-
-mv $LOGPATH $bak （把日志从原来路径移到拼写路径）
-touch $LOGPATH （写入新的日志名）
-
-kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`（重写日志）
-</code></pre><p>3, 让脚本生效</p>
-<pre><code>执行crontab -e
-写入内容(分 时 日 月 周)
-*/1 * * * * sh /data/runlog.sh
-</code></pre><p>4， 如果想按月份创建目录按天切割管理：</p>
-<pre><code>#!/bin/bash
-
-LOGPATH=/usr/local/nginx/logs/host.access.log
-
-BASEPATH=/data/$(date &quot;+%Y%m&quot;)
-
-mkdir -p $BASEPATH
-
-bak=$BASEPATH/$(date &quot;+%d%H%M&quot;).host.access.log
-#echo $bak
-
-mv $LOGPATH $bak
-touch $LOGPATH
-
-kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
-</code></pre>
       
     </div>
 
@@ -479,17 +478,13 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/14/nginx-staudy-1/" rel="next" title="linux下nginx安装编译(1)">
-                <i class="fa fa-chevron-left"></i> linux下nginx安装编译(1)
+              <a href="/2016/03/14/nginx-staudy-2/" rel="next" title="nginx简单配置管理(2)">
+                <i class="fa fa-chevron-left"></i> nginx简单配置管理(2)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/nginx-staudy-3/" rel="prev" title="nginx简单配置管理(3)">
-                nginx简单配置管理(3) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -515,8 +510,8 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/nginx-staudy-2/"
-           data-title="nginx简单配置管理(2)" data-url="http://yoursite.com/2016/03/14/nginx-staudy-2/">
+      <div class="ds-thread" data-thread-key="2016/03/14/nginx-staudy-3/"
+           data-title="nginx简单配置管理(3)" data-url="http://yoursite.com/2016/03/14/nginx-staudy-3/">
       </div>
     
   </div>
@@ -655,7 +650,7 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、nginx-信号量"><span class="nav-number">1.</span> <span class="nav-text">一、nginx 信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、nginx-简单配置"><span class="nav-number">2.</span> <span class="nav-text">二、nginx 简单配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#简单的配置："><span class="nav-number">2.0.0.1.</span> <span class="nav-text">简单的配置：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#基于端口的虚拟主机配置"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">基于端口的虚拟主机配置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、nginx-简单日志管理"><span class="nav-number">3.</span> <span class="nav-text">三、nginx 简单日志管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、按时间转存日志"><span class="nav-number">4.</span> <span class="nav-text">四、按时间转存日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Location"><span class="nav-number">1.</span> <span class="nav-text">一、Location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、rewrite-重写"><span class="nav-number">2.</span> <span class="nav-text">二、rewrite 重写</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

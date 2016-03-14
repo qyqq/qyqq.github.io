@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-14T10:02:32.282Z</updated>
+  <updated>2016-03-14T10:47:11.555Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,152 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx简单配置管理(3)</title>
+    <link href="http://yoursite.com/2016/03/14/nginx-staudy-3/"/>
+    <id>http://yoursite.com/2016/03/14/nginx-staudy-3/</id>
+    <published>2016-03-14T10:17:14.000Z</published>
+    <updated>2016-03-14T10:47:11.555Z</updated>
+    
+    <content type="html">&lt;p&gt;Location，rewrite 重写&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;一、Location&quot;&gt;&lt;a href=&quot;#一、Location&quot; class=&quot;headerlink&quot; title=&quot;一、Location&quot;&gt;&lt;/a&gt;一、Location&lt;/h3&gt;&lt;p&gt;1, 作用&lt;/p&gt;
+&lt;p&gt;根据Uri来进行不同的定位，location可以把网站的不同部分,定位到不同的处理方式上&lt;/p&gt;
+&lt;p&gt;2, 语法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;location [=|~|~*|^~] patt { }【参数可以省略】
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;三种参数类型：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;location = patt {} 【精准匹配】
+
+location patt{} 【一般匹配】
+
+location ~ patt{} 【正则匹配】
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;首先执行精准匹配，如果都匹配不到最终会定位到默认目录&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/html/
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;有正则匹配参与的情况，如果之前有匹配到的，正则也能匹配到的就会覆盖前面的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;location / {
+             root /usr/local/nginx/html;
+             index index.html index.htm;
+         }
+
+           location ~ image {
+            root /var/www/image;
+            index index.html;
+        }
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;对于同样都能匹配的情况下会使用更详细的匹配条件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;location / {
+              root /usr/local/nginx/html;
+              index index.html index.htm;
+ }
+
+ location /foo {
+             root /var/www/html;
+             index index.html;
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;匹配原则流程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrpkn.com1.z0.glb.clouddn.com/3.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;二、rewrite-重写&quot;&gt;&lt;a href=&quot;#二、rewrite-重写&quot; class=&quot;headerlink&quot; title=&quot;二、rewrite 重写&quot;&gt;&lt;/a&gt;二、rewrite 重写&lt;/h3&gt;&lt;p&gt;1，模块很多，通常碰到nginx新问题怎么解决？？？？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;到官网去查文档（在哪儿写，语法）      http://nginx.org/en/docs/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2，功能：域名跳转，域名镜像，防盗链，等。&lt;/p&gt;
+&lt;p&gt;3，nginx有权引用的变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ls conf/     fastcgi.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4，常用命令语法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;location / {
+   # 判断相等
+        if ($remote_addr = 192.168.33.1) {
+           return 403;
+         }
+
+   # 正则匹配
+          if ($http_user_agent ~ AppleWebK ) {
+              rewrite ^.*$ /ge.html;
+              break;
+          }
+
+   # -f -d -e来判断是否为文件,为目录,是否存在.
+          if (!-e $document_root$fastcgi_script_name) {
+               rewrite ^.*$  /404.html;
+               break;
+           }
+     root   html;
+     index  index.html index.htm;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;set则用来设置变量，多条件判断时作标志用.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;if ($http_user_agent ~* msie) {
+     set $isie 1;
+ }
+
+if ($fastcgi_script_name = ie.html) {
+     set $isie 0;
+  }
+
+if ($isie 1) {
+     rewrite ^.*$ ie.html;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;tips:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其中正则匹配和判断目录文件是都存在的模块break不可以少：服务器内部的rewrite和302跳转不一样访问路径不会改变&lt;/p&gt;
+&lt;p&gt;如访问：xx.com/dsafsd.html，重写之后地址不会变，会循环重定向&lt;/p&gt;
+&lt;p&gt;302跳转就是网址重定向的一种，它区别于301跳转，301是网址永久重定向，&lt;/p&gt;
+&lt;p&gt;302  则 是 网址的临时定向。302转向或者302重定向（302 redirect）指的&lt;br&gt;是当浏览器要求一个网页的时候，主机所返回的状态码。302状态码的意义是&lt;br&gt;暂时转向到另外一个网址。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;5，ecshop正则重写练习&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;模式规则&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;Rewrite 正则表达式 定向后的位置 模式
+
+（根据url规则去匹配变的东西）（需要在ecshop后台设置url重写模式）
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;对应关系:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Goods-3.html ----&amp;gt;Goods.php?goods_id=3
+
+goods-([\d]+)\.html ---&amp;gt; goods.php?goods_id =$1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;location /ecshop {
+    index index.php;
+
+    rewrite goods-([\d]+)\.html$ /ecshop/goods.php?id=$1;
+
+    rewrite article-([\d]+)\.html$ /ecshop/article.php?id=$1;
+
+    rewrite category-(\d+)-b(\d+)\.html /ecshop/category.php?id=$1&amp;amp;brand=$2;
+
+    rewrite category-(\d+)-b(\d+)-min(\d+)-max(\d+)-attr([\d\.]+)\.html /ecshop/category.php?id=$1&amp;amp;brand=$2&amp;amp;price_min=$3&amp;amp;price_max=$4&amp;amp;filter_attr=$5;
+
+    rewrite category-(\d+)-b(\d+)-min(\d+)-max(\d+)-attr([\d+\.])-(\d+)-([^-]+)-([^-]+)\.html /ecshop/category.php?id=$1&amp;amp;brand=$2&amp;amp;price_min=$3&amp;amp;price_max=$4&amp;amp;filter_attr=$5&amp;amp;page=$6&amp;amp;sort=$7&amp;amp;order=$8;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 遇到的问题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;配置nginx.conf重写时报403,原因没有制定访问文件&lt;/p&gt;
+&lt;p&gt;rewrite 项里不能用 {} 可能是会与location{}的括号冲突 ，可以用\d+代替，也可以用双引号引起来&lt;/p&gt;
+&lt;p&gt;当用复杂重写时，使用贪婪匹配时要把复杂的放前面，先去匹配，否则不准确&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Location，rewrite 重写&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="nginx" scheme="http://yoursite.com/categories/nginx/"/>
+    
+    
+      <category term="linux nignx" scheme="http://yoursite.com/tags/linux-nignx/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx简单配置管理(2)</title>
