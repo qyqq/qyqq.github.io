@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-14T07:53:16.782Z</updated>
+  <updated>2016-03-14T08:12:52.035Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-1/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-1/</id>
     <published>2016-03-14T06:17:14.000Z</published>
-    <updated>2016-03-14T07:53:16.782Z</updated>
+    <updated>2016-03-14T08:12:52.035Z</updated>
     
     <content type="html">&lt;p&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
 &lt;p&gt;2, 复制安装地址&lt;/p&gt;
@@ -65,7 +65,8 @@ sbin（进程文件二进制程序）
 &lt;p&gt;解决办法：把占用80端口的软件或服务关闭即可&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;查看进程占用程序&lt;/p&gt;
-</content>
+&lt;pre&gt;&lt;code&gt;pkill -9 http
+&lt;/code&gt;&lt;/pre&gt;</content>
     
     <summary type="html">
     
