@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-14T08:12:52.035Z</updated>
+  <updated>2016-03-14T10:02:32.282Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,151 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx简单配置管理(2)</title>
+    <link href="http://yoursite.com/2016/03/14/nginx-staudy-2/"/>
+    <id>http://yoursite.com/2016/03/14/nginx-staudy-2/</id>
+    <published>2016-03-14T09:17:14.000Z</published>
+    <updated>2016-03-14T10:02:32.282Z</updated>
+    
+    <content type="html">&lt;p&gt;nginx 信号量，nginx假单配置，&lt;/p&gt;
+&lt;p&gt;nginx日志管理，按时间转存日志&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;一、nginx-信号量&quot;&gt;&lt;a href=&quot;#一、nginx-信号量&quot; class=&quot;headerlink&quot; title=&quot;一、nginx 信号量&quot;&gt;&lt;/a&gt;一、nginx 信号量&lt;/h3&gt;&lt;p&gt;开启，关闭，重启&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kill -INT 26661
+     -TERM (紧急杀掉)
+     -QUIT请求结束后在关闭
+     -HUP改配置文件，平滑的重读配置文件
+     -USR1重读日志，
+     -USR2 升级用
+     -WINCH优雅关闭旧程序配合usr1使用
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kill -HUP `cat logs/nginx.pid`
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;也可以也哦那个命令来管理：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./sbin/nginx -s reload stop
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;二、nginx-简单配置&quot;&gt;&lt;a href=&quot;#二、nginx-简单配置&quot; class=&quot;headerlink&quot; title=&quot;二、nginx 简单配置&quot;&gt;&lt;/a&gt;二、nginx 简单配置&lt;/h3&gt;&lt;p&gt;nginx虚拟主机的配置&lt;/p&gt;
+&lt;p&gt;  打开配置文件nginx.conf&lt;/p&gt;
+&lt;p&gt;  全局区&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;worker_processes 1;       工作的子进程数量,可以修改,但太大无益,因为要争夺CPU,一般设置为 CPU数*核数
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  配置nginx连接的特性，如1个word能同时允许多少连接&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Event {
+   worker_connections  1024; // 这是指 一个子进程最大允许连1024个连接
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  配置http服务器的主要段&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http {
+  Server1 { // 虚拟主机段
+        Location {  //定位,把特殊的路径或文件再次定位 ,如image目录单独处理
+        }             /// 如.php单独处理
+ }
+
+ Server2 {
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;简单的配置：&quot;&gt;&lt;a href=&quot;#简单的配置：&quot; class=&quot;headerlink&quot; title=&quot;简单的配置：&quot;&gt;&lt;/a&gt;简单的配置：&lt;/h6&gt;&lt;p&gt; 基于域名的虚拟主机&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server {
+    listen 80;
+    server_name z.com;
+    location / {
+      root z.com;
+      index.html;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;软重启nginx读取配置文件:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -s reload
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kill -HUP `cat logs/nginx.pid`
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后解析host,访问z.com就可以访问了&lt;/p&gt;
+&lt;h6 id=&quot;基于端口的虚拟主机配置&quot;&gt;&lt;a href=&quot;#基于端口的虚拟主机配置&quot; class=&quot;headerlink&quot; title=&quot;基于端口的虚拟主机配置&quot;&gt;&lt;/a&gt;基于端口的虚拟主机配置&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;server {
+    listen 8080;
+    server_name 192.168.1.204;
+
+    location / {
+            root /var/www/html8080;
+            index index.html;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;三、nginx-简单日志管理&quot;&gt;&lt;a href=&quot;#三、nginx-简单日志管理&quot; class=&quot;headerlink&quot; title=&quot;三、nginx 简单日志管理&quot;&gt;&lt;/a&gt;三、nginx 简单日志管理&lt;/h3&gt;&lt;p&gt;打开配置文件会看到&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nginx的server段&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;#access_log  logs/host.access.log  main;（访问日志的文件是logs/host.access.log 使用main格式，也可以自定义格式）
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;main格式（是我们定义好一种日志的格式,并起个名字,便于引用 ）：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;log_format  main  &amp;apos;$remote_addr（远程IP ） - $remote_user [$time_local]（远程用户/用户时间 ） &amp;quot;$request&amp;quot;（请求方法(如GET/POST) ） &amp;apos;
+#                 &amp;apos;$status $body_bytes_sent （请求体body长度 ）&amp;quot;$http_referer（referer来源信息 ）&amp;quot; &amp;apos;
+#                 &amp;apos;&amp;quot;$http_user_agent（用户代理/蜘蛛 ,被转发的请求的原始IP ）&amp;quot; &amp;quot;$http_x_forwarded_for（在经过代理时,代理把你的本来IP加在此头信息中,传输你的原始IP ）&amp;quot;&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;声明一个独特的log_format并命名（选项可以自由选择）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;log_format  mylog &amp;apos;$remote_addr- &amp;quot;$request&amp;quot; &amp;apos;
+                  &amp;apos;$status $body_bytes_sent &amp;quot;$http_referer&amp;quot; &amp;apos;
+                  &amp;apos;&amp;quot;$http_user_agent&amp;quot; &amp;quot;$http_x_forwarded_for&amp;quot;&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;针对不同的server做不同的Log ,(有的web服务器不支持,如lighttp)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;access_log logs/access_8080.log mylog;
+声明log           log位置                  log格式;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;四、按时间转存日志&quot;&gt;&lt;a href=&quot;#四、按时间转存日志&quot; class=&quot;headerlink&quot; title=&quot;四、按时间转存日志&quot;&gt;&lt;/a&gt;四、按时间转存日志&lt;/h3&gt;&lt;p&gt;1, 日志的定时切割，shell脚本，定时&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;date -s &amp;apos;2015-12-28 17:32&amp;apos;     修改系统时间
+clock -w                       修改后写入日志
+
+date -d yesterday              查看昨天时间
+date -d yesterday +%Y%m%d      格式化时间
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;注意：安装ntpdate时间服务器，更新系统时间&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2, 写脚本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;命名runlog.sh
+
+#!/bin/bash
+LOGPATH=/usr/local/nginx/logs/access.log (日志路径)
+BASEPATH=/data (将要保存路径)
+
+
+bak=$BASEPATH/$(date &amp;quot;+%Y-%m-%d-%H-%M-%S&amp;quot;).access.log（拼写命名路径）
+#echo $bak
+
+mv $LOGPATH $bak （把日志从原来路径移到拼写路径）
+touch $LOGPATH （写入新的日志名）
+
+kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`（重写日志）
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3, 让脚本生效&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;执行crontab -e
+写入内容(分 时 日 月 周)
+*/1 * * * * sh /data/runlog.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4， 如果想按月份创建目录按天切割管理：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+LOGPATH=/usr/local/nginx/logs/host.access.log
+
+BASEPATH=/data/$(date &amp;quot;+%Y%m&amp;quot;)
+
+mkdir -p $BASEPATH
+
+bak=$BASEPATH/$(date &amp;quot;+%d%H%M&amp;quot;).host.access.log
+#echo $bak
+
+mv $LOGPATH $bak
+touch $LOGPATH
+
+kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;nginx 信号量，nginx假单配置，&lt;/p&gt;
+&lt;p&gt;nginx日志管理，按时间转存日志&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="linux nignx" scheme="http://yoursite.com/tags/linux-nignx/"/>
+    
+  </entry>
   
   <entry>
     <title>linux下nginx安装编译(1)</title>

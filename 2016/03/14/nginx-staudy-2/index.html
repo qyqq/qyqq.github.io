@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="makdown," />
+  <meta name="keywords" content="linux nignx," />
 
 
 
@@ -57,45 +57,21 @@
 
 
 
-<meta name="description" content="一级标题&amp;apos;#&amp;apos;号后加空格，几个#就是几级标题，一共6级标题
-无序列表
-需要在文字前加上 - 或 *
-
-
-即可变为无序列表
-
-有序列表
-有序列表则直接在文字前加 1. 2. 3.
-符号要和文字之间加上一个字符的空格。">
+<meta name="description" content="nginx 信号量，nginx假单配置，
+nginx日志管理，按时间转存日志">
 <meta property="og:type" content="article">
-<meta property="og:title" content="makdown基础用法">
-<meta property="og:url" content="http://yoursite.com/2016/03/07/makdown-diary/index.html">
+<meta property="og:title" content="nginx简单配置管理(2)">
+<meta property="og:url" content="http://yoursite.com/2016/03/14/nginx-staudy-2/index.html">
 <meta property="og:site_name" content="WANGCAN'S BLOG">
-<meta property="og:description" content="一级标题&amp;apos;#&amp;apos;号后加空格，几个#就是几级标题，一共6级标题
-无序列表
-需要在文字前加上 - 或 *
-
-
-即可变为无序列表
-
-有序列表
-有序列表则直接在文字前加 1. 2. 3.
-符号要和文字之间加上一个字符的空格。">
-<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160311133405.png">
-<meta property="og:updated_time" content="2016-03-11T05:39:40.883Z">
+<meta property="og:description" content="nginx 信号量，nginx假单配置，
+nginx日志管理，按时间转存日志">
+<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg">
+<meta property="og:updated_time" content="2016-03-14T10:02:32.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="makdown基础用法">
-<meta name="twitter:description" content="一级标题&amp;apos;#&amp;apos;号后加空格，几个#就是几级标题，一共6级标题
-无序列表
-需要在文字前加上 - 或 *
-
-
-即可变为无序列表
-
-有序列表
-有序列表则直接在文字前加 1. 2. 3.
-符号要和文字之间加上一个字符的空格。">
-<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160311133405.png">
+<meta name="twitter:title" content="nginx简单配置管理(2)">
+<meta name="twitter:description" content="nginx 信号量，nginx假单配置，
+nginx日志管理，按时间转存日志">
+<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg">
 
 
 
@@ -113,7 +89,7 @@
   };
 </script>
 
-  <title> makdown基础用法 | WANGCAN'S BLOG </title>
+  <title> nginx简单配置管理(2) | WANGCAN'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +253,7 @@
             
             
               
-                makdown基础用法
+                nginx简单配置管理(2)
               
             
           </h1>
@@ -289,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-07T17:53:51+08:00" content="2016-03-07">
-              2016-03-07
+            <time itemprop="dateCreated" datetime="2016-03-14T17:17:14+08:00" content="2016-03-14">
+              2016-03-14
             </time>
           </span>
 
@@ -303,8 +279,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/small-tool/" itemprop="url" rel="index">
-                    <span itemprop="name">small-tool</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -319,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/07/makdown-diary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/07/makdown-diary/" itemprop="commentsCount"></span>
+                <a href="/2016/03/14/nginx-staudy-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/nginx-staudy-2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,9 +321,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160311133405.png" rel="gallery_cilrry8g70005lgo0wtrroctt"
+                 href="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg" rel="gallery_cilrry8gn000blgo0n4dz7uak"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160311133405.png" itemprop="contentUrl"/>
+                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/41.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -358,36 +334,129 @@
       
 
       
-        <h2 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h2><pre><code>&apos;#&apos;号后加空格，几个#就是几级标题，一共6级标题
-</code></pre><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><ul>
-<li>需要在文字前加上 - 或 *</li>
-</ul>
-<ul>
-<li>即可变为无序列表</li>
-</ul>
-<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><ol>
-<li>有序列表则直接在文字前加 1. 2. 3.</li>
-<li>符号要和文字之间加上一个字符的空格。</li>
-</ol>
+        <p>nginx 信号量，nginx假单配置，</p>
+<p>nginx日志管理，按时间转存日志</p>
 <a id="more"></a>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>如果你需要引用一小段别处的句子，那么就要用引用的格式。<br>只需要在文本前加入 &gt; 这种尖括号（大于号）即可</p>
-<blockquote>
-<p>这里是引用</p>
-</blockquote>
-<p>要注意符号和文本的空格</p>
-<p>##图片与连接<br>插入链接与插入图片的语法很像，区别在一个 !号</p>
-<p>插入图片的地址需要图床，这里推荐 CloudApp 的服务，生成URL地址即可。<br><a href="http://baidu.com" target="_blank" rel="external">baidu</a></p>
-<p><img src="http://mouapp.com/Mou_128.png" alt="mou icom"></p>
-<h2 id="粗体与斜体"><a href="#粗体与斜体" class="headerlink" title="粗体与斜体"></a>粗体与斜体</h2><p>Markdown 的粗体和斜体也非常简单，用两个 <em> 包含一段文本就是粗体的语法，用一个 </em> 包含一段文本就是斜体的语法。</p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><pre><code>| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-</code></pre><h2 id="代码框"><a href="#代码框" class="headerlink" title="代码框"></a>代码框</h2><p>只需要用两个 反引号把中间的代码包裹起来</p>
-<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>分割线的语法只需要另起一行，连续输入三个星号 <em>*</em> 即可。</p>
-<hr>
+<h3 id="一、nginx-信号量"><a href="#一、nginx-信号量" class="headerlink" title="一、nginx 信号量"></a>一、nginx 信号量</h3><p>开启，关闭，重启</p>
+<pre><code>kill -INT 26661
+     -TERM (紧急杀掉)
+     -QUIT请求结束后在关闭
+     -HUP改配置文件，平滑的重读配置文件
+     -USR1重读日志，
+     -USR2 升级用
+     -WINCH优雅关闭旧程序配合usr1使用
+</code></pre><p>eg:</p>
+<pre><code>kill -HUP `cat logs/nginx.pid`
+</code></pre><p>也可以也哦那个命令来管理：</p>
+<pre><code>./sbin/nginx -s reload stop
+</code></pre><h3 id="二、nginx-简单配置"><a href="#二、nginx-简单配置" class="headerlink" title="二、nginx 简单配置"></a>二、nginx 简单配置</h3><p>nginx虚拟主机的配置</p>
+<p>  打开配置文件nginx.conf</p>
+<p>  全局区</p>
+<pre><code>worker_processes 1;       工作的子进程数量,可以修改,但太大无益,因为要争夺CPU,一般设置为 CPU数*核数
+</code></pre><p>  配置nginx连接的特性，如1个word能同时允许多少连接</p>
+<pre><code>Event {
+   worker_connections  1024; // 这是指 一个子进程最大允许连1024个连接
+}
+</code></pre><p>  配置http服务器的主要段</p>
+<pre><code>http {
+  Server1 { // 虚拟主机段
+        Location {  //定位,把特殊的路径或文件再次定位 ,如image目录单独处理
+        }             /// 如.php单独处理
+ }
 
+ Server2 {
+ }
+}
+</code></pre><h6 id="简单的配置："><a href="#简单的配置：" class="headerlink" title="简单的配置："></a>简单的配置：</h6><p> 基于域名的虚拟主机</p>
+<pre><code>server {
+    listen 80;
+    server_name z.com;
+    location / {
+      root z.com;
+      index.html;
+    }
+}
+</code></pre><p>软重启nginx读取配置文件:</p>
+<pre><code>/usr/local/nginx/sbin/nginx -s reload
+</code></pre><p>或者</p>
+<pre><code>kill -HUP `cat logs/nginx.pid`
+</code></pre><p>然后解析host,访问z.com就可以访问了</p>
+<h6 id="基于端口的虚拟主机配置"><a href="#基于端口的虚拟主机配置" class="headerlink" title="基于端口的虚拟主机配置"></a>基于端口的虚拟主机配置</h6><pre><code>server {
+    listen 8080;
+    server_name 192.168.1.204;
+
+    location / {
+            root /var/www/html8080;
+            index index.html;
+    }
+}
+</code></pre><h3 id="三、nginx-简单日志管理"><a href="#三、nginx-简单日志管理" class="headerlink" title="三、nginx 简单日志管理"></a>三、nginx 简单日志管理</h3><p>打开配置文件会看到</p>
+<blockquote>
+<p>nginx的server段</p>
+</blockquote>
+<pre><code>#access_log  logs/host.access.log  main;（访问日志的文件是logs/host.access.log 使用main格式，也可以自定义格式）
+</code></pre><blockquote>
+<p>main格式（是我们定义好一种日志的格式,并起个名字,便于引用 ）：</p>
+</blockquote>
+<pre><code>log_format  main  &apos;$remote_addr（远程IP ） - $remote_user [$time_local]（远程用户/用户时间 ） &quot;$request&quot;（请求方法(如GET/POST) ） &apos;
+#                 &apos;$status $body_bytes_sent （请求体body长度 ）&quot;$http_referer（referer来源信息 ）&quot; &apos;
+#                 &apos;&quot;$http_user_agent（用户代理/蜘蛛 ,被转发的请求的原始IP ）&quot; &quot;$http_x_forwarded_for（在经过代理时,代理把你的本来IP加在此头信息中,传输你的原始IP ）&quot;&apos;;
+</code></pre><blockquote>
+<p>声明一个独特的log_format并命名（选项可以自由选择）</p>
+</blockquote>
+<pre><code>log_format  mylog &apos;$remote_addr- &quot;$request&quot; &apos;
+                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
+                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+</code></pre><blockquote>
+<p>针对不同的server做不同的Log ,(有的web服务器不支持,如lighttp)</p>
+</blockquote>
+<pre><code>access_log logs/access_8080.log mylog;
+声明log           log位置                  log格式;
+</code></pre><h3 id="四、按时间转存日志"><a href="#四、按时间转存日志" class="headerlink" title="四、按时间转存日志"></a>四、按时间转存日志</h3><p>1, 日志的定时切割，shell脚本，定时</p>
+<pre><code>date -s &apos;2015-12-28 17:32&apos;     修改系统时间
+clock -w                       修改后写入日志
+
+date -d yesterday              查看昨天时间
+date -d yesterday +%Y%m%d      格式化时间
+</code></pre><blockquote>
+<p>注意：安装ntpdate时间服务器，更新系统时间</p>
+</blockquote>
+<p>2, 写脚本</p>
+<pre><code>命名runlog.sh
+
+#!/bin/bash
+LOGPATH=/usr/local/nginx/logs/access.log (日志路径)
+BASEPATH=/data (将要保存路径)
+
+
+bak=$BASEPATH/$(date &quot;+%Y-%m-%d-%H-%M-%S&quot;).access.log（拼写命名路径）
+#echo $bak
+
+mv $LOGPATH $bak （把日志从原来路径移到拼写路径）
+touch $LOGPATH （写入新的日志名）
+
+kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`（重写日志）
+</code></pre><p>3, 让脚本生效</p>
+<pre><code>执行crontab -e
+写入内容(分 时 日 月 周)
+*/1 * * * * sh /data/runlog.sh
+</code></pre><p>4， 如果想按月份创建目录按天切割管理：</p>
+<pre><code>#!/bin/bash
+
+LOGPATH=/usr/local/nginx/logs/host.access.log
+
+BASEPATH=/data/$(date &quot;+%Y%m&quot;)
+
+mkdir -p $BASEPATH
+
+bak=$BASEPATH/$(date &quot;+%d%H%M&quot;).host.access.log
+#echo $bak
+
+mv $LOGPATH $bak
+touch $LOGPATH
+
+kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+</code></pre>
       
     </div>
 
@@ -401,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/makdown/" rel="tag">#makdown</a>
+            <a href="/tags/linux-nignx/" rel="tag">#linux nignx</a>
           
         </div>
       
@@ -410,17 +479,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/07/gulp/" rel="next" title="gulp自动化构建工具">
-                <i class="fa fa-chevron-left"></i> gulp自动化构建工具
+              <a href="/2016/03/14/nginx-staudy-1/" rel="next" title="linux下nginx安装编译(1)">
+                <i class="fa fa-chevron-left"></i> linux下nginx安装编译(1)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/08/git/" rel="prev" title="Git 介绍与使用">
-                Git 介绍与使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -446,8 +511,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/07/makdown-diary/"
-           data-title="makdown基础用法" data-url="http://yoursite.com/2016/03/07/makdown-diary/">
+      <div class="ds-thread" data-thread-key="2016/03/14/nginx-staudy-2/"
+           data-title="nginx简单配置管理(2)" data-url="http://yoursite.com/2016/03/14/nginx-staudy-2/">
       </div>
     
   </div>
@@ -586,7 +651,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一级标题"><span class="nav-number">1.</span> <span class="nav-text">一级标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无序列表"><span class="nav-number">2.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序列表"><span class="nav-number">3.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粗体与斜体"><span class="nav-number">5.</span> <span class="nav-text">粗体与斜体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">6.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码框"><span class="nav-number">7.</span> <span class="nav-text">代码框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分割线"><span class="nav-number">8.</span> <span class="nav-text">分割线</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、nginx-信号量"><span class="nav-number">1.</span> <span class="nav-text">一、nginx 信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、nginx-简单配置"><span class="nav-number">2.</span> <span class="nav-text">二、nginx 简单配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#简单的配置："><span class="nav-number">2.0.0.1.</span> <span class="nav-text">简单的配置：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#基于端口的虚拟主机配置"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">基于端口的虚拟主机配置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、nginx-简单日志管理"><span class="nav-number">3.</span> <span class="nav-text">三、nginx 简单日志管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、按时间转存日志"><span class="nav-number">4.</span> <span class="nav-text">四、按时间转存日志</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
