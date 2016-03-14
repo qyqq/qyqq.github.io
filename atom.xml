@@ -608,11 +608,11 @@ Automatic merge failed; fix conflicts and then commit the result.
   </entry>
   
   <entry>
-    <title>gulp</title>
+    <title>gulp自动化构建工具</title>
     <link href="http://yoursite.com/2016/03/07/gulp/"/>
     <id>http://yoursite.com/2016/03/07/gulp/</id>
     <published>2016-03-07T03:51:53.000Z</published>
-    <updated>2016-03-11T05:44:07.767Z</updated>
+    <updated>2016-03-14T06:07:15.654Z</updated>
     
     <content type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。&lt;/p&gt;
 &lt;h1 id=&quot;gulp能帮我们做什么&quot;&gt;&lt;a href=&quot;#gulp能帮我们做什么&quot; class=&quot;headerlink&quot; title=&quot;gulp能帮我们做什么?&quot;&gt;&lt;/a&gt;gulp能帮我们做什么?&lt;/h1&gt;&lt;ul&gt;
