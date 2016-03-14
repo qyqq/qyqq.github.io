@@ -334,51 +334,18 @@
 
       
         
-          
-            <p>1, 地址：www.nginx.org        (尽量选择稳定版本)</p>
+          <p>1, 地址：www.nginx.org        (尽量选择稳定版本)</p>
 <p>2, 复制安装地址</p>
 <pre><code>wget http://nginx.org/download/nginx-1.9.12.tar.gz
 </code></pre><blockquote>
 <p>这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：</p>
 <p>su 切换root用户     passwd： 修改密码</p>
 </blockquote>
-<p>3, 进入到(/usr/local/src)解压安装包：</p>
-<pre><code>tar -zxvf nginx-1.8.0.tar.gz
-</code></pre><p>4, 安装：</p>
-<pre><code>./configure --prefix=/usr/local/nginx
-</code></pre><p>5，如果发现依赖没安装，再安装依赖</p>
-<pre><code>yum install pcre（正则表达式库）
-</code></pre><blockquote>
-<p>结果提示：</p>
-</blockquote>
-<pre><code>setting up Install Process
-Package pcre-7.8-6.e16.x86_64 already installed and latest verion
-Nothing to do
-</code></pre><blockquote>
-<p>查看有没有 pcre-devel, 执行安装命令</p>
-</blockquote>
-<pre><code>yum install pcre-devel
-</code></pre><p>6，编译安装</p>
-<pre><code>make &amp;&amp; make install
-</code></pre><p>7.安装完成后在 /usr/local/nginx下可以看到四个目录</p>
-<pre><code>conf（配置文件）
-html（放置网页文件）
-logs（日志文件）
-sbin（进程文件二进制程序）
-</code></pre><p>  8，启动：<br>常见问题，端口被占用</p>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160314152133.png" alt=""></p>
-<blockquote>
-<p>查看占用端口情况</p>
-</blockquote>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/2.png" alt=""></p>
-<blockquote>
-<p>不能绑定 80端口，80 端口已经被占用</p>
-<p>有时是自己装了 apache，nginx等，还有更多情况是操作系统自带了 apache并作为服务启动</p>
-<p>解决办法：把占用80端口的软件或服务关闭即可</p>
-</blockquote>
-<p>查看进程占用程序</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/14/nginx-staudy-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-14T07:34:15.075Z</updated>
+  <updated>2016-03-14T07:53:16.782Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-1/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-1/</id>
     <published>2016-03-14T06:17:14.000Z</published>
-    <updated>2016-03-14T07:34:15.075Z</updated>
+    <updated>2016-03-14T07:53:16.782Z</updated>
     
     <content type="html">&lt;p&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
 &lt;p&gt;2, 复制安装地址&lt;/p&gt;
@@ -29,6 +29,7 @@
 &lt;p&gt;这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：&lt;/p&gt;
 &lt;p&gt;su 切换root用户     passwd： 修改密码&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;3, 进入到(/usr/local/src)解压安装包：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;tar -zxvf nginx-1.8.0.tar.gz
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4, 安装：&lt;/p&gt;
@@ -71,7 +72,10 @@ sbin（进程文件二进制程序）
       &lt;p&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
 &lt;p&gt;2, 复制安装地址&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;wget http://nginx.org/download/nginx-1.9.12.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;bl
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：&lt;/p&gt;
+&lt;p&gt;su 切换root用户     passwd： 修改密码&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
