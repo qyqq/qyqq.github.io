@@ -92,7 +92,7 @@ sbin（进程文件二进制程序）
     <link href="http://yoursite.com/2016/03/09/vagrant-basic-use/"/>
     <id>http://yoursite.com/2016/03/09/vagrant-basic-use/</id>
     <published>2016-03-09T10:34:59.000Z</published>
-    <updated>2016-03-14T07:51:23.473Z</updated>
+    <updated>2016-03-14T08:41:39.875Z</updated>
     
     <content type="html">&lt;h4 id=&quot;vagrant-windows下基本使用&quot;&gt;&lt;a href=&quot;#vagrant-windows下基本使用&quot; class=&quot;headerlink&quot; title=&quot;vagrant windows下基本使用&quot;&gt;&lt;/a&gt;vagrant windows下基本使用&lt;/h4&gt;&lt;h6 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h6&gt;&lt;blockquote&gt;
 &lt;p&gt;Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。它 使用Oracle的开源VirtualBox虚拟化系统，使用 Chef创建自动化虚拟环境&lt;/p&gt;
@@ -186,8 +186,7 @@ ifconfig 查看 ip
 &lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;vagrant up
 vagrant package –base virtualbox_vm_name –output newbox_name.box
-vagrant box add wangcan/item package.box
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  在你的醒目下就存在了一个打包好的box&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  在你的醒目下就存在了一个打包好的newbox_name.box&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;tips:&lt;/p&gt;
 &lt;/blockquote&gt;
