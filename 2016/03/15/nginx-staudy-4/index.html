@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux nignx," />
+  <meta name="keywords" content="makdown," />
 
 
 
@@ -57,18 +57,18 @@
 
 
 
-<meta name="description" content="linux下nginx安装编译…">
+<meta name="description" content="编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux下nginx安装编译(1)">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/nginx-staudy-1/index.html">
+<meta property="og:title" content="nginx简单配置管理(4)">
+<meta property="og:url" content="http://yoursite.com/2016/03/15/nginx-staudy-4/index.html">
 <meta property="og:site_name" content="WANGCAN'S BLOG">
-<meta property="og:description" content="linux下nginx安装编译…">
-<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/17.jpg">
-<meta property="og:updated_time" content="2016-04-27T16:55:53.025Z">
+<meta property="og:description" content="编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置">
+<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/39.jpg">
+<meta property="og:updated_time" content="2016-04-27T16:52:51.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux下nginx安装编译(1)">
-<meta name="twitter:description" content="linux下nginx安装编译…">
-<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/17.jpg">
+<meta name="twitter:title" content="nginx简单配置管理(4)">
+<meta name="twitter:description" content="编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置">
+<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/39.jpg">
 
 
 
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> linux下nginx安装编译(1) | WANGCAN'S BLOG </title>
+  <title> nginx简单配置管理(4) | WANGCAN'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +250,7 @@
             
             
               
-                linux下nginx安装编译(1)
+                nginx简单配置管理(4)
               
             
           </h1>
@@ -262,8 +262,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T14:17:14+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-03-15T10:53:51+08:00" content="2016-03-15">
+              2016-03-15
             </time>
           </span>
 
@@ -276,8 +276,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/nginx-linux-php/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx linux php</span>
                   </a>
                 </span>
 
@@ -292,8 +292,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/nginx-staudy-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/nginx-staudy-1/" itemprop="commentsCount"></span>
+                <a href="/2016/03/15/nginx-staudy-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/nginx-staudy-4/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,9 +318,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7xrpkn.com1.z0.glb.clouddn.com/17.jpg" rel="gallery_cilrry8gj0008lgo0vs5jls7q"
+                 href="http://7xrpkn.com1.z0.glb.clouddn.com/39.jpg" rel="gallery_cinj2vx1p0000ogo0hhd5lowz"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/17.jpg" itemprop="contentUrl"/>
+                <img src="http://7xrpkn.com1.z0.glb.clouddn.com/39.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -331,50 +331,138 @@
       
 
       
-        <p>linux下nginx安装编译…<br><a id="more"></a><br>1, 地址：www.nginx.org        (尽量选择稳定版本)</p>
-<p>2, 复制安装地址</p>
-<pre><code>wget http://nginx.org/download/nginx-1.9.12.tar.gz
-</code></pre><blockquote>
-<p>这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：</p>
-<p>su 切换root用户     passwd： 修改密码</p>
+        <p>编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置</p>
+<a id="more"></a>
+<h2 id="编译php并与nginx整合"><a href="#编译php并与nginx整合" class="headerlink" title="编译php并与nginx整合"></a>编译php并与nginx整合</h2><h4 id="1-安装mysql"><a href="#1-安装mysql" class="headerlink" title="1. 安装mysql"></a>1. 安装mysql</h4><pre><code>yum install mysql mysql-devel 客户
+yum install mysql-server服务
+yum install dg dg-devel
+</code></pre><h4 id="2-安装php"><a href="#2-安装php" class="headerlink" title="2. 安装php"></a>2. 安装php</h4><p>安装php需要注意的是：</p>
+<ul>
+<li><p>如果原来与apache编译过的php需要重新编译；</p>
+</li>
+<li><p>apache一般是把php当做自己的一个模块来启动的.而nginx则是把http请求变量(如 get,user_agent等)转发给 php进程,即php独立进程,与nginx进行通信. 称为 fastcgi运行方式，是不能用于nginx的.需要进入目录执行make clean重新执行编译。</p>
+</li>
+</ul>
+<p>要考虑需要编译的功能、编译在哪</p>
+<blockquote>
+<p>支持mysql、gd库要支持、字体要支持、以fpm(fascgi)方式运行，那么就有了mysql,gd,ttf,fpm</p>
 </blockquote>
-<p>3, 进入到(/usr/local/src)解压安装包：</p>
-<pre><code>tar -zxvf nginx-1.8.0.tar.gz
-</code></pre><p>4, 安装：</p>
-<pre><code>./configure --prefix=/usr/local/nginx
-</code></pre><p>5，如果发现依赖没安装，再安装依赖</p>
-<pre><code>yum install pcre（正则表达式库）
-</code></pre><blockquote>
-<p>结果提示：</p>
-</blockquote>
-<pre><code>setting up Install Process
-Package pcre-7.8-6.e16.x86_64 already installed and latest verion
-Nothing to do
-</code></pre><blockquote>
-<p>查看有没有 pcre-devel, 执行安装命令</p>
-</blockquote>
-<pre><code>yum install pcre-devel
-</code></pre><p>6，编译安装</p>
+<p>  不知道怎么添加编译可以查看帮助命令：</p>
+<pre><code>./configure -help | grep mysql
+</code></pre><p>  字体需要安装freetype：</p>
+<pre><code>yum install freetype
+</code></pre><p>  那么编译就可以这么写：</p>
+<pre><code>./configure --prefix=/usr/local/php \
+--with-mysql=mysqlnd \
+--enable-mysqlnd \
+--with-gd \
+--enable-gd-native-ttf \
+--enable-gd-jis-conv
+--enable-fpm
+</code></pre><p> 如果编译过程中遇到错误就看看提示，一般都是少编译了什么然后再加上重新编译然后执行:</p>
 <pre><code>make &amp;&amp; make install
-</code></pre><p>7.安装完成后在 /usr/local/nginx下可以看到四个目录</p>
-<pre><code>conf（配置文件）
-html（放置网页文件）
-logs（日志文件）
-sbin（进程文件二进制程序）
-</code></pre><p>  8，启动：<br>常见问题，端口被占用</p>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160314152133.png" alt=""></p>
+</code></pre><p>复制php配置文件,进入到php目录</p>
+<pre><code>cp /usr/local/src/php-5.6.17/php.ini-development ./lib/php.ini
+</code></pre><p>复制php进程管理器php-fpm配置文件</p>
+<pre><code>cp /etc/php-fpm.conf.default etc/php-fpm.conf
+</code></pre><p>运行php_fpm</p>
+<pre><code>/sbin/php-fpm
+</code></pre><h4 id="3-简单配置"><a href="#3-简单配置" class="headerlink" title="3. 简单配置"></a>3. 简单配置</h4><p>记住核心的一句话</p>
 <blockquote>
-<p>查看占用端口情况</p>
+<p>发请求信息给php进程默认端口9000，让php进程来处理，<br>指定该目录下的php文件，包含fastccgi_params参数</p>
 </blockquote>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/2.png" alt=""></p>
-<blockquote>
-<p>不能绑定 80端口，80 端口已经被占用</p>
-<p>有时是自己装了 apache，nginx等，还有更多情况是操作系统自带了 apache并作为服务启动</p>
-<p>解决办法：把占用80端口的软件或服务关闭即可</p>
-</blockquote>
-<p>查看进程占用程序</p>
-<pre><code>pkill -9 http
-</code></pre>
+<pre><code>location ~ \.php$ {
+  root html;
+  fastcgi_pass 127.0.0.1:9000;
+  fastcgi_index index.php;
+  fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  include fastcgi_params;
+  }
+</code></pre><p>区别于apache+php：</p>
+<pre><code>./configure --prefix=/usr/local/php \
+--with-mysql=mysqlnd \
+--enable-mysqlnd \
+--with-gd \
+--enable-gd-native-ttf \
+--enable-gd-jis-conv
+--with-apxs2=/usr/local/httpd/bin/apxs
+</code></pre><p>遇到问题：</p>
+<pre><code>configure: error: xml2-config not found. Please check your&amp;nb
+</code></pre><p>解决办法参考：</p>
+<pre><code>http://blog.sina.com.cn/s/blog_7253980a0101gw3n.html
+</code></pre><h2 id="安装ecshop"><a href="#安装ecshop" class="headerlink" title="安装ecshop"></a>安装ecshop</h2><h4 id="1-下载ecshop"><a href="#1-下载ecshop" class="headerlink" title="1. 下载ecshop"></a>1. 下载ecshop</h4><p>下载ecshop，把upload目录传到</p>
+<pre><code>/usr/local/nginx/html/
+</code></pre><p>更改ecshop配置文件：ecshop/includes/init.php</p>
+<pre><code>error_reporting(0);
+@ini_set(&apos;display_errors&apos;,        0);
+</code></pre><p>删除：</p>
+<pre><code>if ((DEBUG_MODE &amp; 1) == 1) {
+  error_reporting(E_ALL);
+} else {
+    error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+}
+if ((DEBUG_MODE &amp; 4) == 4) {
+    include(ROOT_PATH . &apos;includes/lib.debug.php&apos;);
+}
+</code></pre><p>在ecshop/install/inclodes/init.php中更改：</p>
+<pre><code>@ini_set(&apos;display_errors&apos;, 0);
+error_reporting(0);
+</code></pre><p>还有/usr/local/nginx/html/ecshop/admin/includes/init.php中同样也要修改</p>
+<h4 id="2-配置nginx-conf"><a href="#2-配置nginx-conf" class="headerlink" title="2. 配置nginx.conf"></a>2. 配置nginx.conf</h4><p>默认寻找文件index.php</p>
+<h4 id="3-测试步骤"><a href="#3-测试步骤" class="headerlink" title="3. 测试步骤"></a>3. 测试步骤</h4><p>访问ecshop提示安装-》更改权限-》连接数据库</p>
+<h4 id="4-一般会遇到的问题："><a href="#4-一般会遇到的问题：" class="headerlink" title="4. 一般会遇到的问题："></a>4. 一般会遇到的问题：</h4><p>windows上传到liunx上的文件一般都是权限错误和大小写问题</p>
+<pre><code>chmod o+w temp
+chmod o+w themes
+chmod o+w cert -R
+chmod o+w images -R
+chmod o+w data -R
+chmod o+w temp -R
+chmod o+w themes -R
+</code></pre><p>连接mysql报错：</p>
+<pre><code>root@localhost lib]# mysql -uroot -p
+Enter password:
+ERROR 2002 (HY000): Can&apos;t connect to local MySQL server through socket                                         &apos;/var/lib/mysql/mysql.sock&apos; (2)
+</code></pre><p>解决方案：</p>
+<p>检查mysql状态</p>
+<pre><code>/etc/init.d/mysqld status;  
+</code></pre><p>脚本启动mysql:</p>
+<pre><code>/etc/inint.d/mysqld start
+</code></pre><p>安装时候报错：</p>
+<p>原因：（本地localhost连接走sock,可以直接输入127.0.0.1）</p>
+<p>解决方法：</p>
+<p>①修改/usr/local/httpd/lib/php.ini中</p>
+<pre><code>; Default socket name for local MySQL connects.  If empty, uses the built-in
+; MySQL defaults.
+; http://php.net/mysql.default-socket
+ mysql.default_socket = /var/lib/mysql/mysql.sock
+</code></pre><p>② 强制关掉php-fpm进程</p>
+<pre><code>pkill -9 php-fpm
+</code></pre><p>③ 重启fpm</p>
+<pre><code>/usr/local/httpd/sbin/php-fpm
+</code></pre><p>tips:</p>
+<p>查看具体的详细参数</p>
+<pre><code>mysql -uroot -p -e &quot;show status\G;&quot;
+</code></pre><h2 id="gzip-nginx压缩提升网速"><a href="#gzip-nginx压缩提升网速" class="headerlink" title="gzip+nginx压缩提升网速"></a>gzip+nginx压缩提升网速</h2><h4 id="1-原理"><a href="#1-原理" class="headerlink" title="1. 原理"></a>1. 原理</h4><p>浏览器-》请求-》声明可以接受的压缩（gzip defate compress sdch[google支持]）服务器-》回应-》把内容用gzip方式压缩-》发给浏览器浏览《-解码gzip《接收gzip压缩内容《</p>
+<h4 id="2-配置常用参数"><a href="#2-配置常用参数" class="headerlink" title="2. 配置常用参数"></a>2. 配置常用参数</h4><pre><code>gzip on|off;               #是否开启gzip
+gzip_buffers 32 4K| 16 8K  #缓冲(压缩在内存中缓冲几块? 每块多大?)
+gzip_comp_level [1-9]      #推荐6 压缩级别(级别越高,压的越小,越浪费CPU资源)
+gzip_disable               #正则匹配UA 什么样的Uri不进行gzip
+gzip_min_length 200        # 开始压缩的最小长度(再小就不要压缩了,意义不在)
+gzip_http_version 1.0|1.1  # 开始压缩的http协议版本(可以不设置,目前几乎全是1.1协议)
+gzip_proxied               # 设置请求者代理服务器,该如何缓存内容
+gzip_types text/plain application/xml # 对哪些类型的文件用压缩 如txt,xml,html ,css（html类型不写也会压缩）（可参考/usr/local/nginx/conf/mime.types）
+gzip_vary on|off           # 是否传输gzip压缩标志
+</code></pre><p>要注意：</p>
+<p>①Transfer-Encoding: hunked代表分块传输，看不出长度</p>
+<p>②压缩长度不易太小</p>
+<p>③图片/MP3等二进制文件不必压缩（省不了多少还浪费资源）</p>
+<h2 id="nginx设置缓存设置"><a href="#nginx设置缓存设置" class="headerlink" title="nginx设置缓存设置"></a>nginx设置缓存设置</h2><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1. 作用："></a>1. 作用：</h4><p>提高网站性能，提升负载</p>
+<h4 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h4><p>新闻之类的一旦发布就很少改动的网站</p>
+<h4 id="3-设置"><a href="#3-设置" class="headerlink" title="3. 设置"></a>3. 设置</h4><p>用nginx的expires设置</p>
+<pre><code>expires 1d;
+</code></pre><p>如果http请求不变浏览器就会把之前请求下来的资源拿来用，此时查看请求信息可以看到是304 和expires</p>
+<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160428002126.png" alt=""></p>
+
       
     </div>
 
@@ -388,7 +476,7 @@ sbin（进程文件二进制程序）
       
         <div class="post-tags">
           
-            <a href="/tags/linux-nignx/" rel="tag">#linux nignx</a>
+            <a href="/tags/makdown/" rel="tag">#makdown</a>
           
         </div>
       
@@ -397,17 +485,13 @@ sbin（进程文件二进制程序）
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/09/vagrant-basic-use/" rel="next" title="vagrant基本用法">
-                <i class="fa fa-chevron-left"></i> vagrant基本用法
+              <a href="/2016/03/14/nginx-staudy-3/" rel="next" title="nginx简单配置管理(3)">
+                <i class="fa fa-chevron-left"></i> nginx简单配置管理(3)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/nginx-staudy-2/" rel="prev" title="nginx简单配置管理(2)">
-                nginx简单配置管理(2) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -433,8 +517,8 @@ sbin（进程文件二进制程序）
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/nginx-staudy-1/"
-           data-title="linux下nginx安装编译(1)" data-url="http://yoursite.com/2016/03/14/nginx-staudy-1/">
+      <div class="ds-thread" data-thread-key="2016/03/15/nginx-staudy-4/"
+           data-title="nginx简单配置管理(4)" data-url="http://yoursite.com/2016/03/15/nginx-staudy-4/">
       </div>
     
   </div>
@@ -573,7 +657,7 @@ sbin（进程文件二进制程序）
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译php并与nginx整合"><span class="nav-number">1.</span> <span class="nav-text">编译php并与nginx整合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装mysql"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 安装mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装php"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 安装php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-简单配置"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 简单配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ecshop"><span class="nav-number">2.</span> <span class="nav-text">安装ecshop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-下载ecshop"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 下载ecshop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-配置nginx-conf"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 配置nginx.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-测试步骤"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 测试步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-一般会遇到的问题："><span class="nav-number">2.0.4.</span> <span class="nav-text">4. 一般会遇到的问题：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gzip-nginx压缩提升网速"><span class="nav-number">3.</span> <span class="nav-text">gzip+nginx压缩提升网速</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-原理"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. 原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-配置常用参数"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. 配置常用参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx设置缓存设置"><span class="nav-number">4.</span> <span class="nav-text">nginx设置缓存设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-作用："><span class="nav-number">4.0.1.</span> <span class="nav-text">1. 作用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-应用场景"><span class="nav-number">4.0.2.</span> <span class="nav-text">2. 应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-设置"><span class="nav-number">4.0.3.</span> <span class="nav-text">3. 设置</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

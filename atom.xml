@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-14T10:47:11.555Z</updated>
+  <updated>2016-04-27T16:52:51.095Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,164 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>nginx简单配置管理(4)</title>
+    <link href="http://yoursite.com/2016/03/15/nginx-staudy-4/"/>
+    <id>http://yoursite.com/2016/03/15/nginx-staudy-4/</id>
+    <published>2016-03-15T02:53:51.000Z</published>
+    <updated>2016-04-27T16:52:51.095Z</updated>
+    
+    <content type="html">&lt;p&gt;编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;编译php并与nginx整合&quot;&gt;&lt;a href=&quot;#编译php并与nginx整合&quot; class=&quot;headerlink&quot; title=&quot;编译php并与nginx整合&quot;&gt;&lt;/a&gt;编译php并与nginx整合&lt;/h2&gt;&lt;h4 id=&quot;1-安装mysql&quot;&gt;&lt;a href=&quot;#1-安装mysql&quot; class=&quot;headerlink&quot; title=&quot;1. 安装mysql&quot;&gt;&lt;/a&gt;1. 安装mysql&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;yum install mysql mysql-devel 客户
+yum install mysql-server服务
+yum install dg dg-devel
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;2-安装php&quot;&gt;&lt;a href=&quot;#2-安装php&quot; class=&quot;headerlink&quot; title=&quot;2. 安装php&quot;&gt;&lt;/a&gt;2. 安装php&lt;/h4&gt;&lt;p&gt;安装php需要注意的是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果原来与apache编译过的php需要重新编译；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;apache一般是把php当做自己的一个模块来启动的.而nginx则是把http请求变量(如 get,user_agent等)转发给 php进程,即php独立进程,与nginx进行通信. 称为 fastcgi运行方式，是不能用于nginx的.需要进入目录执行make clean重新执行编译。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;要考虑需要编译的功能、编译在哪&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;支持mysql、gd库要支持、字体要支持、以fpm(fascgi)方式运行，那么就有了mysql,gd,ttf,fpm&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  不知道怎么添加编译可以查看帮助命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./configure -help | grep mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  字体需要安装freetype：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install freetype
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  那么编译就可以这么写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./configure --prefix=/usr/local/php \
+--with-mysql=mysqlnd \
+--enable-mysqlnd \
+--with-gd \
+--enable-gd-native-ttf \
+--enable-gd-jis-conv
+--enable-fpm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 如果编译过程中遇到错误就看看提示，一般都是少编译了什么然后再加上重新编译然后执行:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;make &amp;amp;&amp;amp; make install
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;复制php配置文件,进入到php目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cp /usr/local/src/php-5.6.17/php.ini-development ./lib/php.ini
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;复制php进程管理器php-fpm配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cp /etc/php-fpm.conf.default etc/php-fpm.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行php_fpm&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/sbin/php-fpm
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;3-简单配置&quot;&gt;&lt;a href=&quot;#3-简单配置&quot; class=&quot;headerlink&quot; title=&quot;3. 简单配置&quot;&gt;&lt;/a&gt;3. 简单配置&lt;/h4&gt;&lt;p&gt;记住核心的一句话&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;发请求信息给php进程默认端口9000，让php进程来处理，&lt;br&gt;指定该目录下的php文件，包含fastccgi_params参数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;location ~ \.php$ {
+  root html;
+  fastcgi_pass 127.0.0.1:9000;
+  fastcgi_index index.php;
+  fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  include fastcgi_params;
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;区别于apache+php：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./configure --prefix=/usr/local/php \
+--with-mysql=mysqlnd \
+--enable-mysqlnd \
+--with-gd \
+--enable-gd-native-ttf \
+--enable-gd-jis-conv
+--with-apxs2=/usr/local/httpd/bin/apxs
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;遇到问题：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;configure: error: xml2-config not found. Please check your&amp;amp;nb
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;解决办法参考：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://blog.sina.com.cn/s/blog_7253980a0101gw3n.html
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;安装ecshop&quot;&gt;&lt;a href=&quot;#安装ecshop&quot; class=&quot;headerlink&quot; title=&quot;安装ecshop&quot;&gt;&lt;/a&gt;安装ecshop&lt;/h2&gt;&lt;h4 id=&quot;1-下载ecshop&quot;&gt;&lt;a href=&quot;#1-下载ecshop&quot; class=&quot;headerlink&quot; title=&quot;1. 下载ecshop&quot;&gt;&lt;/a&gt;1. 下载ecshop&lt;/h4&gt;&lt;p&gt;下载ecshop，把upload目录传到&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/html/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;更改ecshop配置文件：ecshop/includes/init.php&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error_reporting(0);
+@ini_set(&amp;apos;display_errors&amp;apos;,        0);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;删除：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;if ((DEBUG_MODE &amp;amp; 1) == 1) {
+  error_reporting(E_ALL);
+} else {
+    error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+}
+if ((DEBUG_MODE &amp;amp; 4) == 4) {
+    include(ROOT_PATH . &amp;apos;includes/lib.debug.php&amp;apos;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在ecshop/install/inclodes/init.php中更改：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@ini_set(&amp;apos;display_errors&amp;apos;, 0);
+error_reporting(0);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;还有/usr/local/nginx/html/ecshop/admin/includes/init.php中同样也要修改&lt;/p&gt;
+&lt;h4 id=&quot;2-配置nginx-conf&quot;&gt;&lt;a href=&quot;#2-配置nginx-conf&quot; class=&quot;headerlink&quot; title=&quot;2. 配置nginx.conf&quot;&gt;&lt;/a&gt;2. 配置nginx.conf&lt;/h4&gt;&lt;p&gt;默认寻找文件index.php&lt;/p&gt;
+&lt;h4 id=&quot;3-测试步骤&quot;&gt;&lt;a href=&quot;#3-测试步骤&quot; class=&quot;headerlink&quot; title=&quot;3. 测试步骤&quot;&gt;&lt;/a&gt;3. 测试步骤&lt;/h4&gt;&lt;p&gt;访问ecshop提示安装-》更改权限-》连接数据库&lt;/p&gt;
+&lt;h4 id=&quot;4-一般会遇到的问题：&quot;&gt;&lt;a href=&quot;#4-一般会遇到的问题：&quot; class=&quot;headerlink&quot; title=&quot;4. 一般会遇到的问题：&quot;&gt;&lt;/a&gt;4. 一般会遇到的问题：&lt;/h4&gt;&lt;p&gt;windows上传到liunx上的文件一般都是权限错误和大小写问题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chmod o+w temp
+chmod o+w themes
+chmod o+w cert -R
+chmod o+w images -R
+chmod o+w data -R
+chmod o+w temp -R
+chmod o+w themes -R
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;连接mysql报错：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@localhost lib]# mysql -uroot -p
+Enter password:
+ERROR 2002 (HY000): Can&amp;apos;t connect to local MySQL server through socket                                         &amp;apos;/var/lib/mysql/mysql.sock&amp;apos; (2)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;解决方案：&lt;/p&gt;
+&lt;p&gt;检查mysql状态&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/etc/init.d/mysqld status;  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;脚本启动mysql:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/etc/inint.d/mysqld start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装时候报错：&lt;/p&gt;
+&lt;p&gt;原因：（本地localhost连接走sock,可以直接输入127.0.0.1）&lt;/p&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;p&gt;①修改/usr/local/httpd/lib/php.ini中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;; Default socket name for local MySQL connects.  If empty, uses the built-in
+; MySQL defaults.
+; http://php.net/mysql.default-socket
+ mysql.default_socket = /var/lib/mysql/mysql.sock
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;② 强制关掉php-fpm进程&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pkill -9 php-fpm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;③ 重启fpm&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/httpd/sbin/php-fpm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;tips:&lt;/p&gt;
+&lt;p&gt;查看具体的详细参数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p -e &amp;quot;show status\G;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;gzip-nginx压缩提升网速&quot;&gt;&lt;a href=&quot;#gzip-nginx压缩提升网速&quot; class=&quot;headerlink&quot; title=&quot;gzip+nginx压缩提升网速&quot;&gt;&lt;/a&gt;gzip+nginx压缩提升网速&lt;/h2&gt;&lt;h4 id=&quot;1-原理&quot;&gt;&lt;a href=&quot;#1-原理&quot; class=&quot;headerlink&quot; title=&quot;1. 原理&quot;&gt;&lt;/a&gt;1. 原理&lt;/h4&gt;&lt;p&gt;浏览器-》请求-》声明可以接受的压缩（gzip defate compress sdch[google支持]）服务器-》回应-》把内容用gzip方式压缩-》发给浏览器浏览《-解码gzip《接收gzip压缩内容《&lt;/p&gt;
+&lt;h4 id=&quot;2-配置常用参数&quot;&gt;&lt;a href=&quot;#2-配置常用参数&quot; class=&quot;headerlink&quot; title=&quot;2. 配置常用参数&quot;&gt;&lt;/a&gt;2. 配置常用参数&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;gzip on|off;               #是否开启gzip
+gzip_buffers 32 4K| 16 8K  #缓冲(压缩在内存中缓冲几块? 每块多大?)
+gzip_comp_level [1-9]      #推荐6 压缩级别(级别越高,压的越小,越浪费CPU资源)
+gzip_disable               #正则匹配UA 什么样的Uri不进行gzip
+gzip_min_length 200        # 开始压缩的最小长度(再小就不要压缩了,意义不在)
+gzip_http_version 1.0|1.1  # 开始压缩的http协议版本(可以不设置,目前几乎全是1.1协议)
+gzip_proxied               # 设置请求者代理服务器,该如何缓存内容
+gzip_types text/plain application/xml # 对哪些类型的文件用压缩 如txt,xml,html ,css（html类型不写也会压缩）（可参考/usr/local/nginx/conf/mime.types）
+gzip_vary on|off           # 是否传输gzip压缩标志
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;要注意：&lt;/p&gt;
+&lt;p&gt;①Transfer-Encoding: hunked代表分块传输，看不出长度&lt;/p&gt;
+&lt;p&gt;②压缩长度不易太小&lt;/p&gt;
+&lt;p&gt;③图片/MP3等二进制文件不必压缩（省不了多少还浪费资源）&lt;/p&gt;
+&lt;h2 id=&quot;nginx设置缓存设置&quot;&gt;&lt;a href=&quot;#nginx设置缓存设置&quot; class=&quot;headerlink&quot; title=&quot;nginx设置缓存设置&quot;&gt;&lt;/a&gt;nginx设置缓存设置&lt;/h2&gt;&lt;h4 id=&quot;1-作用：&quot;&gt;&lt;a href=&quot;#1-作用：&quot; class=&quot;headerlink&quot; title=&quot;1. 作用：&quot;&gt;&lt;/a&gt;1. 作用：&lt;/h4&gt;&lt;p&gt;提高网站性能，提升负载&lt;/p&gt;
+&lt;h4 id=&quot;2-应用场景&quot;&gt;&lt;a href=&quot;#2-应用场景&quot; class=&quot;headerlink&quot; title=&quot;2. 应用场景&quot;&gt;&lt;/a&gt;2. 应用场景&lt;/h4&gt;&lt;p&gt;新闻之类的一旦发布就很少改动的网站&lt;/p&gt;
+&lt;h4 id=&quot;3-设置&quot;&gt;&lt;a href=&quot;#3-设置&quot; class=&quot;headerlink&quot; title=&quot;3. 设置&quot;&gt;&lt;/a&gt;3. 设置&lt;/h4&gt;&lt;p&gt;用nginx的expires设置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;expires 1d;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果http请求不变浏览器就会把之前请求下来的资源拿来用，此时查看请求信息可以看到是304 和expires&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160428002126.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="nginx linux php" scheme="http://yoursite.com/categories/nginx-linux-php/"/>
+    
+    
+      <category term="makdown" scheme="http://yoursite.com/tags/makdown/"/>
+    
+  </entry>
+  
+  <entry>
     <title>nginx简单配置管理(3)</title>
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-3/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-3/</id>
     <published>2016-03-14T10:17:14.000Z</published>
-    <updated>2016-03-14T10:47:11.555Z</updated>
+    <updated>2016-04-21T10:39:57.450Z</updated>
     
     <content type="html">&lt;p&gt;Location，rewrite 重写&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -166,7 +319,7 @@ goods-([\d]+)\.html ---&amp;gt; goods.php?goods_id =$1
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-2/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-2/</id>
     <published>2016-03-14T09:17:14.000Z</published>
-    <updated>2016-03-14T10:02:32.282Z</updated>
+    <updated>2016-04-27T16:43:16.574Z</updated>
     
     <content type="html">&lt;p&gt;nginx 信号量，nginx假单配置，&lt;/p&gt;
 &lt;p&gt;nginx日志管理，按时间转存日志&lt;/p&gt;
@@ -311,16 +464,15 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-1/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-1/</id>
     <published>2016-03-14T06:17:14.000Z</published>
-    <updated>2016-03-14T08:12:52.035Z</updated>
+    <updated>2016-04-27T16:55:53.025Z</updated>
     
-    <content type="html">&lt;p&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
+    <content type="html">&lt;p&gt;linux下nginx安装编译…&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
 &lt;p&gt;2, 复制安装地址&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;wget http://nginx.org/download/nginx-1.9.12.tar.gz
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：&lt;/p&gt;
 &lt;p&gt;su 切换root用户     passwd： 修改密码&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;3, 进入到(/usr/local/src)解压安装包：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;tar -zxvf nginx-1.8.0.tar.gz
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4, 安装：&lt;/p&gt;
@@ -361,13 +513,7 @@ sbin（进程文件二进制程序）
     
     <summary type="html">
     
-      &lt;p&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
-&lt;p&gt;2, 复制安装地址&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;wget http://nginx.org/download/nginx-1.9.12.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：&lt;/p&gt;
-&lt;p&gt;su 切换root用户     passwd： 修改密码&lt;/p&gt;
-&lt;/blockquote&gt;
+      &lt;p&gt;linux下nginx安装编译…&lt;br&gt;
     
     </summary>
     
