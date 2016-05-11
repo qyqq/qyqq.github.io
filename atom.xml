@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-28T02:00:28.324Z</updated>
+  <updated>2016-05-11T11:49:08.725Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,180 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>makdown基础用法（5）</title>
+    <link href="http://yoursite.com/2016/05/11/nginx-staudy-5/"/>
+    <id>http://yoursite.com/2016/05/11/nginx-staudy-5/</id>
+    <published>2016-05-11T02:53:51.000Z</published>
+    <updated>2016-05-11T11:49:08.725Z</updated>
+    
+    <content type="html">&lt;p&gt;nginx反向代理服务器+负载均衡，memcached，nginx+php+memcache的扩展，&lt;br&gt;第3方模块编译及一致性哈希应用,大访问量优化整体思路&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一、-nginx反向代理服务器-负载均衡&quot;&gt;&lt;a href=&quot;#一、-nginx反向代理服务器-负载均衡&quot; class=&quot;headerlink&quot; title=&quot;一、 nginx反向代理服务器+负载均衡&quot;&gt;&lt;/a&gt;一、 nginx反向代理服务器+负载均衡&lt;/h2&gt;&lt;h4 id=&quot;1-新建一个nginx虚拟机&quot;&gt;&lt;a href=&quot;#1-新建一个nginx虚拟机&quot; class=&quot;headerlink&quot; title=&quot;1. 新建一个nginx虚拟机&quot;&gt;&lt;/a&gt;1. 新建一个nginx虚拟机&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt;我是利用vagrant新建的一个环境&lt;/p&gt;
+&lt;h4 id=&quot;2-把原来的配置加上一句命令&quot;&gt;&lt;a href=&quot;#2-把原来的配置加上一句命令&quot; class=&quot;headerlink&quot; title=&quot;2. 把原来的配置加上一句命令&quot;&gt;&lt;/a&gt;2. 把原来的配置加上一句命令&lt;/h4&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;proxy_pass http://192.168.33.13:80;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（关闭其他php配置项）这样就被代理到192.168.33.13上了；&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;location ~ \.php$ {
+  proxy_pass http://192.168.33.13:80;
+ #root html;
+ #fastcgi_pass   127.0.0.1:9000;
+ #fastcgi_index  index.php;
+ #fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+ #include        fastcgi_params;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  }&lt;/p&gt;
+&lt;h4 id=&quot;3-负载均衡&quot;&gt;&lt;a href=&quot;#3-负载均衡&quot; class=&quot;headerlink&quot; title=&quot;3. 负载均衡&quot;&gt;&lt;/a&gt;3. 负载均衡&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt;反向代理后端如果有多台服务器,自然可形成负载均衡,但proxy_pass如何指向多台服务器?&lt;br&gt;把多台服务器用 upstream指定绑定在一起并起个组名,然后proxy_pass指向该组&lt;br&gt;默认的均衡的算法很简单,就是针对后端服务器的顺序,逐个请求.&lt;/p&gt;
+&lt;h4 id=&quot;4-反向代理导致了后端服务器的IP-为前端服务器的IP-而不是客户真正的IP&quot;&gt;&lt;a href=&quot;#4-反向代理导致了后端服务器的IP-为前端服务器的IP-而不是客户真正的IP&quot; class=&quot;headerlink&quot; title=&quot;4. 反向代理导致了后端服务器的IP,为前端服务器的IP,而不是客户真正的IP&quot;&gt;&lt;/a&gt;4. 反向代理导致了后端服务器的IP,为前端服务器的IP,而不是客户真正的IP&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt;可以在配置时设置真实ip:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;proxy_set_header X-Forwarded-For $remote_addr;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;二、memcached&quot;&gt;&lt;a href=&quot;#二、memcached&quot; class=&quot;headerlink&quot; title=&quot;二、memcached&quot;&gt;&lt;/a&gt;二、memcached&lt;/h2&gt;&lt;h4 id=&quot;1-memcached&quot;&gt;&lt;a href=&quot;#1-memcached&quot; class=&quot;headerlink&quot; title=&quot;1. memcached&quot;&gt;&lt;/a&gt;1. memcached&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt;Memcache是一种内存缓存，把经常存取的对象或数据缓存在内存中，内存中缓存的这些数据通过API的方式被存取，&lt;br&gt;数据就像一张大的HASH表，以key-value对的方式存在&lt;/p&gt;
+&lt;h4 id=&quot;2-memcached的编译与安装&quot;&gt;&lt;a href=&quot;#2-memcached的编译与安装&quot; class=&quot;headerlink&quot; title=&quot;2. memcached的编译与安装&quot;&gt;&lt;/a&gt;2. memcached的编译与安装&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt; 注意不能直接安装libevent&lt;/p&gt;
+&lt;p&gt;这是在编译memcached过程中经常遇到的问题（memcached基于libevent的事件处理机制。libevent是个程序库，它将Linux的epoll、BSD类操作系统的kqueue等事件处理功能封装成统一的接口。即使服务器的连接数增加，也能发挥时间复杂度O(1)的性能。 memcached使用这个libevent库，因此能在Linux、BSD、Solaris等操作系统上发挥其高性能。）。这时就要安装libevent库了。&lt;/p&gt;
+&lt;p&gt;在libevent官方网站&lt;a href=&quot;http://libevent.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://libevent.org&lt;/a&gt; 中可以下载到最新最稳定版源代码：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrpkn.com1.z0.glb.clouddn.com/memcache.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;下载解压配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./configure --prefix=/usr
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;参考：&lt;a href=&quot;http://blog.csdn.net/chaijunkun/article/details/6993264&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/chaijunkun/article/details/6993264&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;3-安装完成后启动memcached&quot;&gt;&lt;a href=&quot;#3-安装完成后启动memcached&quot; class=&quot;headerlink&quot; title=&quot;3. 安装完成后启动memcached&quot;&gt;&lt;/a&gt;3. 安装完成后启动memcached&lt;/h4&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/memcached/bin/memcached -d -m 128  -u root -p 11211 -c 256 -P /tmp/memcached.pid
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意参数大小写，还有参数是否正确&lt;/p&gt;
+&lt;p&gt;启动参数说明：&lt;/p&gt;
+&lt;p&gt;  -d 选项是启动一个守护进程，&lt;/p&gt;
+&lt;p&gt;  -m 是分配给Memcache使用的内存数量，单位是MB，默认64MB&lt;/p&gt;
+&lt;p&gt;  -M return error on memory exhausted (rather than removing items)&lt;/p&gt;
+&lt;p&gt;  -u 是运行Memcache的用户，如果当前为root 的话，需要使用此参数指定用户。&lt;/p&gt;
+&lt;p&gt;  -l 是监听的服务器IP地址，默认为所有网卡。&lt;/p&gt;
+&lt;p&gt;  -p 是设置Memcache的TCP监听的端口，最好是1024以上的端口&lt;/p&gt;
+&lt;p&gt;  -c 选项是最大运行的并发连接数，默认是1024&lt;/p&gt;
+&lt;p&gt;  -P 是设置保存Memcache的pid文件&lt;/p&gt;
+&lt;p&gt;  -f &lt;factor&gt; chunk size growth factor (default: 1.25)&lt;/factor&gt;&lt;/p&gt;
+&lt;p&gt;  -I Override the size of each slab page. Adjusts max item size(1.4.2版本新增)&lt;/p&gt;
+&lt;p&gt;  也可以启动多个守护进程，但是端口不能重复&lt;/p&gt;
+&lt;h4 id=&quot;4-停止Memcache进程：&quot;&gt;&lt;a href=&quot;#4-停止Memcache进程：&quot; class=&quot;headerlink&quot; title=&quot;4. 停止Memcache进程：&quot;&gt;&lt;/a&gt;4. 停止Memcache进程：&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;kill `cat /tmp/memcached.pid`
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;三、nginx-php-memcache的扩展&quot;&gt;&lt;a href=&quot;#三、nginx-php-memcache的扩展&quot; class=&quot;headerlink&quot; title=&quot;三、nginx+php+memcache的扩展&quot;&gt;&lt;/a&gt;三、nginx+php+memcache的扩展&lt;/h2&gt;&lt;h4 id=&quot;1-memcache的扩展安装&quot;&gt;&lt;a href=&quot;#1-memcache的扩展安装&quot; class=&quot;headerlink&quot; title=&quot;1. memcache的扩展安装&quot;&gt;&lt;/a&gt;1. memcache的扩展安装&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt; 下载地址&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://pecl.php.net/package/memcache
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 解压安装编译&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/httpd/bin/phpize（针对编译的php）
+./configure  --with-php-config=/usr/local/httpd/bin/php-config（制定配置位置）
+make &amp;amp;&amp;amp; make install
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;复制扩展路径&lt;br&gt;    /usr/local/httpd/lib/php/extensions/no-debug-non-zts-20131226/&lt;/p&gt;
+&lt;p&gt;打开php.ini(引入扩展)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;extension= /usr/local/httpd/lib/php/extensions/no-debug-non-zts-20131226/memcache.so
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;杀掉php进程，重启php&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pkill -9 php
+/usr/local/httpd/sbin/php-fpm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启php-fpm详情参考：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://www.cnblogs.com/zdz8207/p/3765579.html
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 流程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrpkn.com1.z0.glb.clouddn.com/liucheng.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2-连接memcache需要安装telnet&quot;&gt;&lt;a href=&quot;#2-连接memcache需要安装telnet&quot; class=&quot;headerlink&quot; title=&quot;2. 连接memcache需要安装telnet&quot;&gt;&lt;/a&gt;2. 连接memcache需要安装telnet&lt;/h4&gt;&lt;hr&gt;
+&lt;p&gt; 查看本机是否安装telnet&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#rpm -qa | grep telnet
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果什么都不显示。说明你没有安装telnet&lt;/p&gt;
+&lt;p&gt; 开始安装&lt;br&gt;    yum install xinetd&lt;br&gt;    yum install telnet&lt;br&gt;    yum install telnet-server&lt;/p&gt;
+&lt;p&gt;装好telnet服务之后，默认是不开启服务的，下面我们需要修改文件来开启服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/xinetd.d/telnet 修改 disable = yes 为 disable = no
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;需要激活xinetd服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# service xinetd restart
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#/etc/rc.d/init.d/xinetd restart
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;执行连接：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;telnet 127.0.0.1 11211
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果还是起不来就看看防火墙是否关闭&lt;/p&gt;
+&lt;h4 id=&quot;3-测试使用memcache&quot;&gt;&lt;a href=&quot;#3-测试使用memcache&quot; class=&quot;headerlink&quot; title=&quot;3. 测试使用memcache&quot;&gt;&lt;/a&gt;3. 测试使用memcache&lt;/h4&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;location / {
+      set $memcached_key &amp;quot;$uri&amp;quot;;# 设置key
+      memcached_pass 127.0.0.1:11211;#从memcache读取key
+      error_page 404 /callback.php; #要是没找到key就调用callback.php
+      #root   html;
+      #index index.php  index.html index.htm;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;测试内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//连接数据库，查询并写入memcached
+$conect = mysql_connect(&amp;apos;localhost&amp;apos;,&amp;apos;root&amp;apos;,&amp;apos;&amp;apos;);
+$sql = &amp;apos;use test&amp;apos;;
+$a =mysql_query($sql,$conect);
+//var_dump($a);
+$sql = &amp;quot;set names utf8&amp;quot;;
+mysql_query($sql,$conect);
+$sql = &amp;quot;select * from custom_auth_user where id=&amp;quot;.$uid;
+$rs = mysql_query($sql,$conect);
+//var_dump($rs);
+
+$user = mysql_fetch_assoc($rs);
+
+if(empty($user)){
+        echo &amp;apos;no this user&amp;apos;;
+ } else {
+        echo &amp;apos;from mysql&amp;apos;;
+        $mem = new memcache();
+        $mem-&amp;gt;connect(&amp;apos;localhost&amp;apos;,11211);
+        $mem-&amp;gt;add($uri,$user,0,300);
+        $mem-&amp;gt;close();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;四、第3方模块编译及一致性哈希应用&quot;&gt;&lt;a href=&quot;#四、第3方模块编译及一致性哈希应用&quot; class=&quot;headerlink&quot; title=&quot;四、第3方模块编译及一致性哈希应用&quot;&gt;&lt;/a&gt;四、第3方模块编译及一致性哈希应用&lt;/h2&gt;&lt;h4 id=&quot;1-官网：&quot;&gt;&lt;a href=&quot;#1-官网：&quot; class=&quot;headerlink&quot; title=&quot;1. 官网：&quot;&gt;&lt;/a&gt;1. 官网：&lt;/h4&gt;&lt;p&gt;   &lt;a href=&quot;http://tool.oschina.net/uploads/apidocs/nginx-zh/HttpUpstreamConsistentHash.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tool.oschina.net/uploads/apidocs/nginx-zh/HttpUpstreamConsistentHash.htm&lt;/a&gt;&lt;br&gt;   &lt;a href=&quot;https://www.nginx.com/resources/wiki/modules/consistent_hash/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.nginx.com/resources/wiki/modules/consistent_hash/&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2-编译第三方模块&quot;&gt;&lt;a href=&quot;#2-编译第三方模块&quot; class=&quot;headerlink&quot; title=&quot;2. 编译第三方模块&quot;&gt;&lt;/a&gt;2. 编译第三方模块&lt;/h4&gt;&lt;p&gt;查看编译&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/nginx/sbin/nginx -V
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;之前的编译加上要增加模块的路径&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./configure --prefix=/usr/local/nginx --add- module=/usr/local/src/ngx_http_consistent_hash-master/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为保证不受之前nginx进程的影响，先杀掉nginx进程再编译&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pkill -9 nginx
+make &amp;amp;&amp;amp; make install
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;3-配置&quot;&gt;&lt;a href=&quot;#3-配置&quot; class=&quot;headerlink&quot; title=&quot;3. 配置&quot;&gt;&lt;/a&gt;3. 配置&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;upstream somestream {
+       consistent_hash $request_uri;(指定算法)
+       server 10.50.1.3:11211;
+       server 10.50.1.4:11211;
+       server 10.50.1.5:11211;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;开启新的memcache端口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/user/local/memcached/bin/memcached -u nobody -vv -p 11212
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时也需要制定同样的算法到存到memcahe&lt;br&gt;保证nginx请求的key和memcache增加的key是一致的&lt;br&gt;memcache的hash策略&lt;br&gt;在PHP.ini中增加如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;memcache.hash_strategy=consistent
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;php也增加和nginx一样多的服务器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$mem = new memcache();
+$mem-&amp;gt;addServer(&amp;apos;192.168.33.10&amp;apos;,11211);
+$mem-&amp;gt;addServer(&amp;apos;192.168.33.10&amp;apos;,11212);
+$mem-&amp;gt;addServer(&amp;apos;192.168.33.10&amp;apos;,11213);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;tips&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;upstream做负载均衡时，要用IP或远程主机名，不能用localhost&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认的负载均衡的算法:&lt;/li&gt;
+&lt;li&gt;是设置计数器,轮流请求N台服务器.&lt;/li&gt;
+&lt;li&gt;可以安装第3方模式,来利用uri做hash等等.&lt;/li&gt;
+&lt;li&gt;如&lt;a href=&quot;http://wiki.nginx.org/NginxHttpUpstreamConsistentHash&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wiki.nginx.org/NginxHttpUpstreamConsistentHash&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;这个模块就是用一致性hash来请求后端结节,并且其算法,与PHP中的memcache模块的一致性hash算法,兼容.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;五、大访问量优化整体思路&quot;&gt;&lt;a href=&quot;#五、大访问量优化整体思路&quot; class=&quot;headerlink&quot; title=&quot;五、大访问量优化整体思路&quot;&gt;&lt;/a&gt;五、大访问量优化整体思路&lt;/h2&gt;&lt;p&gt;对于高性能网站 ,请求量大,如何支撑？&lt;/p&gt;
+&lt;h4 id=&quot;1-要减少请求&quot;&gt;&lt;a href=&quot;#1-要减少请求&quot; class=&quot;headerlink&quot; title=&quot;1. 要减少请求&quot;&gt;&lt;/a&gt;1. 要减少请求&lt;/h4&gt;&lt;p&gt;对于开发人员—-合并css, 背景图片, 减少mysql查询等.&lt;/p&gt;
+&lt;h4 id=&quot;2-对于运维&quot;&gt;&lt;a href=&quot;#2-对于运维&quot; class=&quot;headerlink&quot; title=&quot;2. 对于运维&quot;&gt;&lt;/a&gt;2. 对于运维&lt;/h4&gt;&lt;p&gt;nginx的expires ,利用浏览器缓存等,减少查询.&lt;/p&gt;
+&lt;h4 id=&quot;3-利用cdn来响应请求&quot;&gt;&lt;a href=&quot;#3-利用cdn来响应请求&quot; class=&quot;headerlink&quot; title=&quot;3. 利用cdn来响应请求&quot;&gt;&lt;/a&gt;3. 利用cdn来响应请求&lt;/h4&gt;&lt;h4 id=&quot;4-最终剩下的-不可避免的请求&quot;&gt;&lt;a href=&quot;#4-最终剩下的-不可避免的请求&quot; class=&quot;headerlink&quot; title=&quot;4. 最终剩下的,不可避免的请求&quot;&gt;&lt;/a&gt;4. 最终剩下的,不可避免的请求&lt;/h4&gt;&lt;p&gt;—-服务器集群+负载均衡来支撑.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;思考如何更好的响应高并发请求.：&lt;/p&gt;
+&lt;p&gt;大的认识——-既然响应是不可避免的,我们要做的是把工作内容”平均”分给每台服务器.&lt;br&gt;最理想的状态 每台服务器的性能都被充分利用.&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;nginx反向代理服务器+负载均衡，memcached，nginx+php+memcache的扩展，&lt;br&gt;第3方模块编译及一致性哈希应用,大访问量优化整体思路&lt;br&gt;
+    
+    </summary>
+    
+      <category term="nginx linux php" scheme="http://yoursite.com/categories/nginx-linux-php/"/>
+    
+    
+      <category term="makdown" scheme="http://yoursite.com/tags/makdown/"/>
+    
+  </entry>
+  
+  <entry>
     <title>nginx简单配置管理(4)</title>
-    <link href="http://yoursite.com/2016/03/15/nginx-staudy-4/"/>
-    <id>http://yoursite.com/2016/03/15/nginx-staudy-4/</id>
-    <published>2016-03-15T02:53:51.000Z</published>
-    <updated>2016-04-28T02:00:28.324Z</updated>
+    <link href="http://yoursite.com/2016/04/28/nginx-staudy-4/"/>
+    <id>http://yoursite.com/2016/04/28/nginx-staudy-4/</id>
+    <published>2016-04-28T14:53:51.000Z</published>
+    <updated>2016-05-11T11:50:32.823Z</updated>
     
     <content type="html">&lt;p&gt;编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
