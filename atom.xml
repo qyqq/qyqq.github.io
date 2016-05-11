@@ -193,7 +193,7 @@ $mem-&amp;gt;addServer(&amp;apos;192.168.33.10&amp;apos;,11213);
     <link href="http://yoursite.com/2016/04/28/nginx-staudy-4/"/>
     <id>http://yoursite.com/2016/04/28/nginx-staudy-4/</id>
     <published>2016-04-28T14:53:51.000Z</published>
-    <updated>2016-05-11T11:50:32.823Z</updated>
+    <updated>2016-05-11T16:04:53.148Z</updated>
     
     <content type="html">&lt;p&gt;编译php并与nginx整合,安装ecshop,gzip+nginx压缩提升网速,nginx设置缓存设置&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -350,7 +350,7 @@ gzip_vary on|off           # 是否传输gzip压缩标志
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-3/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-3/</id>
     <published>2016-03-14T10:17:14.000Z</published>
-    <updated>2016-04-27T16:46:28.344Z</updated>
+    <updated>2016-05-11T16:05:18.471Z</updated>
     
     <content type="html">&lt;p&gt;Location，rewrite 重写&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -496,7 +496,7 @@ goods-([\d]+)\.html ---&amp;gt; goods.php?goods_id =$1
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-2/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-2/</id>
     <published>2016-03-14T09:17:14.000Z</published>
-    <updated>2016-04-27T16:43:16.574Z</updated>
+    <updated>2016-05-11T16:09:31.937Z</updated>
     
     <content type="html">&lt;p&gt;nginx 信号量，nginx假单配置，&lt;/p&gt;
 &lt;p&gt;nginx日志管理，按时间转存日志&lt;/p&gt;
@@ -641,7 +641,7 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
     <link href="http://yoursite.com/2016/03/14/nginx-staudy-1/"/>
     <id>http://yoursite.com/2016/03/14/nginx-staudy-1/</id>
     <published>2016-03-14T06:17:14.000Z</published>
-    <updated>2016-04-27T16:55:53.025Z</updated>
+    <updated>2016-05-11T16:06:44.931Z</updated>
     
     <content type="html">&lt;p&gt;linux下nginx安装编译…&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;1, 地址：www.nginx.org        (尽量选择稳定版本)&lt;/p&gt;
 &lt;p&gt;2, 复制安装地址&lt;/p&gt;

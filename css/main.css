@@ -1225,7 +1225,7 @@ pre .javascript .function {
 }
 .posts-expand .post-title {
   font-size: 26px;
-  text-align: left;
+  text-align: center;
   word-break: break-word;
 }
 @media (max-width: 767px) {
@@ -1544,7 +1544,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e52925;
+  background: #c8fcff;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2256,7 +2256,7 @@ hr {
 @media (max-width: 767px) {
   .posts-expand .post-title,
   .posts-expand .post-meta {
-    text-align: left;
+    text-align: center;
   }
 }
 .posts-expand .post-eof {
@@ -2269,12 +2269,12 @@ hr {
   margin-top: 0;
 }
 .posts-expand .post-meta {
-  text-align: left;
+  text-align: center;
   margin-top: 5px;
   margin-bottom: 20px;
 }
 .posts-expand .post-title {
-  text-align: left;
+  text-align: center;
   position: relative;
   font-size: 26px;
   font-weight: 400;
