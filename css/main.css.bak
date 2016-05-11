@@ -1225,7 +1225,7 @@ pre .javascript .function {
 }
 .posts-expand .post-title {
   font-size: 26px;
-  text-align: center;
+  text-align: left;
   word-break: break-word;
 }
 @media (max-width: 767px) {
@@ -1375,7 +1375,6 @@ pre .javascript .function {
 }
 .post-gallery-row {
   display: table-row;
-  text-align: center;
 }
 .post-gallery .post-gallery-img {
   display: table-cell;
@@ -1545,7 +1544,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fff;
+  background: #e52925;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2270,12 +2269,12 @@ hr {
   margin-top: 0;
 }
 .posts-expand .post-meta {
-  text-align: center;
+  text-align: left;
   margin-top: 5px;
   margin-bottom: 20px;
 }
 .posts-expand .post-title {
-  text-align: center;
+  text-align: left;
   position: relative;
   font-size: 26px;
   font-weight: 400;
