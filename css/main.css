@@ -1187,9 +1187,6 @@ pre .javascript .function {
   transition-delay: 0s;
   transition-property: background;
 }
-.post-header h1{
-	text-align: left;
-}
 .posts-collapse .post-header:hover {
   border-bottom-color: #666;
 }
@@ -2364,7 +2361,7 @@ hr {
 }
 .page-post-detail .post-title,
 .page-post-detail .post-meta {
-  text-align: center;
+  text-align: left;
 }
 .page-post-detail .post-title:before {
   display: none;
