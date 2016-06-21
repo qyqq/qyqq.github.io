@@ -2256,7 +2256,7 @@ hr {
 @media (max-width: 767px) {
   .posts-expand .post-title,
   .posts-expand .post-meta {
-    text-align: center;
+    text-align: left;
   }
 }
 .posts-expand .post-eof {
@@ -2274,7 +2274,7 @@ hr {
   margin-bottom: 20px;
 }
 .posts-expand .post-title {
-  text-align: center;
+  text-align: left;
   position: relative;
   font-size: 26px;
   font-weight: 400;
@@ -2361,7 +2361,7 @@ hr {
 }
 .page-post-detail .post-title,
 .page-post-detail .post-meta {
-  text-align: center;
+  text-align: left;
 }
 .page-post-detail .post-title:before {
   display: none;
