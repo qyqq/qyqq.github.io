@@ -1187,6 +1187,9 @@ pre .javascript .function {
   transition-delay: 0s;
   transition-property: background;
 }
+.post-header {
+	text-align: left;
+}
 .posts-collapse .post-header:hover {
   border-bottom-color: #666;
 }
@@ -2256,7 +2259,7 @@ hr {
 @media (max-width: 767px) {
   .posts-expand .post-title,
   .posts-expand .post-meta {
-    text-align: center;
+    text-align: left;
   }
 }
 .posts-expand .post-eof {
