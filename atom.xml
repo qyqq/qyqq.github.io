@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-06-21T02:22:28.028Z</updated>
+  <updated>2016-06-21T03:06:13.437Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/06/20/vim-study/"/>
     <id>http://yoursite.com/2016/06/20/vim-study/</id>
     <published>2016-06-20T02:53:51.000Z</published>
-    <updated>2016-06-21T02:22:28.028Z</updated>
+    <updated>2016-06-21T03:06:13.437Z</updated>
     
     <content type="html">&lt;p&gt;  学习 vim 并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。当你走完这篇文章，你会成为一个vim的 superstar，同时要明白vim是需要不断的来练习的&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;第一级-–-存活&quot;&gt;&lt;a href=&quot;#第一级-–-存活&quot; class=&quot;headerlink&quot; title=&quot;第一级 – 存活&quot;&gt;&lt;/a&gt;第一级 – 存活&lt;/h3&gt;&lt;p&gt;当你安装好一个编辑器后，你一定会想在其中输入点什么东西，然后看看这个编辑器是什么样子。但vim不是这样的，请按照下面的命令操作：&lt;/p&gt;
@@ -136,7 +136,7 @@ t, → 到逗号前的第一个字符。逗号可以变成其它字符。
 3fa → 在当前行查找第三个出现的a。
 F 和 T → 和 f 和 t 一样，只不过是相反方向。
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;还有一个很有用的命令是 dt” → 删除所有的内容，直到遇到双引号—— “。&lt;/p&gt;
-&lt;h4 id=&quot;区域选择-a-或-i&quot;&gt;&lt;a href=&quot;#区域选择-a-或-i&quot; class=&quot;headerlink&quot; title=&quot;区域选择 a 或 i&quot;&gt;&lt;/a&gt;区域选择 &lt;action&gt;a&lt;object&gt; 或 &lt;action&gt;i&lt;object&gt;&lt;/object&gt;&lt;/action&gt;&lt;/object&gt;&lt;/action&gt;&lt;/h4&gt;&lt;p&gt;在visual 模式下，这些命令很强大，其命令格式为&lt;/p&gt;
+&lt;h4 id=&quot;区域选择-lt-action-gt-a-lt-object-gt-或-lt-action-gt-i-lt-object-gt&quot;&gt;&lt;a href=&quot;#区域选择-lt-action-gt-a-lt-object-gt-或-lt-action-gt-i-lt-object-gt&quot; class=&quot;headerlink&quot; title=&quot;区域选择 &amp;lt; action&amp;gt;a&amp;lt; object&amp;gt; 或 &amp;lt; action&amp;gt;i&amp;lt; object&amp;gt;&quot;&gt;&lt;/a&gt;区域选择 &amp;lt; action&amp;gt;a&amp;lt; object&amp;gt; 或 &amp;lt; action&amp;gt;i&amp;lt; object&amp;gt;&lt;/h4&gt;&lt;p&gt;在visual 模式下，这些命令很强大，其命令格式为&lt;/p&gt;
 &lt;p&gt;action a object 和 action i object&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;action可以是任何的命令，如 d (删除), y (拷贝), v (可以视模式选择)。
 object 可能是： w 一个单词， W 一个以空格为分隔的单词， s 一个句字， p 一个段落。也可以是一个特别的字符：&amp;quot;、 &amp;apos;、 )、 }、 ]。
