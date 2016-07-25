@@ -1544,7 +1544,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #50b837;
+  background: #3b99a7;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2256,7 +2256,7 @@ hr {
 @media (max-width: 767px) {
   .posts-expand .post-title,
   .posts-expand .post-meta {
-    text-align: center;
+    text-align: left;
   }
 }
 .posts-expand .post-eof {
@@ -2269,12 +2269,12 @@ hr {
   margin-top: 0;
 }
 .posts-expand .post-meta {
-  text-align: center;
+  text-align: left;
   margin-top: 5px;
   margin-bottom: 20px;
 }
 .posts-expand .post-title {
-  text-align: center;
+  text-align: left;
   position: relative;
   font-size: 26px;
   font-weight: 400;
