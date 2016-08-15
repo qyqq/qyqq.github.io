@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-06-21T03:06:13.437Z</updated>
+  <updated>2016-08-15T09:36:44.540Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,158 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql主从</title>
+    <link href="http://yoursite.com/2016/08/15/mysql-master-slave-study/"/>
+    <id>http://yoursite.com/2016/08/15/mysql-master-slave-study/</id>
+    <published>2016-08-15T02:53:51.000Z</published>
+    <updated>2016-08-15T09:36:44.540Z</updated>
+    
+    <content type="html">&lt;p&gt;  简单的实现了主从复制、读写分离、负载均衡&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;配置主机&quot;&gt;&lt;a href=&quot;#配置主机&quot; class=&quot;headerlink&quot; title=&quot;配置主机&quot;&gt;&lt;/a&gt;配置主机&lt;/h2&gt;&lt;h6 id=&quot;编辑配置文件&quot;&gt;&lt;a href=&quot;#编辑配置文件&quot; class=&quot;headerlink&quot; title=&quot;编辑配置文件&quot;&gt;&lt;/a&gt;编辑配置文件&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;/etc/my.cnf
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;开启二进制日志&quot;&gt;&lt;a href=&quot;#开启二进制日志&quot; class=&quot;headerlink&quot; title=&quot;开启二进制日志&quot;&gt;&lt;/a&gt;开启二进制日志&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;log-bin=master-bin
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;指定日志格式&quot;&gt;&lt;a href=&quot;#指定日志格式&quot; class=&quot;headerlink&quot; title=&quot;指定日志格式&quot;&gt;&lt;/a&gt;指定日志格式&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;binlog-format=mixed
+server-id=30
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;日志格式mixed表示自动&lt;/p&gt;
+&lt;p&gt;row表示行改变即产生日志&lt;/p&gt;
+&lt;p&gt;statement表示有语句即产生日志&lt;/p&gt;
+&lt;p&gt;注意：配置应写在mysqld下，并且检查是否有重复的server-id&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;配置从机&quot;&gt;&lt;a href=&quot;#配置从机&quot; class=&quot;headerlink&quot; title=&quot;配置从机&quot;&gt;&lt;/a&gt;配置从机&lt;/h2&gt;&lt;h6 id=&quot;编辑配置文件-1&quot;&gt;&lt;a href=&quot;#编辑配置文件-1&quot; class=&quot;headerlink&quot; title=&quot;编辑配置文件&quot;&gt;&lt;/a&gt;编辑配置文件&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;/etc/my.cnf
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;中继日志&quot;&gt;&lt;a href=&quot;#中继日志&quot; class=&quot;headerlink&quot; title=&quot;中继日志&quot;&gt;&lt;/a&gt;中继日志&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;relay-log=slave-bin
+server-id=31
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;然后分别重启mysql服务：&quot;&gt;&lt;a href=&quot;#然后分别重启mysql服务：&quot; class=&quot;headerlink&quot; title=&quot;然后分别重启mysql服务：&quot;&gt;&lt;/a&gt;然后分别重启mysql服务：&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;service mysqld restart
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;设置账号&quot;&gt;&lt;a href=&quot;#设置账号&quot; class=&quot;headerlink&quot; title=&quot;设置账号&quot;&gt;&lt;/a&gt;设置账号&lt;/h2&gt;&lt;h6 id=&quot;在主机上配置相应的复制账号&quot;&gt;&lt;a href=&quot;#在主机上配置相应的复制账号&quot; class=&quot;headerlink&quot; title=&quot;在主机上配置相应的复制账号&quot;&gt;&lt;/a&gt;在主机上配置相应的复制账号&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;GRANT REPLICATION SLAVE,
+
+REPLICATION CLIENT ON *.*
+
+TO &amp;apos;wc&amp;apos;@&amp;apos;192.168.33.%&amp;apos;
+
+IDENTIFIED BY &amp;apos;wc&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;在从服务器指定要复制的主服务器&quot;&gt;&lt;a href=&quot;#在从服务器指定要复制的主服务器&quot; class=&quot;headerlink&quot; title=&quot;在从服务器指定要复制的主服务器&quot;&gt;&lt;/a&gt;在从服务器指定要复制的主服务器&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;注意： 要在主服务器下执行 show master status&lt;/p&gt;
+&lt;p&gt;配置信息:master_log_pos、master_log_file&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;change master to master_host=&amp;apos;192.168.33.11&amp;apos;, master_user=&amp;apos;wc&amp;apos;,master_password=&amp;apos;wc&amp;apos;,master_log_file=&amp;apos;master-bin.000001&amp;apos;,master_log_pos=282;
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;开启服务&quot;&gt;&lt;a href=&quot;#开启服务&quot; class=&quot;headerlink&quot; title=&quot;开启服务&quot;&gt;&lt;/a&gt;开启服务&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;start slave;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;注意：若开始配置没成功，再次进行配置的时候要重置服务reset slave&lt;/p&gt;
+&lt;p&gt;可以一主多从,不可一从多主&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;主从测试&quot;&gt;&lt;a href=&quot;#主从测试&quot; class=&quot;headerlink&quot; title=&quot;主从测试&quot;&gt;&lt;/a&gt;主从测试&lt;/h2&gt;&lt;h5 id=&quot;主服务器执行&quot;&gt;&lt;a href=&quot;#主服务器执行&quot; class=&quot;headerlink&quot; title=&quot;主服务器执行&quot;&gt;&lt;/a&gt;主服务器执行&lt;/h5&gt;&lt;h6 id=&quot;创建库&quot;&gt;&lt;a href=&quot;#创建库&quot; class=&quot;headerlink&quot; title=&quot;创建库&quot;&gt;&lt;/a&gt;创建库&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;create database test1;
+
+use test1;
+
+create table test(id int(3),name varchar(10));
+
+insert into test values(&amp;apos;aa&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;从数据库查看&quot;&gt;&lt;a href=&quot;#从数据库查看&quot; class=&quot;headerlink&quot; title=&quot;从数据库查看&quot;&gt;&lt;/a&gt;从数据库查看&lt;/h5&gt;&lt;h6 id=&quot;查看主库相应操作是否实现&quot;&gt;&lt;a href=&quot;#查看主库相应操作是否实现&quot; class=&quot;headerlink&quot; title=&quot;查看主库相应操作是否实现&quot;&gt;&lt;/a&gt;查看主库相应操作是否实现&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| shop               |
+| test               |
+| test1              |
++--------------------+
+5 rows in set (0.04 sec)
+
+mysql&amp;gt; show tables;
++-----------------+
+| Tables_in_test1 |
++-----------------+
+| test            |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select * from test;
++------+------+
+| id   | name |
++------+------+
+|    1 | aa   |
++------+------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;从数据库执行&quot;&gt;&lt;a href=&quot;#从数据库执行&quot; class=&quot;headerlink&quot; title=&quot;从数据库执行&quot;&gt;&lt;/a&gt;从数据库执行&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;insert into test values(2,&amp;apos;bb&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;主服务器查看主服务器中没有实现&quot;&gt;&lt;a href=&quot;#主服务器查看主服务器中没有实现&quot; class=&quot;headerlink&quot; title=&quot;主服务器查看主服务器中没有实现&quot;&gt;&lt;/a&gt;主服务器查看主服务器中没有实现&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;mysql&amp;gt; select * from test;
++------+------+
+| id   | name |
++------+------+
+|    1 | aa   |
++------+------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;互为主从&quot;&gt;&lt;a href=&quot;#互为主从&quot; class=&quot;headerlink&quot; title=&quot;互为主从&quot;&gt;&lt;/a&gt;互为主从&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt; 在从服务器上设置主服务器设置，在主服务器上设置从服务器设置，即一台服务器既能为主也能为从&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;原从服务器执行&quot;&gt;&lt;a href=&quot;#原从服务器执行&quot; class=&quot;headerlink&quot; title=&quot;原从服务器执行&quot;&gt;&lt;/a&gt;原从服务器执行&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;insert into test values(3,&amp;apos;cc&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;原主服务器查看&quot;&gt;&lt;a href=&quot;#原主服务器查看&quot; class=&quot;headerlink&quot; title=&quot;原主服务器查看&quot;&gt;&lt;/a&gt;原主服务器查看&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;mysql&amp;gt; select * from test;
++------+------+
+| id   | name |
++------+------+
+|    1 | aa   |
+|    3 | cc   |
++------+------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;id冲突问题&quot;&gt;&lt;a href=&quot;#id冲突问题&quot; class=&quot;headerlink&quot; title=&quot;id冲突问题&quot;&gt;&lt;/a&gt;id冲突问题&lt;/h3&gt;&lt;p&gt;互为主从的时候id自增长就出现了可能重复的问题，解决办法可以以设置一台服务器为全单数，另一台为全双数&lt;/p&gt;
+&lt;h5 id=&quot;分别从本次与全局进行修改-一台服务器：&quot;&gt;&lt;a href=&quot;#分别从本次与全局进行修改-一台服务器：&quot; class=&quot;headerlink&quot; title=&quot;分别从本次与全局进行修改 一台服务器：&quot;&gt;&lt;/a&gt;分别从本次与全局进行修改 一台服务器：&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;set global auto_increment_increment = 2;
+set global auto_increment_offset = 1;
+set session auto_increment_increment = 2;
+set session auto_increment_offset = 1;
+&lt;/code&gt;&lt;/pre&gt;&lt;h6 id=&quot;另一台服务器：&quot;&gt;&lt;a href=&quot;#另一台服务器：&quot; class=&quot;headerlink&quot; title=&quot;另一台服务器：&quot;&gt;&lt;/a&gt;另一台服务器：&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;set global auto_increment_increment = 2;
+set global auto_increment_offset = 2;
+set session auto_increment_increment=2;
+set session auto_increment_offset = 2;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;注意：auto-increment-increment 和　auto-increment-offset　要写到配置文件中，防止下次重启后失效&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;错误1：&quot;&gt;&lt;a href=&quot;#错误1：&quot; class=&quot;headerlink&quot; title=&quot;错误1：&quot;&gt;&lt;/a&gt;错误1：&lt;/h3&gt;&lt;p&gt;在slave服务器show slave status:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Fatal error: The slave I/O thread stops because master and slave have equal MySQL server UUIDs; these UUIDs must be different for replication to work.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;首先检查：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show variables like ‘server_id&amp;apos;;
++—————+——-+
+| Variable_name | Value |
++—————+——-+
+| server_id | 3 |
++—————+——-+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;主从并不一样，排除该问题。&lt;/p&gt;
+&lt;p&gt;auto.cnf里面记录了数据库的uuid，每个库的uuid应该是不一样的。&lt;/p&gt;
+&lt;p&gt;查找 find / -name ‘auto.cnf’ ，发现 auto.cnf 所在目录/var/lib/mysql/&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[auto]
+server-uuid=6dcee5be-8cdb-11e2-9408-90e2ba2e2ea6
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;解决办法，按照这个16进制格式，随便改下，重启mysql即可&lt;/p&gt;
+&lt;h3 id=&quot;利用mysql-proxy实现负载均衡&quot;&gt;&lt;a href=&quot;#利用mysql-proxy实现负载均衡&quot; class=&quot;headerlink&quot; title=&quot;利用mysql_proxy实现负载均衡&quot;&gt;&lt;/a&gt;利用mysql_proxy实现负载均衡&lt;/h3&gt;&lt;h5 id=&quot;下载安装mysql-proxy&quot;&gt;&lt;a href=&quot;#下载安装mysql-proxy&quot; class=&quot;headerlink&quot; title=&quot;下载安装mysql_proxy&quot;&gt;&lt;/a&gt;下载安装mysql_proxy&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;wget http://ftp.ntu.edu.tw/pub/MySQL/Downloads/MySQL-Proxy/mysql-proxy-0.8.3-linux-glibc2.3-x86-64bit.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;查看帮助&quot;&gt;&lt;a href=&quot;#查看帮助&quot; class=&quot;headerlink&quot; title=&quot;查看帮助&quot;&gt;&lt;/a&gt;查看帮助&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;./bin/mysql-proxy --help-all
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;注意两点:&lt;/p&gt;
+&lt;p&gt;1.proxy在哪个端口运行&lt;/p&gt;
+&lt;p&gt;2.代理的是那几台服务器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&quot;指定代理代理的服务器&quot;&gt;&lt;a href=&quot;#指定代理代理的服务器&quot; class=&quot;headerlink&quot; title=&quot;指定代理代理的服务器&quot;&gt;&lt;/a&gt;指定代理代理的服务器&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;./bin/mysql-proxy \
+--proxy-backend-addresses=192.168.31.165:3306 \
+--proxy-backend-addresses=192.168.31.145:3306
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;读写分离操作&quot;&gt;&lt;a href=&quot;#读写分离操作&quot; class=&quot;headerlink&quot; title=&quot;读写分离操作&quot;&gt;&lt;/a&gt;读写分离操作&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;./bin/mysql-proxy  \
+--proxy-backend-addresses=192.168.31.165:3306 \ #配置写服务器
+--proxy-read-only-backend-addresses=192.168.31.145:3306 \ #配置读服务器
+--proxy-lua-script=mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua #利用这个脚本
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;简写&quot;&gt;&lt;a href=&quot;#简写&quot; class=&quot;headerlink&quot; title=&quot;简写&quot;&gt;&lt;/a&gt;简写&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;./bin/mysql-proxy -b 192.168.31.165:3306 \
+-r 192.168.31.145:3306 \
+-s /root/mysql-proxy-0.8.3-linux-glibc2.3-x86-64bit/share/doc/mysql-proxy/rw-splitting
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  简单的实现了主从复制、读写分离、负载均衡&lt;br&gt;
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
+    
+    
+      <category term="myql" scheme="http://yoursite.com/tags/myql/"/>
+    
+  </entry>
   
   <entry>
     <title>vim编辑器常用命令</title>

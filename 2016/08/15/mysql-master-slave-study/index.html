@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux nignx," />
+  <meta name="keywords" content="myql," />
 
 
 
@@ -57,18 +57,16 @@
 
 
 
-<meta name="description" content="Location，rewrite 重写">
+<meta name="description" content="简单的实现了主从复制、读写分离、负载均衡">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx简单配置管理(3)">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/nginx-staudy-3/index.html">
+<meta property="og:title" content="mysql主从">
+<meta property="og:url" content="http://yoursite.com/2016/08/15/mysql-master-slave-study/index.html">
 <meta property="og:site_name" content="WANGCAN'S BLOG">
-<meta property="og:description" content="Location，rewrite 重写">
-<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/3.png">
-<meta property="og:updated_time" content="2016-05-11T16:09:36.017Z">
+<meta property="og:description" content="简单的实现了主从复制、读写分离、负载均衡">
+<meta property="og:updated_time" content="2016-08-15T09:36:44.540Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx简单配置管理(3)">
-<meta name="twitter:description" content="Location，rewrite 重写">
-<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/3.png">
+<meta name="twitter:title" content="mysql主从">
+<meta name="twitter:description" content="简单的实现了主从复制、读写分离、负载均衡">
 
 
 
@@ -86,7 +84,7 @@
   };
 </script>
 
-  <title> nginx简单配置管理(3) | WANGCAN'S BLOG </title>
+  <title> mysql主从 | WANGCAN'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +248,7 @@
             
             
               
-                nginx简单配置管理(3)
+                mysql主从
               
             
           </h1>
@@ -262,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T18:17:14+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-08-15T10:53:51+08:00" content="2016-08-15">
+              2016-08-15
             </time>
           </span>
 
@@ -276,8 +274,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -292,8 +290,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/nginx-staudy-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/nginx-staudy-3/" itemprop="commentsCount"></span>
+                <a href="/2016/08/15/mysql-master-slave-study/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/15/mysql-master-slave-study/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -315,131 +313,137 @@
       
 
       
-        <p>Location，rewrite 重写</p>
-<a id="more"></a>
-<h3 id="一、Location"><a href="#一、Location" class="headerlink" title="一、Location"></a>一、Location</h3><p>1, 作用</p>
-<p>根据Uri来进行不同的定位，location可以把网站的不同部分,定位到不同的处理方式上</p>
-<p>2, 语法</p>
-<pre><code>location [=|~|~*|^~] patt { }【参数可以省略】
+        <p>  简单的实现了主从复制、读写分离、负载均衡<br><a id="more"></a></p>
+<h2 id="配置主机"><a href="#配置主机" class="headerlink" title="配置主机"></a>配置主机</h2><h6 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h6><pre><code>/etc/my.cnf
+</code></pre><h6 id="开启二进制日志"><a href="#开启二进制日志" class="headerlink" title="开启二进制日志"></a>开启二进制日志</h6><pre><code>log-bin=master-bin
+</code></pre><h6 id="指定日志格式"><a href="#指定日志格式" class="headerlink" title="指定日志格式"></a>指定日志格式</h6><pre><code>binlog-format=mixed
+server-id=30
 </code></pre><blockquote>
-<p>三种参数类型：</p>
+<p>日志格式mixed表示自动</p>
+<p>row表示行改变即产生日志</p>
+<p>statement表示有语句即产生日志</p>
+<p>注意：配置应写在mysqld下，并且检查是否有重复的server-id</p>
 </blockquote>
-<pre><code>location = patt {} 【精准匹配】
+<h2 id="配置从机"><a href="#配置从机" class="headerlink" title="配置从机"></a>配置从机</h2><h6 id="编辑配置文件-1"><a href="#编辑配置文件-1" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h6><pre><code>/etc/my.cnf
+</code></pre><h6 id="中继日志"><a href="#中继日志" class="headerlink" title="中继日志"></a>中继日志</h6><pre><code>relay-log=slave-bin
+server-id=31
+</code></pre><h6 id="然后分别重启mysql服务："><a href="#然后分别重启mysql服务：" class="headerlink" title="然后分别重启mysql服务："></a>然后分别重启mysql服务：</h6><pre><code>service mysqld restart
+</code></pre><h2 id="设置账号"><a href="#设置账号" class="headerlink" title="设置账号"></a>设置账号</h2><h6 id="在主机上配置相应的复制账号"><a href="#在主机上配置相应的复制账号" class="headerlink" title="在主机上配置相应的复制账号"></a>在主机上配置相应的复制账号</h6><pre><code>GRANT REPLICATION SLAVE,
 
-location patt{} 【一般匹配】
+REPLICATION CLIENT ON *.*
 
-location ~ patt{} 【正则匹配】
+TO &apos;wc&apos;@&apos;192.168.33.%&apos;
+
+IDENTIFIED BY &apos;wc&apos;;
+</code></pre><h6 id="在从服务器指定要复制的主服务器"><a href="#在从服务器指定要复制的主服务器" class="headerlink" title="在从服务器指定要复制的主服务器"></a>在从服务器指定要复制的主服务器</h6><blockquote>
+<p>注意： 要在主服务器下执行 show master status</p>
+<p>配置信息:master_log_pos、master_log_file</p>
+</blockquote>
+<pre><code>change master to master_host=&apos;192.168.33.11&apos;, master_user=&apos;wc&apos;,master_password=&apos;wc&apos;,master_log_file=&apos;master-bin.000001&apos;,master_log_pos=282;
+</code></pre><h6 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h6><pre><code>start slave;
 </code></pre><blockquote>
-<p>首先执行精准匹配，如果都匹配不到最终会定位到默认目录</p>
+<p>注意：若开始配置没成功，再次进行配置的时候要重置服务reset slave</p>
+<p>可以一主多从,不可一从多主</p>
 </blockquote>
-<pre><code>/usr/local/nginx/html/
+<h2 id="主从测试"><a href="#主从测试" class="headerlink" title="主从测试"></a>主从测试</h2><h5 id="主服务器执行"><a href="#主服务器执行" class="headerlink" title="主服务器执行"></a>主服务器执行</h5><h6 id="创建库"><a href="#创建库" class="headerlink" title="创建库"></a>创建库</h6><pre><code>create database test1;
+
+use test1;
+
+create table test(id int(3),name varchar(10));
+
+insert into test values(&apos;aa&apos;);
+</code></pre><h5 id="从数据库查看"><a href="#从数据库查看" class="headerlink" title="从数据库查看"></a>从数据库查看</h5><h6 id="查看主库相应操作是否实现"><a href="#查看主库相应操作是否实现" class="headerlink" title="查看主库相应操作是否实现"></a>查看主库相应操作是否实现</h6><pre><code>mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| shop               |
+| test               |
+| test1              |
++--------------------+
+5 rows in set (0.04 sec)
+
+mysql&gt; show tables;
++-----------------+
+| Tables_in_test1 |
++-----------------+
+| test            |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql&gt; select * from test;
++------+------+
+| id   | name |
++------+------+
+|    1 | aa   |
++------+------+
+1 row in set (0.00 sec)
+</code></pre><h5 id="从数据库执行"><a href="#从数据库执行" class="headerlink" title="从数据库执行"></a>从数据库执行</h5><pre><code>insert into test values(2,&apos;bb&apos;);
+</code></pre><h5 id="主服务器查看主服务器中没有实现"><a href="#主服务器查看主服务器中没有实现" class="headerlink" title="主服务器查看主服务器中没有实现"></a>主服务器查看主服务器中没有实现</h5><pre><code>mysql&gt; select * from test;
++------+------+
+| id   | name |
++------+------+
+|    1 | aa   |
++------+------+
+1 row in set (0.00 sec)
+</code></pre><h3 id="互为主从"><a href="#互为主从" class="headerlink" title="互为主从"></a>互为主从</h3><blockquote>
+<p> 在从服务器上设置主服务器设置，在主服务器上设置从服务器设置，即一台服务器既能为主也能为从</p>
+</blockquote>
+<h6 id="原从服务器执行"><a href="#原从服务器执行" class="headerlink" title="原从服务器执行"></a>原从服务器执行</h6><pre><code>insert into test values(3,&apos;cc&apos;);
+</code></pre><h6 id="原主服务器查看"><a href="#原主服务器查看" class="headerlink" title="原主服务器查看"></a>原主服务器查看</h6><pre><code>mysql&gt; select * from test;
++------+------+
+| id   | name |
++------+------+
+|    1 | aa   |
+|    3 | cc   |
++------+------+
+2 rows in set (0.00 sec)
+</code></pre><h3 id="id冲突问题"><a href="#id冲突问题" class="headerlink" title="id冲突问题"></a>id冲突问题</h3><p>互为主从的时候id自增长就出现了可能重复的问题，解决办法可以以设置一台服务器为全单数，另一台为全双数</p>
+<h5 id="分别从本次与全局进行修改-一台服务器："><a href="#分别从本次与全局进行修改-一台服务器：" class="headerlink" title="分别从本次与全局进行修改 一台服务器："></a>分别从本次与全局进行修改 一台服务器：</h5><pre><code>set global auto_increment_increment = 2;
+set global auto_increment_offset = 1;
+set session auto_increment_increment = 2;
+set session auto_increment_offset = 1;
+</code></pre><h6 id="另一台服务器："><a href="#另一台服务器：" class="headerlink" title="另一台服务器："></a>另一台服务器：</h6><pre><code>set global auto_increment_increment = 2;
+set global auto_increment_offset = 2;
+set session auto_increment_increment=2;
+set session auto_increment_offset = 2;
 </code></pre><blockquote>
-<p>有正则匹配参与的情况，如果之前有匹配到的，正则也能匹配到的就会覆盖前面的</p>
+<p>注意：auto-increment-increment 和　auto-increment-offset　要写到配置文件中，防止下次重启后失效</p>
 </blockquote>
-<pre><code>location / {
-             root /usr/local/nginx/html;
-             index index.html index.htm;
-         }
-
-           location ~ image {
-            root /var/www/image;
-            index index.html;
-        }
+<h3 id="错误1："><a href="#错误1：" class="headerlink" title="错误1："></a>错误1：</h3><p>在slave服务器show slave status:</p>
+<pre><code>Fatal error: The slave I/O thread stops because master and slave have equal MySQL server UUIDs; these UUIDs must be different for replication to work.
+</code></pre><p>首先检查：</p>
+<pre><code>mysql&gt; show variables like ‘server_id&apos;;
++—————+——-+
+| Variable_name | Value |
++—————+——-+
+| server_id | 3 |
++—————+——-+
+</code></pre><p>主从并不一样，排除该问题。</p>
+<p>auto.cnf里面记录了数据库的uuid，每个库的uuid应该是不一样的。</p>
+<p>查找 find / -name ‘auto.cnf’ ，发现 auto.cnf 所在目录/var/lib/mysql/</p>
+<pre><code>[auto]
+server-uuid=6dcee5be-8cdb-11e2-9408-90e2ba2e2ea6
+</code></pre><p>解决办法，按照这个16进制格式，随便改下，重启mysql即可</p>
+<h3 id="利用mysql-proxy实现负载均衡"><a href="#利用mysql-proxy实现负载均衡" class="headerlink" title="利用mysql_proxy实现负载均衡"></a>利用mysql_proxy实现负载均衡</h3><h5 id="下载安装mysql-proxy"><a href="#下载安装mysql-proxy" class="headerlink" title="下载安装mysql_proxy"></a>下载安装mysql_proxy</h5><pre><code>wget http://ftp.ntu.edu.tw/pub/MySQL/Downloads/MySQL-Proxy/mysql-proxy-0.8.3-linux-glibc2.3-x86-64bit.tar.gz
+</code></pre><h5 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h5><pre><code>./bin/mysql-proxy --help-all
 </code></pre><blockquote>
-<p>对于同样都能匹配的情况下会使用更详细的匹配条件</p>
+<p>注意两点:</p>
+<p>1.proxy在哪个端口运行</p>
+<p>2.代理的是那几台服务器</p>
 </blockquote>
-<pre><code>location / {
-              root /usr/local/nginx/html;
-              index index.html index.htm;
- }
-
- location /foo {
-             root /var/www/html;
-             index index.html;
- }
-</code></pre><blockquote>
-<p>匹配原则流程</p>
-</blockquote>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/3.png" alt=""></p>
-<h3 id="二、rewrite-重写"><a href="#二、rewrite-重写" class="headerlink" title="二、rewrite 重写"></a>二、rewrite 重写</h3><p>1，模块很多，通常碰到nginx新问题怎么解决？？？？</p>
-<pre><code>到官网去查文档（在哪儿写，语法）      http://nginx.org/en/docs/
-</code></pre><p>2，功能：域名跳转，域名镜像，防盗链，等。</p>
-<p>3，nginx有权引用的变量</p>
-<pre><code>ls conf/     fastcgi.conf
-</code></pre><p>4，常用命令语法</p>
-<pre><code>location / {
-   # 判断相等
-        if ($remote_addr = 192.168.33.1) {
-           return 403;
-         }
-
-   # 正则匹配
-          if ($http_user_agent ~ AppleWebK ) {
-              rewrite ^.*$ /ge.html;
-              break;
-          }
-
-   # -f -d -e来判断是否为文件,为目录,是否存在.
-          if (!-e $document_root$fastcgi_script_name) {
-               rewrite ^.*$  /404.html;
-               break;
-           }
-     root   html;
-     index  index.html index.htm;
-}
-</code></pre><blockquote>
-<p>set则用来设置变量，多条件判断时作标志用.</p>
-</blockquote>
-<pre><code>if ($http_user_agent ~* msie) {
-     set $isie 1;
- }
-
-if ($fastcgi_script_name = ie.html) {
-     set $isie 0;
-  }
-
-if ($isie 1) {
-     rewrite ^.*$ ie.html;
-}
-</code></pre><p>tips:</p>
-<blockquote>
-<p>其中正则匹配和判断目录文件是都存在的模块break不可以少：服务器内部的rewrite和302跳转不一样访问路径不会改变</p>
-<p>如访问：xx.com/dsafsd.html，重写之后地址不会变，会循环重定向</p>
-<p>302跳转就是网址重定向的一种，它区别于301跳转，301是网址永久重定向，</p>
-<p>302  则 是 网址的临时定向。302转向或者302重定向（302 redirect）指的<br>是当浏览器要求一个网页的时候，主机所返回的状态码。302状态码的意义是<br>暂时转向到另外一个网址。</p>
-</blockquote>
-<p>5，ecshop正则重写练习</p>
-<blockquote>
-<p>模式规则</p>
-</blockquote>
-<pre><code>Rewrite 正则表达式 定向后的位置 模式
-
-（根据url规则去匹配变的东西）（需要在ecshop后台设置url重写模式）
-</code></pre><p>对应关系:</p>
-<pre><code>Goods-3.html ----&gt;Goods.php?goods_id=3
-
-goods-([\d]+)\.html ---&gt; goods.php?goods_id =$1
-</code></pre><p>eg:</p>
-<pre><code>location /ecshop {
-    index index.php;
-
-    rewrite goods-([\d]+)\.html$ /ecshop/goods.php?id=$1;
-
-    rewrite article-([\d]+)\.html$ /ecshop/article.php?id=$1;
-
-    rewrite category-(\d+)-b(\d+)\.html /ecshop/category.php?id=$1&amp;brand=$2;
-
-    rewrite category-(\d+)-b(\d+)-min(\d+)-max(\d+)-attr([\d\.]+)\.html /ecshop/category.php?id=$1&amp;brand=$2&amp;price_min=$3&amp;price_max=$4&amp;filter_attr=$5;
-
-    rewrite category-(\d+)-b(\d+)-min(\d+)-max(\d+)-attr([\d+\.])-(\d+)-([^-]+)-([^-]+)\.html /ecshop/category.php?id=$1&amp;brand=$2&amp;price_min=$3&amp;price_max=$4&amp;filter_attr=$5&amp;page=$6&amp;sort=$7&amp;order=$8;
-}
-</code></pre><p> 遇到的问题：</p>
-<blockquote>
-<p>配置nginx.conf重写时报403,原因没有制定访问文件</p>
-<p>rewrite 项里不能用 {} 可能是会与location{}的括号冲突 ，可以用\d+代替，也可以用双引号引起来</p>
-<p>当用复杂重写时，使用贪婪匹配时要把复杂的放前面，先去匹配，否则不准确</p>
-</blockquote>
-
+<h5 id="指定代理代理的服务器"><a href="#指定代理代理的服务器" class="headerlink" title="指定代理代理的服务器"></a>指定代理代理的服务器</h5><pre><code>./bin/mysql-proxy \
+--proxy-backend-addresses=192.168.31.165:3306 \
+--proxy-backend-addresses=192.168.31.145:3306
+</code></pre><h5 id="读写分离操作"><a href="#读写分离操作" class="headerlink" title="读写分离操作"></a>读写分离操作</h5><pre><code>./bin/mysql-proxy  \
+--proxy-backend-addresses=192.168.31.165:3306 \ #配置写服务器
+--proxy-read-only-backend-addresses=192.168.31.145:3306 \ #配置读服务器
+--proxy-lua-script=mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua #利用这个脚本
+</code></pre><h5 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h5><pre><code>./bin/mysql-proxy -b 192.168.31.165:3306 \
+-r 192.168.31.145:3306 \
+-s /root/mysql-proxy-0.8.3-linux-glibc2.3-x86-64bit/share/doc/mysql-proxy/rw-splitting
+</code></pre>
       
     </div>
 
@@ -453,7 +457,7 @@ goods-([\d]+)\.html ---&gt; goods.php?goods_id =$1
       
         <div class="post-tags">
           
-            <a href="/tags/linux-nignx/" rel="tag">#linux nignx</a>
+            <a href="/tags/myql/" rel="tag">#myql</a>
           
         </div>
       
@@ -462,17 +466,13 @@ goods-([\d]+)\.html ---&gt; goods.php?goods_id =$1
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/14/nginx-staudy-2/" rel="next" title="nginx简单配置管理(2)">
-                <i class="fa fa-chevron-left"></i> nginx简单配置管理(2)
+              <a href="/2016/06/20/vim-study/" rel="next" title="vim编辑器常用命令">
+                <i class="fa fa-chevron-left"></i> vim编辑器常用命令
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/28/nginx-staudy-4/" rel="prev" title="nginx简单配置管理(4)">
-                nginx简单配置管理(4) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -498,8 +498,8 @@ goods-([\d]+)\.html ---&gt; goods.php?goods_id =$1
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/nginx-staudy-3/"
-           data-title="nginx简单配置管理(3)" data-url="http://yoursite.com/2016/03/14/nginx-staudy-3/">
+      <div class="ds-thread" data-thread-key="2016/08/15/mysql-master-slave-study/"
+           data-title="mysql主从" data-url="http://yoursite.com/2016/08/15/mysql-master-slave-study/">
       </div>
     
   </div>
@@ -638,7 +638,7 @@ goods-([\d]+)\.html ---&gt; goods.php?goods_id =$1
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Location"><span class="nav-number">1.</span> <span class="nav-text">一、Location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、rewrite-重写"><span class="nav-number">2.</span> <span class="nav-text">二、rewrite 重写</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置主机"><span class="nav-number">1.</span> <span class="nav-text">配置主机</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编辑配置文件"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">编辑配置文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#开启二进制日志"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">开启二进制日志</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#指定日志格式"><span class="nav-number">1.0.0.0.3.</span> <span class="nav-text">指定日志格式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置从机"><span class="nav-number">2.</span> <span class="nav-text">配置从机</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#编辑配置文件-1"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">编辑配置文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#中继日志"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">中继日志</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#然后分别重启mysql服务："><span class="nav-number">2.0.0.0.3.</span> <span class="nav-text">然后分别重启mysql服务：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置账号"><span class="nav-number">3.</span> <span class="nav-text">设置账号</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#在主机上配置相应的复制账号"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">在主机上配置相应的复制账号</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#在从服务器指定要复制的主服务器"><span class="nav-number">3.0.0.0.2.</span> <span class="nav-text">在从服务器指定要复制的主服务器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#开启服务"><span class="nav-number">3.0.0.0.3.</span> <span class="nav-text">开启服务</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从测试"><span class="nav-number">4.</span> <span class="nav-text">主从测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主服务器执行"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">主服务器执行</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建库"><span class="nav-number">4.0.0.1.1.</span> <span class="nav-text">创建库</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从数据库查看"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">从数据库查看</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#查看主库相应操作是否实现"><span class="nav-number">4.0.0.2.1.</span> <span class="nav-text">查看主库相应操作是否实现</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从数据库执行"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">从数据库执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#主服务器查看主服务器中没有实现"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">主服务器查看主服务器中没有实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互为主从"><span class="nav-number">4.1.</span> <span class="nav-text">互为主从</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#原从服务器执行"><span class="nav-number">4.1.0.0.1.</span> <span class="nav-text">原从服务器执行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#原主服务器查看"><span class="nav-number">4.1.0.0.2.</span> <span class="nav-text">原主服务器查看</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id冲突问题"><span class="nav-number">4.2.</span> <span class="nav-text">id冲突问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分别从本次与全局进行修改-一台服务器："><span class="nav-number">4.2.0.1.</span> <span class="nav-text">分别从本次与全局进行修改 一台服务器：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#另一台服务器："><span class="nav-number">4.2.0.1.1.</span> <span class="nav-text">另一台服务器：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误1："><span class="nav-number">4.3.</span> <span class="nav-text">错误1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用mysql-proxy实现负载均衡"><span class="nav-number">4.4.</span> <span class="nav-text">利用mysql_proxy实现负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下载安装mysql-proxy"><span class="nav-number">4.4.0.1.</span> <span class="nav-text">下载安装mysql_proxy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看帮助"><span class="nav-number">4.4.0.2.</span> <span class="nav-text">查看帮助</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定代理代理的服务器"><span class="nav-number">4.4.0.3.</span> <span class="nav-text">指定代理代理的服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#读写分离操作"><span class="nav-number">4.4.0.4.</span> <span class="nav-text">读写分离操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简写"><span class="nav-number">4.4.0.5.</span> <span class="nav-text">简写</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
