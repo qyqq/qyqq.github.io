@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-21T10:23:22.400Z</updated>
+  <updated>2016-11-21T10:26:28.476Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/11/21/php-fpm/"/>
     <id>http://yoursite.com/2016/11/21/php-fpm/</id>
     <published>2016-11-21T02:53:51.000Z</published>
-    <updated>2016-11-21T10:23:22.400Z</updated>
+    <updated>2016-11-21T10:26:28.476Z</updated>
     
     <content type="html">&lt;p&gt;  概念了解：CGI，FastCGI，PHP-CGI与PHP-FPM&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;CGI&quot;&gt;&lt;a href=&quot;#CGI&quot; class=&quot;headerlink&quot; title=&quot;CGI&quot;&gt;&lt;/a&gt;CGI&lt;/h2&gt;&lt;p&gt;CGI全称是“公共网关接口”(Common Gateway Interface)，HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。&lt;br&gt;CGI可以用任何一种语言编写，只要这种语言具有标准输入、输出和环境变量。如php,perl,tcl等。&lt;/p&gt;
