@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux nignx," />
+  <meta name="keywords" content="web," />
 
 
 
@@ -57,19 +57,16 @@
 
 
 
-<meta name="description" content="linux下nginx安装编译…">
+<meta name="description" content="概念了解：CGI，FastCGI，PHP-CGI与PHP-FPM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux下nginx安装编译(1)">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/nginx-staudy-1/index.html">
+<meta property="og:title" content="CGI，FastCGI，PHP-CGI与PHP-FPM，php运行模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/php-fpm/index.html">
 <meta property="og:site_name" content="WANGCAN'S BLOG">
-<meta property="og:description" content="linux下nginx安装编译…">
-<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160314152133.png">
-<meta property="og:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/2.png">
-<meta property="og:updated_time" content="2016-05-11T16:06:44.931Z">
+<meta property="og:description" content="概念了解：CGI，FastCGI，PHP-CGI与PHP-FPM">
+<meta property="og:updated_time" content="2016-11-21T10:23:22.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux下nginx安装编译(1)">
-<meta name="twitter:description" content="linux下nginx安装编译…">
-<meta name="twitter:image" content="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160314152133.png">
+<meta name="twitter:title" content="CGI，FastCGI，PHP-CGI与PHP-FPM，php运行模式">
+<meta name="twitter:description" content="概念了解：CGI，FastCGI，PHP-CGI与PHP-FPM">
 
 
 
@@ -87,7 +84,7 @@
   };
 </script>
 
-  <title> linux下nginx安装编译(1) | WANGCAN'S BLOG </title>
+  <title> CGI，FastCGI，PHP-CGI与PHP-FPM，php运行模式 | WANGCAN'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +248,7 @@
             
             
               
-                linux下nginx安装编译(1)
+                CGI，FastCGI，PHP-CGI与PHP-FPM，php运行模式
               
             
           </h1>
@@ -263,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T14:17:14+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-11-21T10:53:51+08:00" content="2016-11-21">
+              2016-11-21
             </time>
           </span>
 
@@ -277,8 +274,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -293,8 +290,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/nginx-staudy-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/nginx-staudy-1/" itemprop="commentsCount"></span>
+                <a href="/2016/11/21/php-fpm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/21/php-fpm/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,50 +313,51 @@
       
 
       
-        <p>linux下nginx安装编译…<br><a id="more"></a><br>1, 地址：www.nginx.org        (尽量选择稳定版本)</p>
-<p>2, 复制安装地址</p>
-<pre><code>wget http://nginx.org/download/nginx-1.9.12.tar.gz
-</code></pre><blockquote>
-<p>这时候需要注意权限问题（需要切换至root用户，或者在命令前加sudo）：</p>
-<p>su 切换root用户     passwd： 修改密码</p>
-</blockquote>
-<p>3, 进入到(/usr/local/src)解压安装包：</p>
-<pre><code>tar -zxvf nginx-1.8.0.tar.gz
-</code></pre><p>4, 安装：</p>
-<pre><code>./configure --prefix=/usr/local/nginx
-</code></pre><p>5，如果发现依赖没安装，再安装依赖</p>
-<pre><code>yum install pcre（正则表达式库）
-</code></pre><blockquote>
-<p>结果提示：</p>
-</blockquote>
-<pre><code>setting up Install Process
-Package pcre-7.8-6.e16.x86_64 already installed and latest verion
-Nothing to do
-</code></pre><blockquote>
-<p>查看有没有 pcre-devel, 执行安装命令</p>
-</blockquote>
-<pre><code>yum install pcre-devel
-</code></pre><p>6，编译安装</p>
-<pre><code>make &amp;&amp; make install
-</code></pre><p>7.安装完成后在 /usr/local/nginx下可以看到四个目录</p>
-<pre><code>conf（配置文件）
-html（放置网页文件）
-logs（日志文件）
-sbin（进程文件二进制程序）
-</code></pre><p>  8，启动：<br>常见问题，端口被占用</p>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160314152133.png" alt=""></p>
-<blockquote>
-<p>查看占用端口情况</p>
-</blockquote>
-<p><img src="http://7xrpkn.com1.z0.glb.clouddn.com/2.png" alt=""></p>
-<blockquote>
-<p>不能绑定 80端口，80 端口已经被占用</p>
-<p>有时是自己装了 apache，nginx等，还有更多情况是操作系统自带了 apache并作为服务启动</p>
-<p>解决办法：把占用80端口的软件或服务关闭即可</p>
-</blockquote>
-<p>查看进程占用程序</p>
-<pre><code>pkill -9 http
-</code></pre>
+        <p>  概念了解：CGI，FastCGI，PHP-CGI与PHP-FPM<br><a id="more"></a></p>
+<h2 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h2><p>CGI全称是“公共网关接口”(Common Gateway Interface)，HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。<br>CGI可以用任何一种语言编写，只要这种语言具有标准输入、输出和环境变量。如php,perl,tcl等。</p>
+<h2 id="FastCGI"><a href="#FastCGI" class="headerlink" title="FastCGI"></a>FastCGI</h2><p>FastCGI像是一个常驻(long-live)型的CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去fork一次（这是CGI最为人诟病的fork-and-execute 模式）。它还支持分布式的运算，即 FastCGI 程序可以在网站服务器以外的主机上执行并且接受来自其它网站服务器来的请求。</p>
+<p>FastCGI是语言无关的、可伸缩架构的CGI开放扩展，其主要行为是将CGI解释器进程保持在内存中并因此获得较高的性能。众所周知，CGI解释器的反复加载是CGI性能低下的主要原因，如果CGI解释器保持在内存中并接受FastCGI进程管理器调度，则可以提供良好的性能、伸缩性、Fail- Over特性等等。</p>
+<h5 id="FastCGI特点"><a href="#FastCGI特点" class="headerlink" title="FastCGI特点"></a>FastCGI特点</h5><ol>
+<li>FastCGI具有语言无关性</li>
+<li>FastCGI在进程中的应用程序，独立于核心web服务器运行，提供了一个比API更安全的环境。APIs把应用程序的代码与核心的web服务器链接在一起，这意味着在一个错误的API的应用程序可能会损坏其他应用程序或核心服务器。 恶意的API的应用程序代码甚至可以窃取另一个应用程序或核心服务器的密钥。</li>
+<li>当客户端请求到达web server时,fastcgi进程管理器选择并连接到一个CGI解析器，Web server将CGI环境变量和标准输入发送到fastcgi的php-cgi子进程中</li>
+<li>FastCGI子进程完成处理后将标准输出和错误信息从同一连接返回Web Server。当FastCGI子进程关闭连接时，请求便告处理完成。FastCGI子进程接着等待并处理来自FastCGI进程管理器(运行在Web Server中)的下一个连接。 在CGI模式中，php-cgi在此便退出了。</li>
+</ol>
+<p>上述情况中，你可以想象CGI通常有多慢。每一个Web请求PHP都必须重新解析php.ini、重新载入全部扩展并重初始化全部数据结构。使用FastCGI，所有这些都只在进程启动时发生一次。一个额外的好处是，持续数据库连接(Persistent database connection)可以工作。</p>
+<h5 id="FastCGI的不足"><a href="#FastCGI的不足" class="headerlink" title="FastCGI的不足"></a>FastCGI的不足</h5><p>因为是多进程，所以比CGI多线程消耗更多的服务器内存，PHP-CGI解释器每进程消耗7至25兆内存，将这个数字乘以50或100就是很大的内存数。</p>
+<p>Nginx 0.8.46+PHP 5.2.14(FastCGI)服务器在3万并发连接下，开启的10个Nginx进程消耗150M内存（15M<em>10=150M），开启的64个php-cgi进程消耗1280M内存（20M</em>64=1280M），加上系统自身消耗的内存，总共消耗不到2GB内存。如果服务器内存较小，完全可以只开启25个php-cgi进程，这样php-cgi消耗的总内存数才500M。<br>上面的数据摘自Nginx 0.8.x + PHP 5.2.13(FastCGI)搭建胜过Apache十倍的Web服务器(第6版)</p>
+<h2 id="PHP-CGI"><a href="#PHP-CGI" class="headerlink" title="PHP-CGI"></a>PHP-CGI</h2><p>PHP-CGI是PHP自带的FastCGI管理器。</p>
+<h6 id="PHP-CGI的不足："><a href="#PHP-CGI的不足：" class="headerlink" title="PHP-CGI的不足："></a>PHP-CGI的不足：</h6><ol>
+<li>php-cgi变更php.ini配置后需重启php-cgi才能让新的php-ini生效，不可以平滑重启。</li>
+<li>直接杀死php-cgi进程，php就不能运行了。(PHP-FPM和Spawn-FCGI就没有这个问题，守护进程会平滑从新生成新的子进程。）</li>
+</ol>
+<h2 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h2><p>PHP-FPM是一个PHP FastCGI管理器，是只用于PHP的，可以在 <a href="http://php-fpm.org/download下载得到。" target="_blank" rel="external">http://php-fpm.org/download下载得到。</a></p>
+<p>PHP-FPM其实是PHP源代码的一个补丁，旨在将FastCGI进程管理整合进PHP包中。必须将它patch到你的PHP源代码中，在编译安装PHP后才可以使用。</p>
+<p>现在我们可以在最新的PHP 5.3.2的源码树里下载得到直接整合了PHP-FPM的分支，据说下个版本会融合进PHP的主分支去。相对Spawn-FCGI，PHP-FPM在CPU和内存方面的控制都更胜一筹，而且前者很容易崩溃，必须用crontab进行监控，而PHP-FPM则没有这种烦恼。</p>
+<p>PHP5.3.3已经集成php-fpm了，不再是第三方的包了。PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置，比spawn-fcgi具有更多有点，所以被PHP官方收录了。在./configure的时候带 –enable-fpm参数即可开启PHP-FPM。</p>
+<h2 id="Spawn-FCGI"><a href="#Spawn-FCGI" class="headerlink" title="Spawn-FCGI"></a>Spawn-FCGI</h2><p>Spawn-FCGI是一个通用的FastCGI管理服务器，它是lighttpd中的一部份，很多人都用Lighttpd的Spawn-FCGI进行FastCGI模式下的管理工作，不过有不少缺点。而PHP-FPM的出现多少缓解了一些问题，但PHP-FPM有个缺点就是要重新编译，这对于一些已经运行的环境可能有不小的风险(refer)，在php 5.3.3中可以直接使用PHP-FPM了。</p>
+<p>Spawn-FCGI目前已经独成为一个项目，更加稳定一些，也给很多Web 站点的配置带来便利。已经有不少站点将它与nginx搭配来解决动态网页。</p>
+<p>最新的lighttpd也没有包含这一块了(<a href="http://www.lighttpd.net/search?q=Spawn-FCGI)，但可以在以前版本中找到它。在lighttpd-1.4.15版本中就包含了(http://www.lighttpd.net/download/lighttpd-1.4.15.tar.gz)，目前Spawn-FCGI的下载地址是http://redmine.lighttpd.net/projects/spawn-fcgi，最新版本是http://www.lighttpd.net/download/spawn-fcgi-1.6.3.tar.gz。" target="_blank" rel="external">http://www.lighttpd.net/search?q=Spawn-FCGI)，但可以在以前版本中找到它。在lighttpd-1.4.15版本中就包含了(http://www.lighttpd.net/download/lighttpd-1.4.15.tar.gz)，目前Spawn-FCGI的下载地址是http://redmine.lighttpd.net/projects/spawn-fcgi，最新版本是http://www.lighttpd.net/download/spawn-fcgi-1.6.3.tar.gz。</a></p>
+<p>注：最新的Spawn-FCGI可以到lighttpd.net网站搜索“Spawn-FCGI”找到它的最新版本发布地址。</p>
+<h2 id="PHP-FPM与spawn-CGI对比"><a href="#PHP-FPM与spawn-CGI对比" class="headerlink" title="PHP-FPM与spawn-CGI对比"></a>PHP-FPM与spawn-CGI对比</h2><p>PHP-FPM的使用非常方便，配置都是在PHP-FPM.ini的文件内，而启动、重启都可以从php/sbin/PHP-FPM中进行。更方便的是修改php.ini后可以直接使用PHP-FPM reload进行加载，无需杀掉进程就可以完成php.ini的修改加载</p>
+<p>结果显示使用PHP-FPM可以使php有不小的性能提升。PHP-FPM控制的进程cpu回收的速度比较慢,内存分配的很均匀。</p>
+<p>Spawn-FCGI控制的进程CPU下降的很快，而内存分配的比较不均匀。有很多进程似乎未分配到，而另外一些却占用很高。可能是由于进程任务分配的不均匀导致的。而这也导致了总体响应速度的下降。而PHP-FPM合理的分配，导致总体响应的提到以及任务的平均。</p>
+<h2 id="nginx处理一个php请求"><a href="#nginx处理一个php请求" class="headerlink" title="nginx处理一个php请求"></a>nginx处理一个php请求</h2><ol>
+<li>nginx服务器启动时自动载入fastcgi进程管理器</li>
+<li>Fastcgi进程管理器(php-fpm)自身初始化,并且启动多个cgi解释进程(php-cgi)并等待来自nginx的连接</li>
+<li>当nginx服务器收到需要解析php的时，将请求转发到fastcgi接口(socket)，fastcgi进程管理器收到请求后选择并连接一个cgi解释器,nginx服务器将cgi环境变量和标准输入发送给cgi解释器(也就是php-cgi)</li>
+<li>FastCGI 子进程(php-cgi)完成处理后将标准输出和错误信息从同一连接返回Web Server。当FastCGI子进程关闭连接时， 请求便告处理完成。FastCGI子进程接着等待并处理来自FastCGI进程管理器(运行在Web Server中)的下一个连接。</li>
+</ol>
+<h2 id="PHP运行模式"><a href="#PHP运行模式" class="headerlink" title="PHP运行模式"></a>PHP运行模式</h2><h5 id="cgi"><a href="#cgi" class="headerlink" title="cgi"></a>cgi</h5><p>CGI即通用网关接口(Common Gateway Interface)，它是一段程序, 通俗的讲CGI就象是一座桥，把网页和WEB服务器中的执行程序连接起来，<br>它把HTML接收的指令传递给服务器的执行程序，再把服务器执行程序的结果返还给HTML页。</p>
+<p>CGI 的跨平台性能极佳，几乎可以在任何操作系统上实现。</p>
+<p>每有一个用户请求，都会激活一个CGI进程，当用户请求数量非常多时，会大量挤占系统的资源如内存，CPU时间等，造成效能低下。</p>
+<h5 id="Isapi"><a href="#Isapi" class="headerlink" title="Isapi"></a>Isapi</h5><p>ISAPI即Internet Server Application Program Interface，是微软提供的一套面向Internet服务的API接口</p>
+<p>一个ISAPI的DLL，可以在被用户请求激活后长驻内存，等待用户的另一个请求，还可以在一个DLL里设置多个用户请求处理函数，此外，<br>ISAPI的DLL应用程序和WWW服务器处于同一个进程中，效率要显著高于CGI。（由于微软的排他性，只能运行于windows环境)</p>
+<h5 id="fast-cgi"><a href="#fast-cgi" class="headerlink" title="fast-cgi"></a>fast-cgi</h5><p>fast-cgi 是cgi的升级版本，FastCGI 像是一个常驻 (long-live) 型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次 (这是 CGI 最为人诟病的 fork-and-execute 模式)。</p>
+<h5 id="cli"><a href="#cli" class="headerlink" title="cli"></a>cli</h5><p>cli是php的命令行运行模式，大家经常会使用它，但是可能并没有注意到（例如：我们在Linux下经常使用 “php -m”查找PHP安装了那些扩展就是PHP命令行运行模式；</p>
+<h5 id="apache模块的DLL"><a href="#apache模块的DLL" class="headerlink" title="apache模块的DLL"></a>apache模块的DLL</h5><p>该运行模式是我们以前在windows环境下使用apache服务器经常使用的，而在模块化(DLL)中，PHP是与Web服务器一起启动并运行的。（是apache在CGI的基础上进行的一种扩展，加快PHP的运行效率）</p>
+<p>参考地址1：<a href="http://www.nowamagic.net/librarys/veda/detail/1319" target="_blank" rel="external">http://www.nowamagic.net/librarys/veda/detail/1319</a><br>参考地址2：<a href="http://blog.csdn.net/a451491135/article/details/48442581" target="_blank" rel="external">http://blog.csdn.net/a451491135/article/details/48442581</a><br>参考地址3：<a href="http://blog.csdn.net/enough_br/article/details/6447011" target="_blank" rel="external">http://blog.csdn.net/enough_br/article/details/6447011</a></p>
+
       
     </div>
 
@@ -373,7 +371,7 @@ sbin（进程文件二进制程序）
       
         <div class="post-tags">
           
-            <a href="/tags/linux-nignx/" rel="tag">#linux nignx</a>
+            <a href="/tags/web/" rel="tag">#web</a>
           
         </div>
       
@@ -382,17 +380,13 @@ sbin（进程文件二进制程序）
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/09/vagrant-basic-use/" rel="next" title="vagrant基本用法">
-                <i class="fa fa-chevron-left"></i> vagrant基本用法
+              <a href="/2016/08/15/mysql-master-slave-study/" rel="next" title="mysql主从">
+                <i class="fa fa-chevron-left"></i> mysql主从
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/nginx-staudy-2/" rel="prev" title="nginx简单配置管理(2)">
-                nginx简单配置管理(2) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -418,8 +412,8 @@ sbin（进程文件二进制程序）
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/nginx-staudy-1/"
-           data-title="linux下nginx安装编译(1)" data-url="http://yoursite.com/2016/03/14/nginx-staudy-1/">
+      <div class="ds-thread" data-thread-key="2016/11/21/php-fpm/"
+           data-title="CGI，FastCGI，PHP-CGI与PHP-FPM，php运行模式" data-url="http://yoursite.com/2016/11/21/php-fpm/">
       </div>
     
   </div>
@@ -558,7 +552,7 @@ sbin（进程文件二进制程序）
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CGI"><span class="nav-number">1.</span> <span class="nav-text">CGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FastCGI"><span class="nav-number">2.</span> <span class="nav-text">FastCGI</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#FastCGI特点"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">FastCGI特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FastCGI的不足"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">FastCGI的不足</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-CGI"><span class="nav-number">3.</span> <span class="nav-text">PHP-CGI</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#PHP-CGI的不足："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">PHP-CGI的不足：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-FPM"><span class="nav-number">4.</span> <span class="nav-text">PHP-FPM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spawn-FCGI"><span class="nav-number">5.</span> <span class="nav-text">Spawn-FCGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-FPM与spawn-CGI对比"><span class="nav-number">6.</span> <span class="nav-text">PHP-FPM与spawn-CGI对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx处理一个php请求"><span class="nav-number">7.</span> <span class="nav-text">nginx处理一个php请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP运行模式"><span class="nav-number">8.</span> <span class="nav-text">PHP运行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cgi"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">cgi</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Isapi"><span class="nav-number">8.0.0.2.</span> <span class="nav-text">Isapi</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fast-cgi"><span class="nav-number">8.0.0.3.</span> <span class="nav-text">fast-cgi</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cli"><span class="nav-number">8.0.0.4.</span> <span class="nav-text">cli</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apache模块的DLL"><span class="nav-number">8.0.0.5.</span> <span class="nav-text">apache模块的DLL</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
